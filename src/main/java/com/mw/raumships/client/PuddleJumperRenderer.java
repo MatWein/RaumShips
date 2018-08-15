@@ -1,8 +1,7 @@
 package com.mw.raumships.client;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.common.PuddleJumperEntity;
-import net.minecraft.client.Minecraft;
+import com.mw.raumships.common.entities.PuddleJumperEntity;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
@@ -16,13 +15,14 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 
+import static com.mw.raumships.common.RSCommonConstants.ROTATION_FACTOR;
+import static com.mw.raumships.common.entities.PuddleJumperEntityConstants.COCKPIT_CAMERA_Z_OFFSET;
+
 public class PuddleJumperRenderer extends Render<PuddleJumperEntity> {
     public static final ResourceLocation MODEL = new ResourceLocation(RaumShipsMod.MODID, "models/entity/puddlejumper.obj");
     public static final ResourceLocation TEXTURE = new ResourceLocation(RaumShipsMod.MODID, "models/entity/puddlejumper.png");
 
     private OBJModel model;
-
-    private float zVersatz = -1.5F;
 
     protected PuddleJumperRenderer(RenderManager renderManager) {
         super(renderManager);
@@ -42,11 +42,10 @@ public class PuddleJumperRenderer extends Render<PuddleJumperEntity> {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y, (float) z);
 
-        Minecraft minecraft = Minecraft.getMinecraft();
-        EntityPlayerSP player = minecraft.player;
-        if (player != null && player.isRidingSameEntity(entity) && minecraft.gameSettings.thirdPersonView == 0) {
-            double motionX = (double) (MathHelper.sin(-entityYaw * 0.017453292F) * zVersatz);
-            double motionZ = (double) (MathHelper.cos(entityYaw * 0.017453292F) * zVersatz);
+        EntityPlayerSP player = RaumShipsMod.mc.player;
+        if (player != null && player.isRidingSameEntity(entity) && RaumShipsMod.mc.gameSettings.thirdPersonView == 0) {
+            double motionX = (double) (MathHelper.sin(-entityYaw * ROTATION_FACTOR) * COCKPIT_CAMERA_Z_OFFSET);
+            double motionZ = (double) (MathHelper.cos(entityYaw * ROTATION_FACTOR) * COCKPIT_CAMERA_Z_OFFSET);
             GL11.glTranslatef((float)motionX, 0.0F, (float)motionZ);
         }
         GlStateManager.rotate(0.0F - entityYaw, 0.0F, 1.0F, 0.0F);

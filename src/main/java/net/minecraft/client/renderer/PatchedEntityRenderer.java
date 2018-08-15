@@ -62,6 +62,8 @@ import java.nio.FloatBuffer;
 import java.util.List;
 import java.util.Random;
 
+import static com.mw.raumships.common.RSCommonConstants.ROTATION_FACTOR;
+
 @SideOnly(Side.CLIENT)
 public class PatchedEntityRenderer extends EntityRenderer implements IResourceManagerReloadListener {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -581,9 +583,9 @@ public class PatchedEntityRenderer extends EntityRenderer implements IResourceMa
                     f2 += 180.0F;
                 }
 
-                double d4 = (double) (-MathHelper.sin(f1 * 0.017453292F) * MathHelper.cos(f2 * 0.017453292F)) * d3;
-                double d5 = (double) (MathHelper.cos(f1 * 0.017453292F) * MathHelper.cos(f2 * 0.017453292F)) * d3;
-                double d6 = (double) (-MathHelper.sin(f2 * 0.017453292F)) * d3;
+                double d4 = (double) (-MathHelper.sin(f1 * ROTATION_FACTOR) * MathHelper.cos(f2 * ROTATION_FACTOR)) * d3;
+                double d5 = (double) (MathHelper.cos(f1 * ROTATION_FACTOR) * MathHelper.cos(f2 * ROTATION_FACTOR)) * d3;
+                double d6 = (double) (-MathHelper.sin(f2 * ROTATION_FACTOR)) * d3;
 
                 for (int i = 0; i < 8; ++i) {
                     float f3 = (float) ((i & 1) * 2 - 1);

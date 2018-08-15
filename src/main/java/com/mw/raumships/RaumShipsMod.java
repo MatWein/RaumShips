@@ -1,6 +1,7 @@
 package com.mw.raumships;
 
 import com.mw.raumships.common.RSCommonProxy;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -23,8 +24,12 @@ public class RaumShipsMod {
     @Instance(MODID)
     public static RaumShipsMod instance;
 
+    public static Minecraft mc;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) throws Exception {
+        mc = Minecraft.getMinecraft();
+
         proxy.preInit(event);
     }
 

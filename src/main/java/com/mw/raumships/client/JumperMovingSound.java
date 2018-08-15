@@ -1,6 +1,6 @@
 package com.mw.raumships.client;
 
-import com.mw.raumships.common.PuddleJumperEntity;
+import com.mw.raumships.common.entities.PuddleJumperEntity;
 import net.minecraft.client.audio.MovingSound;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;

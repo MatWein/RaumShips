@@ -1,9 +1,8 @@
 package com.mw.raumships.client;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.common.PuddleJumperEntity;
 import com.mw.raumships.common.RSCommonProxy;
-import net.minecraft.client.Minecraft;
+import com.mw.raumships.common.entities.PuddleJumperEntity;
 import net.minecraft.client.renderer.PatchedEntityRenderer;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -27,11 +26,11 @@ public class RSClientProxy extends RSCommonProxy {
         super.load(event);
 
         PatchedEntityRenderer patchedEntityRenderer = new PatchedEntityRenderer(
-                Minecraft.getMinecraft(),
-                Minecraft.getMinecraft().getResourceManager());
+                RaumShipsMod.mc,
+                RaumShipsMod.mc.getResourceManager());
 
         patchedEntityRenderer.setThirdPersonDistance(8.0F);
 
-        Minecraft.getMinecraft().entityRenderer = patchedEntityRenderer;
+        RaumShipsMod.mc.entityRenderer = patchedEntityRenderer;
     }
 }
