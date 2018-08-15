@@ -10,6 +10,8 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import static com.mw.raumships.RaumShipsMod.getMc;
+
 public class RSClientProxy extends RSCommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) throws Exception {
@@ -26,12 +28,6 @@ public class RSClientProxy extends RSCommonProxy {
     public void load(FMLInitializationEvent event) throws Exception {
         super.load(event);
 
-        PatchedEntityRenderer patchedEntityRenderer = new PatchedEntityRenderer(
-                RaumShipsMod.mc,
-                RaumShipsMod.mc.getResourceManager());
-
-        patchedEntityRenderer.setThirdPersonDistance(8.0F);
-
-        RaumShipsMod.mc.entityRenderer = patchedEntityRenderer;
+        getMc().entityRenderer = new PatchedEntityRenderer(getMc(), getMc().getResourceManager());
     }
 }

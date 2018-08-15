@@ -2,7 +2,6 @@ package com.mw.raumships.common;
 
 import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.common.entities.PuddleJumperEntity;
-import com.mw.raumships.common.entities.PuddleJumperEntityConstants;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -11,15 +10,17 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import java.awt.*;
 
+import static com.mw.raumships.RaumShipsMod.MODID;
+
 public class RSCommonProxy {
     public void preInit(FMLPreInitializationEvent event) throws Exception {
         EntityRegistry.registerModEntity(
-                new ResourceLocation(RaumShipsMod.MODID, PuddleJumperEntityConstants.NAME),
+                new ResourceLocation(MODID, PuddleJumperEntity.NAME),
                 PuddleJumperEntity.class,
-                PuddleJumperEntityConstants.NAME,
-                PuddleJumperEntityConstants.ID,
+                PuddleJumperEntity.NAME,
+                PuddleJumperEntity.ID,
                 RaumShipsMod.instance,
-                PuddleJumperEntityConstants.RENDER_DISTANCE,
+                PuddleJumperEntity.RENDER_DISTANCE,
                 1,
                 true,
                 Color.BLACK.getRGB(),

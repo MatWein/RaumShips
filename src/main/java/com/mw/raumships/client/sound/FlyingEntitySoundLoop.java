@@ -1,15 +1,14 @@
 package com.mw.raumships.client.sound;
 
-import com.mw.raumships.common.interfaces.IFlyingEntity;
+import com.mw.raumships.common.entities.RaumShipsEntity;
 import net.minecraft.client.audio.MovingSound;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;
 
-public class FlyingEntitySoundLoop<T extends Entity & IFlyingEntity> extends MovingSound {
-    private T entity;
+public class FlyingEntitySoundLoop extends MovingSound {
+    private RaumShipsEntity entity;
 
-    public FlyingEntitySoundLoop(T entity) {
+    public FlyingEntitySoundLoop(RaumShipsEntity entity) {
         super(Sounds.JUMPER_ENGINE, SoundCategory.AMBIENT);
 
         this.entity = entity;
