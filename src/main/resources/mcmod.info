@@ -1,0 +1,16 @@
+[
+    {
+      "modid": "raumships",
+      "name": "RaumShips Mod",
+      "description": "Adds space ships as flyable entities to the game.",
+      "version": "${version}",
+      "mcversion": "${mcversion}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": ["MW"],
+      "credits": "",
+      "logoFile": "",
+      "screenshots": [],
+      "dependencies": []
+    }
+]

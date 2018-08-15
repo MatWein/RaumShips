@@ -1,0 +1,11 @@
+{
+  "sound.engine": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:engine",
+        "stream": false
+      }
+    ]
+  }
+}
