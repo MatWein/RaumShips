@@ -1,8 +1,11 @@
 package com.mw.raumships.common.entities;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.JumperMovingSound;
 import com.mw.raumships.client.Keybinds;
+import com.mw.raumships.client.sound.FlyingEntitySoundLoop;
+import com.mw.raumships.common.interfaces.IEntityWithModel;
+import com.mw.raumships.common.interfaces.IEntityWithProperties;
+import com.mw.raumships.common.interfaces.IFlyingEntity;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -12,25 +15,25 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static com.mw.raumships.common.RSCommonConstants.DEFAULT_MINECRAFT_VIEW_DISTANCE;
 import static com.mw.raumships.common.RSCommonConstants.ROTATION_FACTOR;
 import static com.mw.raumships.common.entities.PuddleJumperEntityConstants.*;
 
-public class PuddleJumperEntity extends EntityLiving {
+public class PuddleJumperEntity extends EntityLiving implements IEntityWithModel, IEntityWithProperties, IFlyingEntity {
     private float deltaRotation;
 
     private boolean leftInputDown;
@@ -47,8 +50,9 @@ public class PuddleJumperEntity extends EntityLiving {
     private double lerpZ;
     private double lerpYaw;
 
-    private SoundHandler soundHandler;
-    private JumperMovingSound sound;
+    private final SoundHandler soundHandler;
+    private final FlyingEntitySoundLoop<PuddleJumperEntity> sound;
+    private final OBJModel model;
 
     public PuddleJumperEntity(World worldIn) {
         super(worldIn);
@@ -58,7 +62,12 @@ public class PuddleJumperEntity extends EntityLiving {
         this.ignoreFrustumCheck = true;
         this.preventEntitySpawning = true;
         this.soundHandler = RaumShipsMod.mc.getSoundHandler();
-        this.sound = new JumperMovingSound(this);
+        this.sound = new FlyingEntitySoundLoop<>(this);
+        try {
+            this.model = (OBJModel) OBJLoader.INSTANCE.loadModel(MODEL);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -93,8 +102,9 @@ public class PuddleJumperEntity extends EntityLiving {
 
         EntityPlayerSP player = RaumShipsMod.mc.player;
         if (player != null && player.isSneaking()) {
-            this.updateThirdPersonDistance(4.0F);
+            this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
             RaumShipsMod.mc.gameSettings.hideGUI = false;
+            player.dismountRidingEntity();
         }
     }
 
@@ -357,5 +367,25 @@ public class PuddleJumperEntity extends EntityLiving {
         }
 
         return super.attackEntityFrom(source, amount);
+    }
+
+    @Override
+    public OBJModel getModel() {
+        return model;
+    }
+
+    @Override
+    public ResourceLocation getTexture() {
+        return TEXTURE;
+    }
+
+    @Override
+    public float getRenderCockpitCameraZOffset() {
+        return COCKPIT_CAMERA_Z_OFFSET;
+    }
+
+    @Override
+    public float getRenderScalingFactor() {
+        return SCALING_FACTOR;
     }
 }

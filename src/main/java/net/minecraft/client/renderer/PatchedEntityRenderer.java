@@ -62,6 +62,7 @@ import java.nio.FloatBuffer;
 import java.util.List;
 import java.util.Random;
 
+import static com.mw.raumships.common.RSCommonConstants.DEFAULT_MINECRAFT_VIEW_DISTANCE;
 import static com.mw.raumships.common.RSCommonConstants.ROTATION_FACTOR;
 
 @SideOnly(Side.CLIENT)
@@ -96,11 +97,11 @@ public class PatchedEntityRenderer extends EntityRenderer implements IResourceMa
     private Entity pointedEntity;
     private final MouseFilter mouseFilterXAxis = new MouseFilter();
     private final MouseFilter mouseFilterYAxis = new MouseFilter();
-    private float thirdPersonDistance = 4.0F;
+    private float thirdPersonDistance = DEFAULT_MINECRAFT_VIEW_DISTANCE;
     /**
      * Previous third person distance
      */
-    private float thirdPersonDistancePrev = 4.0F;
+    private float thirdPersonDistancePrev = DEFAULT_MINECRAFT_VIEW_DISTANCE;
     /**
      * Smooth cam yaw
      */

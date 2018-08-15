@@ -1,4 +1,4 @@
-package com.mw.raumships.client;
+package com.mw.raumships.client.sound;
 
 import com.mw.raumships.RaumShipsMod;
 import net.minecraft.util.ResourceLocation;

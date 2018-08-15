@@ -1,4 +1,4 @@
-package com.mw.raumships.client;
+package com.mw.raumships.client.rendering;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
