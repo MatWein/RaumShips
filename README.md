@@ -6,6 +6,7 @@ Currently supported MC-Versions:
 
 Currently included ships:
 - Stargate Atlantis Puddle Jumper (SGCraft compatible)  
+(Model from https://free3d.com/3d-model/puddle-jumper-70555.html)  
 
   
 ## Screenshots:  
