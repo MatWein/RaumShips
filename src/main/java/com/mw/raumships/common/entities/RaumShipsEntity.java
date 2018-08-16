@@ -53,7 +53,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
         this.ignoreFrustumCheck = true;
         this.preventEntitySpawning = true;
-        this.sound = new FlyingEntitySoundLoop(this);
+        this.sound = new FlyingEntitySoundLoop(this, getSound());
         try {
             this.model = (OBJModel) OBJLoader.INSTANCE.loadModel(getModelResourceLocation());
         } catch (Exception e) {
@@ -61,13 +61,16 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         }
     }
 
+
     public abstract ResourceLocation getModelResourceLocation();
     public abstract ResourceLocation getTextureResourceLocation();
+    public abstract SoundEvent getSound();
 
     public abstract float getRenderCockpitCameraZOffset();
     public abstract float getRenderScalingFactor();
     public abstract float getThirdPersonDistance();
     public abstract int getMaxPassangers();
+    public abstract float getPlayerMountPositionXOffset();
 
     public abstract float getFinalAirShipSpeedTurn();
     public abstract float getFinalAirShipSpeedForward();
@@ -222,7 +225,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     public void updatePassenger(Entity passenger) {
         if (this.isPassenger(passenger)) {
             float zOffset = 0.0F; // left/right
-            float xOffset = 2.0F; // forward/backward
+            float xOffset = getPlayerMountPositionXOffset(); // forward/backward
             float yOffset = (float) ((this.isDead ? 0.009999999776482582D : this.getMountedYOffset()) + passenger.getYOffset());
 
             if (this.getPassengers().size() > 1) {

@@ -7,30 +7,30 @@ import net.minecraft.world.World;
 
 import static com.mw.raumships.RaumShipsMod.MODID;
 
-public class PuddleJumperEntity extends RaumShipsEntity {
-    public static final int ID = 1001;
-    public static final String NAME = "PuddleJumper";
+public class DeathGliderEntity extends RaumShipsEntity {
+    public static final int ID = 1002;
+    public static final String NAME = "DeathGlider";
 
-    public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/puddlejumper.obj");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/puddlejumper.png");
+    public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/deathglider.obj");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/deathglider.png");
 
     public static final float THIRD_PERSON_DISTANCE = 8.5F;
-    public static final float COCKPIT_CAMERA_Z_OFFSET = -1.5F;
-    public static final float SCALING_FACTOR = 0.4F;
-    public static final float PLAYER_MOUNT_POSITION_X_OFFSET = 2.0F;
+    public static final float COCKPIT_CAMERA_Z_OFFSET = -1.7F;
+    public static final float SCALING_FACTOR = 0.6F;
+    public static final float PLAYER_MOUNT_POSITION_X_OFFSET = 0.0F;
 
-    public static final float BOUNDING_BOX_WIDTH = 2.5F;
-    public static final float BOUNDING_BOX_HEIGHT = 2.5F;
-    public static final int MAX_PASSANGERS = 2;
+    public static final float BOUNDING_BOX_WIDTH = 4.0F;
+    public static final float BOUNDING_BOX_HEIGHT = 3.5F;
+    public static final int MAX_PASSANGERS = 1;
 
-    public static final float FINAL_AIRSHIP_SPEED_TURN = 0.18F;
-    public static final float FINAL_AIRSHIP_SPEED_FORWARD = 0.04F;
-    public static final float FINAL_AIRSHIP_SPEED_UP = 0.004F;
-    public static final float FINAL_AIRSHIP_SPEED_DOWN = 0.004F;
-    public static final float SPEED_MODIFIER = 0.02F;
-    public static final float MOMENTUM = 0.9F;
+    public static final float FINAL_AIRSHIP_SPEED_TURN = 0.72F;
+    public static final float FINAL_AIRSHIP_SPEED_FORWARD = 0.32F;
+    public static final float FINAL_AIRSHIP_SPEED_UP = 0.032F;
+    public static final float FINAL_AIRSHIP_SPEED_DOWN = 0.016F;
+    public static final float SPEED_MODIFIER = 0.16F;
+    public static final float MOMENTUM = 0.7F;
 
-    public PuddleJumperEntity(World worldIn) {
+    public DeathGliderEntity(World worldIn) {
         super(worldIn);
 
         setSize(BOUNDING_BOX_WIDTH, BOUNDING_BOX_HEIGHT);

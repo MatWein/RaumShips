@@ -3,6 +3,7 @@ package com.mw.raumships.client;
 import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.rendering.EntityWithModelRenderer;
 import com.mw.raumships.common.RSCommonProxy;
+import com.mw.raumships.common.entities.DeathGliderEntity;
 import com.mw.raumships.common.entities.PuddleJumperEntity;
 import net.minecraft.client.renderer.PatchedEntityRenderer;
 import net.minecraftforge.client.model.obj.OBJLoader;
@@ -20,6 +21,7 @@ public class RSClientProxy extends RSCommonProxy {
         OBJLoader.INSTANCE.addDomain(RaumShipsMod.MODID);
 
         RenderingRegistry.registerEntityRenderingHandler(PuddleJumperEntity.class, EntityWithModelRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(DeathGliderEntity.class, EntityWithModelRenderer::new);
 
         Keybinds.init();
     }

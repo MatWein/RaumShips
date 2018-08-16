@@ -4,12 +4,13 @@ import com.mw.raumships.common.entities.RaumShipsEntity;
 import net.minecraft.client.audio.MovingSound;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 
 public class FlyingEntitySoundLoop extends MovingSound {
     private RaumShipsEntity entity;
 
-    public FlyingEntitySoundLoop(RaumShipsEntity entity) {
-        super(Sounds.JUMPER_ENGINE, SoundCategory.AMBIENT);
+    public FlyingEntitySoundLoop(RaumShipsEntity entity, SoundEvent sound) {
+        super(sound, SoundCategory.AMBIENT);
 
         this.entity = entity;
         this.repeat = true;
