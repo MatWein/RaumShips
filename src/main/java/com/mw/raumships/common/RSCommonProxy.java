@@ -1,6 +1,7 @@
 package com.mw.raumships.common;
 
 import com.mw.raumships.RaumShipsMod;
+import com.mw.raumships.common.entities.AlKeshEntity;
 import com.mw.raumships.common.entities.DeathGliderEntity;
 import com.mw.raumships.common.entities.PuddleJumperEntity;
 import com.mw.raumships.common.entities.RaumShipsEntity;
@@ -20,6 +21,7 @@ public class RSCommonProxy {
     public void preInit(FMLPreInitializationEvent event) throws Exception {
         registerModEntity(PuddleJumperEntity.ID, PuddleJumperEntity.NAME, PuddleJumperEntity.class, Color.BLACK, Color.WHITE);
         registerModEntity(DeathGliderEntity.ID, DeathGliderEntity.NAME, DeathGliderEntity.class, Color.BLUE, Color.WHITE);
+        registerModEntity(AlKeshEntity.ID, AlKeshEntity.NAME, AlKeshEntity.class, Color.YELLOW, Color.WHITE);
     }
 
     private void registerModEntity(int id, String name, Class<? extends RaumShipsEntity> entityClass, Color c1, Color c2) {

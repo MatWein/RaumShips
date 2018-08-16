@@ -71,6 +71,8 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     public abstract float getThirdPersonDistance();
     public abstract int getMaxPassangers();
     public abstract float getPlayerMountPositionXOffset();
+    public abstract float getPlayerMountPositionYOffset();
+    public abstract float getRenderYOffset();
 
     public abstract float getFinalAirShipSpeedTurn();
     public abstract float getFinalAirShipSpeedForward();
@@ -303,7 +305,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
     @Override
     public double getMountedYOffset() {
-        return 0.1;
+        return getPlayerMountPositionYOffset();
     }
 
     @Override

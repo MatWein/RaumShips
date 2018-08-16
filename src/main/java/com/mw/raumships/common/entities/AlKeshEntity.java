@@ -7,32 +7,32 @@ import net.minecraft.world.World;
 
 import static com.mw.raumships.RaumShipsMod.MODID;
 
-public class DeathGliderEntity extends RaumShipsEntity {
-    public static final int ID = 1002;
-    public static final String NAME = "DeathGlider";
+public class AlKeshEntity extends RaumShipsEntity {
+    public static final int ID = 1003;
+    public static final String NAME = "AlKesh";
 
-    public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/deathglider.obj");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/deathglider.png");
+    public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/alkesh.obj");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/alkesh.png");
 
-    public static final float THIRD_PERSON_DISTANCE = 8.5F;
-    public static final float COCKPIT_CAMERA_Z_OFFSET = -1.7F;
+    public static final float THIRD_PERSON_DISTANCE = 10.0F;
+    public static final float COCKPIT_CAMERA_Z_OFFSET = -2.0F;
     public static final float SCALING_FACTOR = 0.6F;
     public static final float PLAYER_MOUNT_POSITION_X_OFFSET = 0.0F;
-    public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 0.8F;
-    public static final float RENDER_Y_OFFSET = 0.5F;
+    public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 3.1F;
+    public static final float RENDER_Y_OFFSET = 3.0F;
 
-    public static final float BOUNDING_BOX_WIDTH = 4.0F;
-    public static final float BOUNDING_BOX_HEIGHT = 3.0F;
-    public static final int MAX_PASSANGERS = 1;
+    public static final float BOUNDING_BOX_WIDTH = 12.0F;
+    public static final float BOUNDING_BOX_HEIGHT = 6.0F;
+    public static final int MAX_PASSANGERS = 2;
 
-    public static final float FINAL_AIRSHIP_SPEED_TURN = 0.72F;
-    public static final float FINAL_AIRSHIP_SPEED_FORWARD = 0.32F;
-    public static final float FINAL_AIRSHIP_SPEED_UP = 0.032F;
-    public static final float FINAL_AIRSHIP_SPEED_DOWN = 0.016F;
-    public static final float SPEED_MODIFIER = 0.16F;
-    public static final float MOMENTUM = 0.7F;
+    public static final float FINAL_AIRSHIP_SPEED_TURN = 0.025F;
+    public static final float FINAL_AIRSHIP_SPEED_FORWARD = 0.03F;
+    public static final float FINAL_AIRSHIP_SPEED_UP = 0.002F;
+    public static final float FINAL_AIRSHIP_SPEED_DOWN = 0.002F;
+    public static final float SPEED_MODIFIER = 0.005F;
+    public static final float MOMENTUM = 0.9F;
 
-    public DeathGliderEntity(World worldIn) {
+    public AlKeshEntity(World worldIn) {
         super(worldIn);
 
         setSize(BOUNDING_BOX_WIDTH, BOUNDING_BOX_HEIGHT);

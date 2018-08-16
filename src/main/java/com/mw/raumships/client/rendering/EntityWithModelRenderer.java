@@ -23,7 +23,7 @@ public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
     @Override
     public void doRender(RaumShipsEntity entity, double x, double y, double z, float entityYaw, float partialTicks) {
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) x, (float) y, (float) z);
+        GL11.glTranslatef((float) x, (float) y + entity.getRenderYOffset(), (float) z);
 
         EntityPlayerSP player = getMc().player;
         if (player != null && player.isRidingSameEntity(entity) && getMc().gameSettings.thirdPersonView == 0) {

@@ -18,6 +18,8 @@ public class PuddleJumperEntity extends RaumShipsEntity {
     public static final float COCKPIT_CAMERA_Z_OFFSET = -1.5F;
     public static final float SCALING_FACTOR = 0.4F;
     public static final float PLAYER_MOUNT_POSITION_X_OFFSET = 2.0F;
+    public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 0.0F;
+    public static final float RENDER_Y_OFFSET = 0.0F;
 
     public static final float BOUNDING_BOX_WIDTH = 2.5F;
     public static final float BOUNDING_BOX_HEIGHT = 2.5F;
@@ -74,6 +76,16 @@ public class PuddleJumperEntity extends RaumShipsEntity {
     @Override
     public float getPlayerMountPositionXOffset() {
         return PLAYER_MOUNT_POSITION_X_OFFSET;
+    }
+
+    @Override
+    public float getPlayerMountPositionYOffset() {
+        return PLAYER_MOUNT_POSITION_Y_OFFSET;
+    }
+
+    @Override
+    public float getRenderYOffset() {
+        return RENDER_Y_OFFSET;
     }
 
     @Override
