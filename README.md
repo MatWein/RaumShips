@@ -6,11 +6,8 @@ Currently supported MC-Versions:
 
 Currently included ships:
 - Stargate Atlantis Puddle Jumper (SGCraft compatible)  
-(Model from https://free3d.com/3d-model/puddle-jumper-70555.html)
 - Stargate Goa'uld Death Glider  
-(Model from https://www.models-resource.com/pc_computer/stargateresistance/model/20344/)
 - Stargate Goa'uld Al'Kesh  
-(Model from https://www.models-resource.com/pc_computer/stargateresistance/model/20343/)
 
   
 ## Screenshots:  
@@ -24,3 +21,5 @@ Currently included ships:
 ![Alt text](/src/test/resources/screenshots/DeathGlider.png?raw=true "DeathGlider")
 
 ![Alt text](/src/test/resources/screenshots/AlKesh.png?raw=true "AlKesh")
+  
+(see LICENSE.txt for more information about models and sounds)

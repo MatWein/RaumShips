@@ -7,5 +7,25 @@
         "stream": false
       }
     ]
+  },
+
+  "sound.engine2": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:engine2",
+        "stream": false
+      }
+    ]
+  },
+
+  "sound.engine3": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:engine3",
+        "stream": false
+      }
+    ]
   }
 }

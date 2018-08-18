@@ -9,12 +9,12 @@ import net.minecraft.util.SoundEvent;
 public class FlyingEntitySoundLoop extends MovingSound {
     private RaumShipsEntity entity;
 
-    public FlyingEntitySoundLoop(RaumShipsEntity entity, SoundEvent sound) {
+    public FlyingEntitySoundLoop(RaumShipsEntity entity, SoundEvent sound, float volume) {
         super(sound, SoundCategory.AMBIENT);
 
         this.entity = entity;
         this.repeat = true;
-        this.volume = 0.3F;
+        this.volume = volume;
     }
 
     @Override

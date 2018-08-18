@@ -13,6 +13,7 @@ public class AlKeshEntity extends RaumShipsEntity {
 
     public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/alkesh.obj");
     public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/alkesh.png");
+    public static final float SOUND_VOLUME = 1.0F;
 
     public static final float THIRD_PERSON_DISTANCE = 10.0F;
     public static final float COCKPIT_CAMERA_Z_OFFSET = -2.0F;
@@ -50,7 +51,12 @@ public class AlKeshEntity extends RaumShipsEntity {
 
     @Override
     public SoundEvent getSound() {
-        return Sounds.JUMPER_ENGINE;
+        return Sounds.ALKESH_ENGINE;
+    }
+
+    @Override
+    public float getVolume() {
+        return SOUND_VOLUME;
     }
 
     @Override

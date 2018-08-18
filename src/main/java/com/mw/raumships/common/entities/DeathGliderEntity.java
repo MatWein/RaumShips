@@ -13,6 +13,7 @@ public class DeathGliderEntity extends RaumShipsEntity {
 
     public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/deathglider.obj");
     public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/deathglider.png");
+    public static final float SOUND_VOLUME = 0.6F;
 
     public static final float THIRD_PERSON_DISTANCE = 8.5F;
     public static final float COCKPIT_CAMERA_Z_OFFSET = -1.7F;
@@ -50,7 +51,12 @@ public class DeathGliderEntity extends RaumShipsEntity {
 
     @Override
     public SoundEvent getSound() {
-        return Sounds.JUMPER_ENGINE;
+        return Sounds.DEATH_GLIDER_ENGINE;
+    }
+
+    @Override
+    public float getVolume() {
+        return SOUND_VOLUME;
     }
 
     @Override

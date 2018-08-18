@@ -12,7 +12,9 @@ public class InitSoundEvents {
     @SubscribeEvent
     public static void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
         event.getRegistry().registerAll(
-                Sounds.JUMPER_ENGINE
+                Sounds.JUMPER_ENGINE,
+                Sounds.ALKESH_ENGINE,
+                Sounds.DEATH_GLIDER_ENGINE
         );
     }
 }

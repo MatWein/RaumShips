@@ -53,7 +53,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
         this.ignoreFrustumCheck = true;
         this.preventEntitySpawning = true;
-        this.sound = new FlyingEntitySoundLoop(this, getSound());
+        this.sound = new FlyingEntitySoundLoop(this, getSound(), getVolume());
         try {
             this.model = (OBJModel) OBJLoader.INSTANCE.loadModel(getModelResourceLocation());
         } catch (Exception e) {
@@ -65,6 +65,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     public abstract ResourceLocation getModelResourceLocation();
     public abstract ResourceLocation getTextureResourceLocation();
     public abstract SoundEvent getSound();
+    public abstract float getVolume();
 
     public abstract float getRenderCockpitCameraZOffset();
     public abstract float getRenderScalingFactor();

@@ -19,3 +19,33 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+--------------------------------------------------------------------------------------------
+-- MODELS                                                                                 --
+--------------------------------------------------------------------------------------------
+
+- Stargate Atlantis Puddle Jumper
+(Model from https://free3d.com/3d-model/puddle-jumper-70555.html)
+
+- Stargate Goa'uld Death Glider
+(Model from https://www.models-resource.com/pc_computer/stargateresistance/model/20344/)
+
+- Stargate Goa'uld Al'Kesh
+(Model from https://www.models-resource.com/pc_computer/stargateresistance/model/20343/)
+
+
+--------------------------------------------------------------------------------------------
+-- SOUNDS                                                                                 --
+--------------------------------------------------------------------------------------------
+
+- engine.ogg
+(Sound from https://minecraft.curseforge.com/projects/starship)
+
+- engine2.ogg
+(Sound from https://freesound.org/people/LittleRobotSoundFactory/sounds/270539/)
+(License: http://creativecommons.org/licenses/by/3.0/)
+
+- engine3.ogg
+(Sound from https://freesound.org/people/nick121087/sounds/234316/)
+(License: https://creativecommons.org/publicdomain/zero/1.0/)

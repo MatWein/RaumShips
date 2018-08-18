@@ -13,6 +13,7 @@ public class PuddleJumperEntity extends RaumShipsEntity {
 
     public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/puddlejumper.obj");
     public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/puddlejumper.png");
+    public static final float SOUND_VOLUME = 0.3F;
 
     public static final float THIRD_PERSON_DISTANCE = 8.5F;
     public static final float COCKPIT_CAMERA_Z_OFFSET = -1.5F;
@@ -51,6 +52,11 @@ public class PuddleJumperEntity extends RaumShipsEntity {
     @Override
     public SoundEvent getSound() {
         return Sounds.JUMPER_ENGINE;
+    }
+
+    @Override
+    public float getVolume() {
+        return SOUND_VOLUME;
     }
 
     @Override
