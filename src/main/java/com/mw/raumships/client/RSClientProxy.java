@@ -12,7 +12,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import static com.mw.raumships.RaumShipsMod.getMc;
+import static com.mw.raumships.client.ClientUtils.getMc;
 
 public class RSClientProxy extends RSCommonProxy {
     @Override

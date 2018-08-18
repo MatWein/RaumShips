@@ -24,8 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static com.mw.raumships.RaumShipsMod.getMc;
-import static com.mw.raumships.RaumShipsMod.getSh;
+import static com.mw.raumships.client.ClientUtils.getMc;
+import static com.mw.raumships.client.ClientUtils.getSh;
 import static com.mw.raumships.common.RSCommonConstants.*;
 
 public abstract class RaumShipsEntity extends EntityLiving  {
@@ -60,7 +60,6 @@ public abstract class RaumShipsEntity extends EntityLiving  {
             throw new RuntimeException(e);
         }
     }
-
 
     public abstract ResourceLocation getModelResourceLocation();
     public abstract ResourceLocation getTextureResourceLocation();

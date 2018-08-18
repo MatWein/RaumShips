@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 
-import static com.mw.raumships.RaumShipsMod.getMc;
+import static com.mw.raumships.client.ClientUtils.getMc;
 import static com.mw.raumships.common.RSCommonConstants.ROTATION_FACTOR;
 
 public class EntityWithModelRenderer extends Render<RaumShipsEntity> {

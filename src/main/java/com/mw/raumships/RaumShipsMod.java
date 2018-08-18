@@ -1,8 +1,6 @@
 package com.mw.raumships;
 
 import com.mw.raumships.common.RSCommonProxy;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -38,13 +36,5 @@ public class RaumShipsMod {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
-    }
-
-    public static Minecraft getMc() {
-        return Minecraft.getMinecraft();
-    }
-
-    public static SoundHandler getSh() {
-        return getMc().getSoundHandler();
     }
 }
