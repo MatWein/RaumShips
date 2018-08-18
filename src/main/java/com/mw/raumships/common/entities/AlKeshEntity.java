@@ -18,13 +18,14 @@ public class AlKeshEntity extends RaumShipsEntity {
     public static final float THIRD_PERSON_DISTANCE = 10.0F;
     public static final float COCKPIT_CAMERA_Z_OFFSET = -2.0F;
     public static final float SCALING_FACTOR = 0.6F;
-    public static final float PLAYER_MOUNT_POSITION_X_OFFSET = 0.0F;
+    public static final float[] PLAYER_MOUNT_POSITION_X_OFFSET = new float[] { 0.0F };
     public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 3.1F;
+    public static final float[] PLAYER_MOUNT_POSITION_Z_OFFSET = new float[] { 0.0F };
     public static final float RENDER_Y_OFFSET = 3.0F;
 
     public static final float BOUNDING_BOX_WIDTH = 12.0F;
     public static final float BOUNDING_BOX_HEIGHT = 6.0F;
-    public static final int MAX_PASSANGERS = 2;
+    public static final int MAX_PASSANGERS = 1;
 
     public static final float FINAL_AIRSHIP_SPEED_TURN = 0.025F;
     public static final float FINAL_AIRSHIP_SPEED_FORWARD = 0.03F;
@@ -80,13 +81,18 @@ public class AlKeshEntity extends RaumShipsEntity {
     }
 
     @Override
-    public float getPlayerMountPositionXOffset() {
+    public float[] getPlayerMountPositionXOffset() {
         return PLAYER_MOUNT_POSITION_X_OFFSET;
     }
 
     @Override
     public float getPlayerMountPositionYOffset() {
         return PLAYER_MOUNT_POSITION_Y_OFFSET;
+    }
+
+    @Override
+    public float[] getPlayerMountPositionZOffset() {
+        return PLAYER_MOUNT_POSITION_Z_OFFSET;
     }
 
     @Override

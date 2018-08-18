@@ -71,8 +71,9 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     public abstract float getRenderScalingFactor();
     public abstract float getThirdPersonDistance();
     public abstract int getMaxPassangers();
-    public abstract float getPlayerMountPositionXOffset();
+    public abstract float[] getPlayerMountPositionXOffset();
     public abstract float getPlayerMountPositionYOffset();
+    public abstract float[] getPlayerMountPositionZOffset();
     public abstract float getRenderYOffset();
 
     public abstract float getFinalAirShipSpeedTurn();
@@ -227,21 +228,13 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     @Override
     public void updatePassenger(Entity passenger) {
         if (this.isPassenger(passenger)) {
-            float zOffset = 0.0F; // left/right
-            float xOffset = getPlayerMountPositionXOffset(); // forward/backward
-            float yOffset = (float) ((this.isDead ? 0.009999999776482582D : this.getMountedYOffset()) + passenger.getYOffset());
+            float[] xOffset = getPlayerMountPositionXOffset(); // forward/backward
+            float yOffset = (float)getMountedYOffset() + (float)passenger.getYOffset();
+            float[] zOffset = getPlayerMountPositionZOffset(); // left/right
 
-            if (this.getPassengers().size() > 1) {
-                int i = this.getPassengers().indexOf(passenger);
+            int i = this.getPassengers().indexOf(passenger);
 
-                if (i == 0) {
-                    zOffset = 0.0F;
-                } else {
-                    zOffset = 0.0F;
-                }
-            }
-
-            Vec3d vec3d = (new Vec3d(xOffset, 0.0D, zOffset)).rotateYaw(-this.rotationYaw * ROTATION_FACTOR - ((float) Math.PI / 2F));
+            Vec3d vec3d = (new Vec3d(xOffset[i], 0.0D, zOffset[i])).rotateYaw(-this.rotationYaw * ROTATION_FACTOR - ((float) Math.PI / 2F));
             passenger.setPosition(this.posX + vec3d.x, this.posY + (double) yOffset, this.posZ + vec3d.z);
             passenger.rotationYaw += this.deltaRotation;
             passenger.setRotationYawHead(passenger.getRotationYawHead() + this.deltaRotation);
