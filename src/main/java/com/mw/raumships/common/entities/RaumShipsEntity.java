@@ -34,6 +34,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     protected boolean backInputDown;
     protected boolean upInputDown;
     protected boolean downInputDown;
+    protected boolean ctrlInputDown;
 
     protected int lerpSteps;
     protected double lerpPitch;
@@ -103,9 +104,12 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         if (this.world.isRemote) {
             EntityPlayerSP player = getMc().player;
             if (player != null && player.isSneaking()) {
+                player.dismountRidingEntity();
+            }
+
+            if (player != null && !player.isRidingSameEntity(this)) {
                 this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
                 getMc().gameSettings.hideGUI = false;
-                player.dismountRidingEntity();
             }
         }
     }
@@ -133,44 +137,58 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
     public void controlAirship() {
         if (this.isBeingRidden()) {
-            float f = 0.0F;
-            float f1 = 0.0F;
+            float forwardBackward = 0.0F;
+            float upDown = 0.0F;
+            float leftRight = 0.0F;
 
             if (this.leftInputDown) {
-                this.deltaRotation -= (getFinalAirShipSpeedTurn() + (getSpeedModifier() * 2));
+                if (this.ctrlInputDown) {
+                    leftRight -= getFinalAirShipSpeedDown() + (getSpeedModifier() / 32);
+                } else {
+                    this.deltaRotation -= (getFinalAirShipSpeedTurn() + (getSpeedModifier() * 2));
+                }
             }
 
             if (this.rightInputDown) {
-                this.deltaRotation += (getFinalAirShipSpeedTurn() + (getSpeedModifier() * 2));
+                if (this.ctrlInputDown) {
+                    leftRight += getFinalAirShipSpeedDown() + (getSpeedModifier() / 32);
+                } else {
+                    this.deltaRotation += (getFinalAirShipSpeedTurn() + (getSpeedModifier() * 2));
+                }
             }
 
             if (this.rightInputDown != this.leftInputDown && !this.forwardInputDown && !this.backInputDown) {
-                f += 0.005F;
+                forwardBackward += 0.005F;
             }
 
             this.rotationYaw += this.deltaRotation;
 
             if (this.forwardInputDown) {
-                f += getFinalAirShipSpeedForward();
+                forwardBackward += getFinalAirShipSpeedForward();
             }
 
             if (this.backInputDown) {
-                f -= 0.005F;
+                forwardBackward -= 0.005F;
             }
 
             if (this.upInputDown) {
-                f1 += getFinalAirShipSpeedUp() + (getSpeedModifier() / 32);
+                upDown += getFinalAirShipSpeedUp() + (getSpeedModifier() / 32);
             }
 
             if (this.downInputDown) {
-                f1 -= getFinalAirShipSpeedDown() + (getSpeedModifier() / 32);
+                upDown -= getFinalAirShipSpeedDown() + (getSpeedModifier() / 32);
             }
 
-            this.motionX += (double) (MathHelper.sin(-this.rotationYaw * ROTATION_FACTOR) * f);
-            this.motionZ += (double) (MathHelper.cos(this.rotationYaw * ROTATION_FACTOR) * f);
-            this.motionY += (double) (Y_FACTOR * f1);
+            if (this.ctrlInputDown) {
+                float factor = leftRight >= 0.0F ? 1.0F : -1.0F;
+                this.motionZ += (double) (MathHelper.sin(-this.rotationYaw * ROTATION_FACTOR) * Math.abs(leftRight)) * factor;
+                this.motionX += (double) (MathHelper.cos(this.rotationYaw * ROTATION_FACTOR) * Math.abs(leftRight)) * -factor;
+            } else {
+                this.motionX += (double) (MathHelper.sin(-this.rotationYaw * ROTATION_FACTOR) * forwardBackward);
+                this.motionZ += (double) (MathHelper.cos(this.rotationYaw * ROTATION_FACTOR) * forwardBackward);
+            }
 
-            this.rotationPitch += 10;
+            this.motionY += (double) (Y_FACTOR * upDown);
         }
     }
 
@@ -256,6 +274,8 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         this.backInputDown = Keybinds.rsBack.isKeyDown();
         this.upInputDown = Keybinds.rsUp.isKeyDown();
         this.downInputDown = Keybinds.rsDown.isKeyDown();
+        this.downInputDown = Keybinds.rsDown.isKeyDown();
+        this.ctrlInputDown = Keybinds.rsCrtl.isKeyDown();
     }
 
     public void playSoundLoop() {
