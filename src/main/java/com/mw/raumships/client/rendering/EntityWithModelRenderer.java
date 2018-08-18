@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 
@@ -16,12 +18,22 @@ import static com.mw.raumships.client.ClientUtils.getMc;
 import static com.mw.raumships.common.RSCommonConstants.ROTATION_FACTOR;
 
 public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
+    private OBJModel model;
+
     public EntityWithModelRenderer(RenderManager renderManager) {
         super(renderManager);
     }
 
     @Override
     public void doRender(RaumShipsEntity entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        if (this.model == null) {
+            try {
+                this.model = (OBJModel) OBJLoader.INSTANCE.loadModel(entity.getModelResourceLocation());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y + entity.getRenderYOffset(), (float) z);
 
@@ -35,7 +47,7 @@ public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
 
         GL11.glScalef(entity.getRenderScalingFactor(), entity.getRenderScalingFactor(), entity.getRenderScalingFactor());
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(entity.getTextureResourceLocation());
-        ModelRenderer.renderObj(entity.getModel());
+        ModelRenderer.renderObj(model);
         GL11.glPopMatrix();
     }
 

@@ -1,7 +1,7 @@
 package com.mw.raumships.common.entities;
 
 import com.mw.raumships.client.Keybinds;
-import com.mw.raumships.client.sound.FlyingEntitySoundLoop;
+import com.mw.raumships.client.sound.Sounds;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -16,8 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.obj.OBJLoader;
-import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,13 +23,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.mw.raumships.client.ClientUtils.getMc;
-import static com.mw.raumships.client.ClientUtils.getSh;
 import static com.mw.raumships.common.RSCommonConstants.*;
 
 public abstract class RaumShipsEntity extends EntityLiving  {
-    protected final FlyingEntitySoundLoop sound;
-    protected final OBJModel model;
-
     protected float deltaRotation;
 
     protected boolean leftInputDown;
@@ -53,12 +47,6 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
         this.ignoreFrustumCheck = true;
         this.preventEntitySpawning = true;
-        this.sound = new FlyingEntitySoundLoop(this, getSound(), getVolume());
-        try {
-            this.model = (OBJModel) OBJLoader.INSTANCE.loadModel(getModelResourceLocation());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public abstract ResourceLocation getModelResourceLocation();
@@ -112,11 +100,13 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
         this.doBlockCollisions();
 
-        EntityPlayerSP player = getMc().player;
-        if (player != null && player.isSneaking()) {
-            this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
-            getMc().gameSettings.hideGUI = false;
-            player.dismountRidingEntity();
+        if (this.world.isRemote) {
+            EntityPlayerSP player = getMc().player;
+            if (player != null && player.isSneaking()) {
+                this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
+                getMc().gameSettings.hideGUI = false;
+                player.dismountRidingEntity();
+            }
         }
     }
 
@@ -241,12 +231,13 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         }
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
+    @SideOnly(Side.CLIENT)
     public void applyOrientationToEntity(Entity entityToUpdate) {
         this.applyYawToEntity(entityToUpdate);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport) {
         this.lerpX = x;
@@ -267,10 +258,9 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         this.downInputDown = Keybinds.rsDown.isKeyDown();
     }
 
-    @SideOnly(Side.CLIENT)
     public void playSoundLoop() {
-        if (!getSh().isSoundPlaying(sound) && world.isRemote) {
-            getSh().playSound(sound);
+        if (world.isRemote) {
+            Sounds.playSound(this, getSound(), getVolume());
         }
     }
 
@@ -278,12 +268,6 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, EnumHand hand) {
         player.startRiding(this);
         return EnumActionResult.SUCCESS;
-    }
-
-    @Override
-    protected void despawnEntity() {
-        super.despawnEntity();
-        getSh().stopSound(sound);
     }
 
     @Override
@@ -373,7 +357,6 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         return super.attackEntityFrom(source, amount);
     }
 
-    public OBJModel getModel() {
-        return model;
-    }
+    @Override
+    public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {}
 }
