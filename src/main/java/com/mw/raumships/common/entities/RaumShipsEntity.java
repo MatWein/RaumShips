@@ -157,10 +157,6 @@ public abstract class RaumShipsEntity extends EntityLiving  {
                 }
             }
 
-            if (this.rightInputDown != this.leftInputDown && !this.forwardInputDown && !this.backInputDown) {
-                forwardBackward += 0.005F;
-            }
-
             this.rotationYaw += this.deltaRotation;
 
             if (this.forwardInputDown) {
@@ -275,7 +271,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         this.upInputDown = Keybinds.rsUp.isKeyDown();
         this.downInputDown = Keybinds.rsDown.isKeyDown();
         this.downInputDown = Keybinds.rsDown.isKeyDown();
-        this.ctrlInputDown = Keybinds.rsCrtl.isKeyDown();
+        this.ctrlInputDown = Keybinds.rsCtrl.isKeyDown();
     }
 
     public void playSoundLoop() {

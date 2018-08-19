@@ -1,3 +1,12 @@
 entity.PuddleJumper.name=Puddle Jumper
 entity.DeathGlider.name=Death Glider
 entity.AlKesh.name=Al'Kesh
+
+raumships.keys=RaumShips
+rs.key.ctrl=Control
+rs.key.moveBack=Back
+rs.key.moveDown=Down
+rs.key.moveForward=Forward
+rs.key.moveLeft=Left
+rs.key.moveRight=Right
+rs.key.moveUp=Up
