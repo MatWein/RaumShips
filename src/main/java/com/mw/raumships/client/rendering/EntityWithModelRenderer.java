@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.Nullable;
 
 import static com.mw.raumships.client.ClientUtils.getMc;
+import static com.mw.raumships.client.ClientUtils.isEgoPersonView;
 import static com.mw.raumships.common.RSCommonConstants.ROTATION_FACTOR;
 
 public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
@@ -38,7 +39,7 @@ public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
         GL11.glTranslatef((float) x, (float) y + entity.getRenderYOffset(), (float) z);
 
         EntityPlayerSP player = getMc().player;
-        if (player != null && player.isRidingSameEntity(entity) && getMc().gameSettings.thirdPersonView == 0) {
+        if (player != null && player.isRidingSameEntity(entity) && isEgoPersonView()) {
             double motionX = (double) (MathHelper.sin(-entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset());
             double motionZ = (double) (MathHelper.cos(entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset());
             GL11.glTranslatef((float)motionX, 0.0F, (float)motionZ);
