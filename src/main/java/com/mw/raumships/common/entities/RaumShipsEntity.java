@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.mw.raumships.client.ClientUtils.getMc;
+import static com.mw.raumships.client.ClientUtils.isEgoPersonView;
 import static com.mw.raumships.common.RSCommonConstants.*;
 
 public abstract class RaumShipsEntity extends EntityLiving  {
@@ -105,11 +106,8 @@ public abstract class RaumShipsEntity extends EntityLiving  {
             EntityPlayerSP player = getMc().player;
             if (player != null && player.isSneaking()) {
                 player.dismountRidingEntity();
-            }
-
-            if (player != null && !player.isRidingSameEntity(this)) {
-                this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
                 getMc().gameSettings.hideGUI = false;
+                this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
             }
         }
     }
@@ -188,17 +186,16 @@ public abstract class RaumShipsEntity extends EntityLiving  {
         }
     }
 
-    @SideOnly(Side.CLIENT)
     public void updatePlayerCamera() {
         EntityPlayerSP player = getMc().player;
-        if (player != null && getMc().gameSettings.thirdPersonView == 0) {
+
+        if (player != null && isEgoPersonView()) {
             player.rotationYaw = this.rotationYaw;
             player.rotationPitch = 0.0F;
             getMc().gameSettings.hideGUI = true;
         }
     }
 
-    @SideOnly(Side.CLIENT)
     public void updateThirdPersonDistance(float distance) {
         EntityRenderer renderer = getMc().entityRenderer;
         if (renderer instanceof PatchedEntityRenderer) {
