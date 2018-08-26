@@ -8,8 +8,12 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.PatchedEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +30,7 @@ import static com.mw.raumships.client.ClientUtils.getMc;
 import static com.mw.raumships.client.ClientUtils.isEgoPersonView;
 import static com.mw.raumships.common.RSCommonConstants.*;
 
-public abstract class RaumShipsEntity extends EntityLiving  {
+public abstract class RaumShipsEntity extends EntityLiving {
     protected float deltaRotation;
 
     protected boolean leftInputDown;
@@ -52,24 +56,39 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     }
 
     public abstract ResourceLocation getModelResourceLocation();
+
     public abstract ResourceLocation getTextureResourceLocation();
+
     public abstract SoundEvent getSound();
+
     public abstract float getVolume();
 
     public abstract float getRenderCockpitCameraZOffset();
+
     public abstract float getRenderScalingFactor();
+
     public abstract float getThirdPersonDistance();
+
     public abstract int getMaxPassangers();
+
     public abstract float[] getPlayerMountPositionXOffset();
+
     public abstract float getPlayerMountPositionYOffset();
+
     public abstract float[] getPlayerMountPositionZOffset();
+
     public abstract float getRenderYOffset();
 
     public abstract float getFinalAirShipSpeedTurn();
+
     public abstract float getFinalAirShipSpeedForward();
+
     public abstract float getFinalAirShipSpeedUp();
+
     public abstract float getFinalAirShipSpeedDown();
+
     public abstract float getSpeedModifier();
+
     public abstract float getMomentum();
 
     @Override
@@ -85,6 +104,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
         if (this.canPassengerSteer()) {
             this.updateMotion();
+//            this.updatePassangerEffects();
 
             if (this.world.isRemote) {
                 this.controlAirship();
@@ -108,6 +128,38 @@ public abstract class RaumShipsEntity extends EntityLiving  {
                 player.dismountRidingEntity();
                 getMc().gameSettings.hideGUI = false;
                 this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
+            }
+        }
+    }
+
+    private void updatePassangerEffects(Entity entity) {
+        if (entity instanceof EntityLivingBase) {
+            EntityLivingBase entityLivingBase = (EntityLivingBase) entity;
+
+            if (isInWater()) {
+                addPotionEffect(entityLivingBase, MobEffects.WATER_BREATHING);
+                addPotionEffect(entityLivingBase, MobEffects.NIGHT_VISION);
+            } else {
+                removePotionEffect(entityLivingBase, MobEffects.WATER_BREATHING);
+                removePotionEffect(entityLivingBase, MobEffects.NIGHT_VISION);
+            }
+        }
+    }
+
+    private void removePotionEffect(EntityLivingBase entity, Potion potion) {
+        if (potion != null) {
+            PotionEffect activePotionEffect = entity.getActivePotionEffect(potion);
+            if (activePotionEffect != null) {
+                entity.removePotionEffect(potion);
+            }
+        }
+    }
+
+    private void addPotionEffect(EntityLivingBase entity, Potion potion) {
+        if (potion != null) {
+            PotionEffect activePotionEffect = entity.getActivePotionEffect(potion);
+            if (activePotionEffect == null || activePotionEffect.getDuration() <= 20 * 11) {
+                entity.addPotionEffect(new PotionEffect(potion, 20 * 12, 1));
             }
         }
     }
@@ -227,9 +279,11 @@ public abstract class RaumShipsEntity extends EntityLiving  {
 
     @Override
     public void updatePassenger(Entity passenger) {
+        updatePassangerEffects(passenger);
+
         if (this.isPassenger(passenger)) {
             float[] xOffset = getPlayerMountPositionXOffset(); // forward/backward
-            float yOffset = (float)getMountedYOffset() + (float)passenger.getYOffset();
+            float yOffset = (float) getMountedYOffset() + (float) passenger.getYOffset();
             float[] zOffset = getPlayerMountPositionZOffset(); // left/right
 
             int i = this.getPassengers().indexOf(passenger);
@@ -299,7 +353,7 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     }
 
     @Override
-    public boolean shouldDismountInWater(Entity rider){
+    public boolean shouldDismountInWater(Entity rider) {
         return false;
     }
 
@@ -351,10 +405,12 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     }
 
     @Override
-    public void fall(float distance, float damageMultiplier) {}
+    public void fall(float distance, float damageMultiplier) {
+    }
 
     @Override
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) { }
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+    }
 
     @Override
     public EnumFacing getAdjustedHorizontalFacing() {
@@ -371,5 +427,11 @@ public abstract class RaumShipsEntity extends EntityLiving  {
     }
 
     @Override
-    public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {}
+    public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
+    }
+
+    @Override
+    public boolean canBreatheUnderwater() {
+        return true;
+    }
 }
