@@ -108,14 +108,18 @@ public abstract class RaumShipsEntity extends EntityLiving {
             this.motionX = 0.0D;
             this.motionY = 0.0D;
             this.motionZ = 0.0D;
+        }
 
-            if (this.world.isRemote) {
+        this.doBlockCollisions();
+
+        if (this.world.isRemote) {
+            EntityPlayerSP player = getMc().player;
+            if (player != null && player.isSneaking()) {
+                player.dismountRidingEntity();
                 getMc().gameSettings.hideGUI = false;
                 this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
             }
         }
-
-        this.doBlockCollisions();
     }
 
     private void updatePassangerEffects(Entity entity) {
