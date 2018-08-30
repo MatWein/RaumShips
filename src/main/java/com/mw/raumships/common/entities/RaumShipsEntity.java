@@ -56,40 +56,32 @@ public abstract class RaumShipsEntity extends EntityLiving {
     }
 
     public abstract ResourceLocation getModelResourceLocation();
-
     public abstract ResourceLocation getTextureResourceLocation();
-
     public abstract SoundEvent getSound();
-
     public abstract float getVolume();
-
     public abstract float getRenderCockpitCameraZOffset();
-
     public abstract float getRenderScalingFactor();
-
     public abstract float getThirdPersonDistance();
-
     public abstract int getMaxPassangers();
-
     public abstract float[] getPlayerMountPositionXOffset();
-
     public abstract float getPlayerMountPositionYOffset();
-
     public abstract float[] getPlayerMountPositionZOffset();
-
     public abstract float getRenderYOffset();
-
     public abstract float getFinalAirShipSpeedTurn();
-
     public abstract float getFinalAirShipSpeedForward();
-
     public abstract float getFinalAirShipSpeedUp();
-
     public abstract float getFinalAirShipSpeedDown();
-
     public abstract float getSpeedModifier();
-
     public abstract float getMomentum();
+
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+
+        if (world.isRemote) {
+            Sounds.playSound(this, getSound(), getVolume());
+        }
+    }
 
     @Override
     public void onUpdate() {
@@ -100,11 +92,9 @@ public abstract class RaumShipsEntity extends EntityLiving {
         super.onEntityUpdate();
 
         this.tickLerp();
-        this.playSoundLoop();
 
         if (this.canPassengerSteer()) {
             this.updateMotion();
-//            this.updatePassangerEffects();
 
             if (this.world.isRemote) {
                 this.controlAirship();
@@ -118,18 +108,14 @@ public abstract class RaumShipsEntity extends EntityLiving {
             this.motionX = 0.0D;
             this.motionY = 0.0D;
             this.motionZ = 0.0D;
-        }
 
-        this.doBlockCollisions();
-
-        if (this.world.isRemote) {
-            EntityPlayerSP player = getMc().player;
-            if (player != null && player.isSneaking()) {
-                player.dismountRidingEntity();
+            if (this.world.isRemote) {
                 getMc().gameSettings.hideGUI = false;
                 this.updateThirdPersonDistance(DEFAULT_MINECRAFT_VIEW_DISTANCE);
             }
         }
+
+        this.doBlockCollisions();
     }
 
     private void updatePassangerEffects(Entity entity) {
@@ -323,12 +309,6 @@ public abstract class RaumShipsEntity extends EntityLiving {
         this.downInputDown = Keybinds.rsDown.isKeyDown();
         this.downInputDown = Keybinds.rsDown.isKeyDown();
         this.ctrlInputDown = Keybinds.rsCtrl.isKeyDown();
-    }
-
-    public void playSoundLoop() {
-        if (world.isRemote) {
-            Sounds.playSound(this, getSound(), getVolume());
-        }
     }
 
     @Override
