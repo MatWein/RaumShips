@@ -1,0 +1,45 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": [
+      {
+        "textures": {
+          "particle": "raumships:blocks/zpmhubdown",
+          "up": "raumships:blocks/zpmhubtopoff",
+          "down": "raumships:blocks/zpmhubdown",
+          "north": "raumships:blocks/zpmhubside",
+          "south": "raumships:blocks/zpmhubside",
+          "east": "raumships:blocks/zpmhubside",
+          "west": "raumships:blocks/zpmhubside"
+        },
+        "model": "cube"
+      }
+    ],
+    "enabled": {
+      "true": {
+        "textures": {
+          "particle": "raumships:blocks/zpmhubdown",
+          "up": "raumships:blocks/zpmhubtopon",
+          "down": "raumships:blocks/zpmhubdown",
+          "north": "raumships:blocks/zpmhubside",
+          "south": "raumships:blocks/zpmhubside",
+          "east": "raumships:blocks/zpmhubside",
+          "west": "raumships:blocks/zpmhubside"
+        },
+        "model": "cube"
+      },
+      "false": {
+        "textures": {
+          "particle": "raumships:blocks/zpmhubdown",
+          "up": "raumships:blocks/zpmhubtopoff",
+          "down": "raumships:blocks/zpmhubdown",
+          "north": "raumships:blocks/zpmhubside",
+          "south": "raumships:blocks/zpmhubside",
+          "east": "raumships:blocks/zpmhubside",
+          "west": "raumships:blocks/zpmhubside"
+        },
+        "model": "cube"
+      }
+    }
+  }
+}

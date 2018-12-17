@@ -10,3 +10,13 @@ rs.key.moveForward=Vorwärts
 rs.key.moveLeft=Nach links
 rs.key.moveRight=Nach rechts
 rs.key.moveUp=Nach oben
+
+item.zpm.name=ZPM (Zero Point Module)
+item.zpmhub.name=ZPM Konsole
+
+tile.zpmhub.name=ZPM Konsole
+
+itemGroup.raumships=RaumShips
+
+custom.zpmhub.gui.noZpm=Kein ZPM installiert. Gerät inaktiv.
+custom.zpmhub.gui.zpmInstalled=ZPM installiert. Gerät betriebsbereit:

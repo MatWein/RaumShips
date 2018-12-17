@@ -5,4 +5,7 @@ public interface RSCommonConstants {
 
     float ROTATION_FACTOR = 0.017453292F;
     float Y_FACTOR = 3.017453292F;
+
+    int MAX_LIGHT = 15;
+    int MIN_LIGHT = 0;
 }
