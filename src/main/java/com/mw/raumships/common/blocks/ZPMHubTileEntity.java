@@ -128,10 +128,8 @@ public class ZPMHubTileEntity extends TileEntity implements IInventory, ITickabl
         if (hasZpmCached != hasZpm) {
             hasZpmCached = hasZpm;
 
-            if (world.isRemote) {
-                IBlockState blockstate = world.getBlockState(pos);
-                world.notifyBlockUpdate(pos, blockstate, blockstate, 3);
-            }
+            IBlockState blockstate = world.getBlockState(pos);
+            world.notifyBlockUpdate(pos, blockstate, blockstate, 3);
 
             world.checkLightFor(EnumSkyBlock.BLOCK, pos);
         }
