@@ -18,5 +18,5 @@ tile.zpmhub.name=ZPM Konsole
 
 itemGroup.raumships=RaumShips
 
-custom.zpmhub.gui.noZpm=Kein ZPM installiert. Gerät inaktiv.
-custom.zpmhub.gui.zpmInstalled=ZPM installiert. Gerät betriebsbereit:
+custom.zpmhub.gui.noZpm=Kein ZPM installiert.
+custom.zpmhub.gui.zpmInstalled=ZPM installiert und betriebsbereit:
