@@ -1,7 +1,7 @@
 package com.mw.raumships.client.gui.zpm;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.common.blocks.ZPMHubTileEntity;
+import com.mw.raumships.common.blocks.OneSlotEnergyTileEntityBase;
 import com.mw.raumships.common.calc.PowerUnitCalculator;
 import com.mw.raumships.common.items.ZPMItem;
 import com.mw.raumships.server.gui.zpm.ZpmHubContainer;
@@ -21,17 +21,17 @@ import java.util.Locale;
 @SideOnly(Side.CLIENT)
 public class ZpmHubGuiContainer extends GuiContainer {
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(RaumShipsMod.MODID, "textures/gui/zpmhub.png");
-    private static final NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(Locale.getDefault());
+    public static final NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(Locale.getDefault());
 
     private static final int FIRST_LINE_X = 11 + ZpmHubContainer.SLOT_X_SPACING;
     private static final int FIRST_LINE_Y = 7;
     private static final int FONT_COLOR = 0x000000;
 
-    private final ZPMHubTileEntity zpmHubTileEntity;
+    private final OneSlotEnergyTileEntityBase zpmHubTileEntity;
     private final String textNoZpm;
     private final String textZpmInstalled;
 
-    public ZpmHubGuiContainer(InventoryPlayer invPlayer, ZPMHubTileEntity zpmHubTileEntity) {
+    public ZpmHubGuiContainer(InventoryPlayer invPlayer, OneSlotEnergyTileEntityBase zpmHubTileEntity) {
         super(new ZpmHubContainer(invPlayer, zpmHubTileEntity));
 
         this.zpmHubTileEntity = zpmHubTileEntity;

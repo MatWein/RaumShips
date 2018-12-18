@@ -1,6 +1,6 @@
 package com.mw.raumships.server.gui.zpm;
 
-import com.mw.raumships.common.blocks.ZPMHubTileEntity;
+import com.mw.raumships.common.blocks.OneSlotEnergyTileEntityBase;
 import com.mw.raumships.common.items.ZPMItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -22,10 +22,10 @@ public class ZpmHubContainer extends Container {
     public static final int VANILLA_FIRST_SLOT_INDEX = 0;
     public static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
 
-    private final ZPMHubTileEntity tileEntity;
+    private final OneSlotEnergyTileEntityBase tileEntity;
     private final ZpmHubContainerSlot slotIn;
 
-    public ZpmHubContainer(InventoryPlayer invPlayer, ZPMHubTileEntity tileEntity) {
+    public ZpmHubContainer(InventoryPlayer invPlayer, OneSlotEnergyTileEntityBase tileEntity) {
         this.tileEntity = tileEntity;
 
         int slotNumber = 0;

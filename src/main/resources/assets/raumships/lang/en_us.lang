@@ -13,8 +13,10 @@ rs.key.moveUp=Up
 
 item.zpm.name=ZPM (Zero Point Module)
 item.zpmhub.name=ZPM Hub
+item.zpmcharger.name=ZPM Charger
 
 tile.zpmhub.name=ZPM Hub
+tile.zpmcharger.name=ZPM Charger
 
 itemGroup.raumships=RaumShips
 

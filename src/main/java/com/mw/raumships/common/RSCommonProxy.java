@@ -1,6 +1,8 @@
 package com.mw.raumships.common;
 
 import com.mw.raumships.RaumShipsMod;
+import com.mw.raumships.common.blocks.ZPMChargerBlock;
+import com.mw.raumships.common.blocks.ZPMChargerTileEntity;
 import com.mw.raumships.common.blocks.ZPMHubBlock;
 import com.mw.raumships.common.blocks.ZPMHubTileEntity;
 import com.mw.raumships.common.entities.AlKeshEntity;
@@ -32,6 +34,8 @@ public class RSCommonProxy {
     protected ZPMHubBlock zpmHubBlock;
     protected Item zpmHubItem;
     protected ZPMItem zpmItem;
+    protected ZPMChargerBlock zpmChargerBlock;
+    protected Item zpmChargerItem;
 
     public void preInit(FMLPreInitializationEvent event) throws Exception {
         raumshipsItemTab = new RaumshipsItemTab();
@@ -43,10 +47,14 @@ public class RSCommonProxy {
         zpmHubBlock = new ZPMHubBlock();
         zpmHubItem = registerModBlock(zpmHubBlock);
 
+        zpmChargerBlock = new ZPMChargerBlock();
+        zpmChargerItem = registerModBlock(zpmChargerBlock);
+
         zpmItem = new ZPMItem();
         registerModItem(zpmItem);
 
         GameRegistry.registerTileEntity(ZPMHubTileEntity.class, new ResourceLocation(MODID, "zpm_hub_tile_entity"));
+        GameRegistry.registerTileEntity(ZPMChargerTileEntity.class, new ResourceLocation(MODID, "zpm_charger_tile_entity"));
 
         NetworkRegistry.INSTANCE.registerGuiHandler(RaumShipsMod.instance, new RaumshipsGuiHandler());
     }

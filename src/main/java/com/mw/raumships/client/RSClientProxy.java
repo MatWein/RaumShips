@@ -39,6 +39,7 @@ public class RSClientProxy extends RSCommonProxy {
         ModelLoader.setCustomModelResourceLocation(zpmItem, 7, new ModelResourceLocation(RaumShipsMod.MODID + ":zpm/8", "inventory"));
 
         ModelLoader.setCustomModelResourceLocation(zpmHubItem, 0, new ModelResourceLocation(RaumShipsMod.MODID + ":zpmhub", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(zpmChargerItem, 0, new ModelResourceLocation(RaumShipsMod.MODID + ":zpmcharger", "inventory"));
     }
 
     @Override

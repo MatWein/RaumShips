@@ -1,6 +1,7 @@
 package com.mw.raumships.common.items;
 
 import com.mw.raumships.RaumShipsMod;
+import com.mw.raumships.client.gui.zpm.ZpmHubGuiContainer;
 import com.mw.raumships.common.RaumshipsItemTab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,16 +27,20 @@ public class ZPMItem extends Item {
 
         setMaxStackSize(1);
         setHasSubtypes(true);
-        setMaxDamage(0); // dont remove this because minecraft sucks: see net.minecraft.client.renderer.ItemModelMesher.getMetadata
+        setMaxDamage(0);
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack activeItemStack = playerIn.getHeldItemMainhand();
-        int zpmEnergy = getZpmEnergy(activeItemStack);
+        if(!worldIn.isRemote) {
+            ItemStack activeItemStack = playerIn.getHeldItemMainhand();
+            int zpmEnergy = getZpmEnergy(activeItemStack);
+            int percentage = (int) (zpmEnergy * 100.0 / ZPMItem.MAX_ZPM_ENERGY);
+            String number = ZpmHubGuiContainer.NUMBER_FORMAT.format(zpmEnergy);
+            String message = String.format("ZPM: %s RF (%s %%)", number, percentage);
 
-        Minecraft mc = Minecraft.getMinecraft();
-        mc.player.sendChatMessage("ZPM: " + zpmEnergy);
+            Minecraft.getMinecraft().player.sendChatMessage(message);
+        }
 
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "lzx",
+    "lzx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "z":
+    {
+      "item": "minecraft:redstone_block"
+    },
+    "l":
+    {
+      "item": "minecraft:lapis_block"
+    }
+  },
+  "result":
+  {
+    "item": "raumships:zpmcharger",
+    "count": 1
+  }
+}

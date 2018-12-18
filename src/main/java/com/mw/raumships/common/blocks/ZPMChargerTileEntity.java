@@ -6,28 +6,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public class ZPMHubTileEntity extends OneSlotEnergyTileEntityBase {
-    public static final String ID = "container.zpmhub.name";
+public class ZPMChargerTileEntity extends OneSlotEnergyTileEntityBase {
+    public static final String ID = "container.zpmcharger.name";
 
     private boolean hasZpmCached;
 
     @Override
     public void update() {
-        boolean hasZpm = hasActiveZpm();
+        boolean hasZpm = hasZpm();
         if (hasZpmCached != hasZpm) {
             hasZpmCached = hasZpm;
 
             IBlockState blockstate = world.getBlockState(pos);
             world.notifyBlockUpdate(pos, blockstate, blockstate, 3);
-
-            world.checkLightFor(EnumSkyBlock.BLOCK, pos);
         }
 
-        if (getEnergyStored() > 0) {
+        if (hasZpm && (getEnergyStored() < getMaxEnergyStored())) {
             for (EnumFacing enumFacing : EnumFacing.values()) {
                 if (enumFacing == EnumFacing.UP) {
                     continue;
@@ -36,13 +33,13 @@ public class ZPMHubTileEntity extends OneSlotEnergyTileEntityBase {
                 BlockPos neighborBlock = pos.offset(enumFacing);
                 TileEntity tile = world.getTileEntity(neighborBlock);
                 if (tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, enumFacing.getOpposite())) {
-                    int maxExtract = getEnergyStored();
-                    int maxAvailable = extractEnergy(maxExtract, true);
+                    int maxReceive = getMaxEnergyStored() - getEnergyStored();
+                    int maxPossible = receiveEnergy(maxReceive, true);
 
                     IEnergyStorage capability = tile.getCapability(CapabilityEnergy.ENERGY, enumFacing.getOpposite());
-                    if (capability != null && capability.canReceive() && this.canExtract()) {
-                        int energyTransferred = capability.receiveEnergy(maxAvailable, false);
-                        extractEnergy(energyTransferred, false);
+                    if (capability != null && capability.canExtract() && this.canReceive()) {
+                        int energyTransferred = capability.extractEnergy(maxPossible, false);
+                        receiveEnergy(energyTransferred, false);
                     }
                 }
             }
@@ -54,43 +51,44 @@ public class ZPMHubTileEntity extends OneSlotEnergyTileEntityBase {
         return ID;
     }
 
-    public boolean hasActiveZpm() {
-        return hasZpm() && ZPMItem.getZpmEnergy(getStackInSlot(0)) > 0L;
-    }
-
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        return 0;
-    }
-
-    @Override
-    public int extractEnergy(int maxExtract, boolean simulate) {
         ItemStack stackInSlot = getStackInSlot(0);
         if (stackInSlot == null) {
             return 0;
         }
 
         int energyStored = getEnergyStored();
-        if (energyStored >= maxExtract) {
+        int maxEnergyStored = getMaxEnergyStored();
+        if (energyStored == maxEnergyStored) {
+            return 0;
+        }
+
+        if (energyStored + maxReceive <= maxEnergyStored) {
             if (!simulate) {
-                ZPMItem.setZpmEnergy(stackInSlot, energyStored - maxExtract);
+                ZPMItem.setZpmEnergy(stackInSlot, energyStored + maxReceive);
             }
-            return maxExtract;
+            return maxReceive;
         }
 
         if (!simulate) {
-            ZPMItem.setZpmEnergy(stackInSlot, 0);
+            ZPMItem.setZpmEnergy(stackInSlot, maxEnergyStored);
         }
-        return maxExtract - energyStored;
+        return maxEnergyStored - energyStored;
+    }
+
+    @Override
+    public int extractEnergy(int maxExtract, boolean simulate) {
+        return 0;
     }
 
     @Override
     public boolean canExtract() {
-        return hasActiveZpm();
+        return false;
     }
 
     @Override
     public boolean canReceive() {
-        return false;
+        return true;
     }
 }

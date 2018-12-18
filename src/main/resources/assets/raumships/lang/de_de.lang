@@ -13,8 +13,10 @@ rs.key.moveUp=Nach oben
 
 item.zpm.name=ZPM (Zero Point Module)
 item.zpmhub.name=ZPM Konsole
+item.zpmcharger.name=ZPM Ladekonsole
 
 tile.zpmhub.name=ZPM Konsole
+tile.zpmcharger.name=ZPM Ladekonsole
 
 itemGroup.raumships=RaumShips
 

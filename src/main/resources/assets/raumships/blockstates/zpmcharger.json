@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": [
+      {
+        "textures": {
+          "particle": "raumships:blocks/zpmchargerdown",
+          "up": "raumships:blocks/zpmchargertop",
+          "down": "raumships:blocks/zpmchargerdown",
+          "north": "raumships:blocks/zpmchargerside",
+          "south": "raumships:blocks/zpmchargerside",
+          "east": "raumships:blocks/zpmchargerside",
+          "west": "raumships:blocks/zpmchargerside"
+        },
+        "model": "cube"
+      }
+    ]
+  }
+}
