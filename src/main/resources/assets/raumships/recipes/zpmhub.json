@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xyx",
+    "zdx",
+    "zxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "y":
+    {
+      "item": "minecraft:obsidian"
+    },
+    "z":
+    {
+      "item": "minecraft:redstone_block"
+    },
+    "d":
+    {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result":
+  {
+    "item": "raumships:zpmhub",
+    "count": 1
+  }
+}
