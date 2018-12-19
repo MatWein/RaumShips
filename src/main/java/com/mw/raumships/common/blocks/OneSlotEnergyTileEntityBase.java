@@ -231,11 +231,24 @@ public abstract class OneSlotEnergyTileEntityBase extends TileEntity implements 
             return 0;
         }
 
+        return ZPMItem.getZpmEnergyAsInt(stackInSlot);
+    }
+
+    public long getEnergyStoredAsLong() {
+        ItemStack stackInSlot = getStackInSlot(0);
+        if (stackInSlot == null) {
+            return 0;
+        }
+
         return ZPMItem.getZpmEnergy(stackInSlot);
     }
 
     @Override
     public int getMaxEnergyStored() {
+        return ZPMItem.toSafeInt(ZPMItem.MAX_ZPM_ENERGY);
+    }
+
+    public long getMaxEnergyStoredAsLong() {
         return ZPMItem.MAX_ZPM_ENERGY;
     }
 }

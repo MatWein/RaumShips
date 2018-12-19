@@ -65,7 +65,7 @@ public class ZpmHubGuiContainer extends GuiContainer {
             } else {
                 fontRenderer.drawString(textZpmInstalled, FIRST_LINE_X, FIRST_LINE_Y, FONT_COLOR);
 
-                int rf = zpmHubTileEntity.getEnergyStored();
+                long rf = zpmHubTileEntity.getEnergyStoredAsLong();
                 fontRenderer.drawString("FE / RF / T: " + NUMBER_FORMAT.format(rf), FIRST_LINE_X, FIRST_LINE_Y + 20, FONT_COLOR);
 
                 double eu = PowerUnitCalculator.toEU(rf);

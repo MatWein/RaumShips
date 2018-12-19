@@ -27,7 +27,7 @@ public class ZPMHubTileEntity extends OneSlotEnergyTileEntityBase {
             world.checkLightFor(EnumSkyBlock.BLOCK, pos);
         }
 
-        if (getEnergyStored() > 0) {
+        if (getEnergyStoredAsLong() > 0) {
             for (EnumFacing enumFacing : EnumFacing.values()) {
                 if (enumFacing == EnumFacing.UP) {
                     continue;
@@ -70,7 +70,7 @@ public class ZPMHubTileEntity extends OneSlotEnergyTileEntityBase {
             return 0;
         }
 
-        int energyStored = getEnergyStored();
+        long energyStored = getEnergyStoredAsLong();
         if (energyStored >= maxExtract) {
             if (!simulate) {
                 ZPMItem.setZpmEnergy(stackInSlot, energyStored - maxExtract);
@@ -81,7 +81,7 @@ public class ZPMHubTileEntity extends OneSlotEnergyTileEntityBase {
         if (!simulate) {
             ZPMItem.setZpmEnergy(stackInSlot, 0);
         }
-        return maxExtract - energyStored;
+        return ZPMItem.toSafeInt(maxExtract - energyStored);
     }
 
     @Override

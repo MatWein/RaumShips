@@ -68,8 +68,8 @@ public class ZPMHubBlock extends BlockContainer {
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         if (tileEntity instanceof ZPMHubTileEntity) {
-            ZPMHubTileEntity tileInventoryFurnace = (ZPMHubTileEntity)tileEntity;
-            return getDefaultState().withProperty(PROP_ENABLED, tileInventoryFurnace.hasActiveZpm());
+            ZPMHubTileEntity zpmHubTileEntity = (ZPMHubTileEntity)tileEntity;
+            return getDefaultState().withProperty(PROP_ENABLED, zpmHubTileEntity.hasActiveZpm());
         }
 
         return state;

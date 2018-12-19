@@ -14,8 +14,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 public class ZPMItem extends Item {
-    public static final int MAX_ZPM_ENERGY_FACTOR = 250000000;
-    public static final int MAX_ZPM_ENERGY = 7 * MAX_ZPM_ENERGY_FACTOR;
+    public static final long MAX_ZPM_ENERGY_FACTOR = 3000000000L;
+    public static final long MAX_ZPM_ENERGY = 7 * MAX_ZPM_ENERGY_FACTOR;
 
     public static final String REGISTRY_NAME = "zpm";
     public static final String NBT_ZPM = "ZPM";
@@ -34,8 +34,8 @@ public class ZPMItem extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if(!worldIn.isRemote) {
             ItemStack activeItemStack = playerIn.getHeldItemMainhand();
-            int zpmEnergy = getZpmEnergy(activeItemStack);
-            int percentage = (int) (zpmEnergy * 100.0 / ZPMItem.MAX_ZPM_ENERGY);
+            long zpmEnergy = getZpmEnergy(activeItemStack);
+            long percentage = (long) (zpmEnergy * 100.0 / ZPMItem.MAX_ZPM_ENERGY);
             String number = ZpmHubGuiContainer.NUMBER_FORMAT.format(zpmEnergy);
             String message = String.format("ZPM: %s RF (%s %%)", number, percentage);
 
@@ -45,19 +45,32 @@ public class ZPMItem extends Item {
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
-    public static int getZpmEnergy(ItemStack stackInSlot) {
-        if (stackInSlot == null) {
-            return 0;
-        }
-
-        if (!(stackInSlot.getItem() instanceof ZPMItem)) {
-            return 0;
-        }
-
-        return stackInSlot.getOrCreateSubCompound(ZPMItem.NBT_ZPM).getInteger(ZPMItem.KEY_ZPM_ENERGY);
+    public static int getZpmEnergyAsInt(ItemStack stackInSlot) {
+        long zpmEnergy = getZpmEnergy(stackInSlot);
+        return toSafeInt(zpmEnergy);
     }
 
-    public static void setZpmEnergy(ItemStack stackInSlot, int zpmEnergy) {
+    public static int toSafeInt(long zpmEnergy) {
+        if (zpmEnergy > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        } else {
+            return (int)zpmEnergy;
+        }
+    }
+
+    public static long getZpmEnergy(ItemStack stackInSlot) {
+        if (stackInSlot == null) {
+            return 0;
+        }
+
+        if (!(stackInSlot.getItem() instanceof ZPMItem)) {
+            return 0;
+        }
+
+        return stackInSlot.getOrCreateSubCompound(ZPMItem.NBT_ZPM).getLong(ZPMItem.KEY_ZPM_ENERGY);
+    }
+
+    public static void setZpmEnergy(ItemStack stackInSlot, long zpmEnergy) {
         if (stackInSlot == null) {
             return;
         }
@@ -66,8 +79,8 @@ public class ZPMItem extends Item {
             return;
         }
 
-        int newZpmEnergy = Math.max(zpmEnergy, 0);
-        stackInSlot.getOrCreateSubCompound(ZPMItem.NBT_ZPM).setInteger(ZPMItem.KEY_ZPM_ENERGY, newZpmEnergy);
+        long newZpmEnergy = Math.max(zpmEnergy, 0);
+        stackInSlot.getOrCreateSubCompound(ZPMItem.NBT_ZPM).setLong(ZPMItem.KEY_ZPM_ENERGY, newZpmEnergy);
 
         if (newZpmEnergy >= 6 * MAX_ZPM_ENERGY_FACTOR) {
             stackInSlot.setItemDamage(0);
@@ -102,7 +115,7 @@ public class ZPMItem extends Item {
         }
     }
 
-    private ItemStack createItemStackWithProperty(int meta, int zpmEnergy) {
+    private ItemStack createItemStackWithProperty(int meta, long zpmEnergy) {
         ItemStack itemStack = new ItemStack(this, 1, meta);
         setZpmEnergy(itemStack, zpmEnergy);
         return itemStack;
