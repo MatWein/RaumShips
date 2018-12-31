@@ -27,6 +27,10 @@ public class ZPMChargerTileEntity extends OneSlotEnergyTileEntityBase {
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
+        if (!hasZpm()) {
+            return 0;
+        }
+
         ItemStack stackInSlot = getStackInSlot(0);
         if (stackInSlot == null) {
             return 0;
