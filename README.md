@@ -9,6 +9,9 @@ Currently included ships:
 - Stargate Goa'uld Death Glider  
 - Stargate Goa'uld Al'Kesh  
 
+Additional content:
+- added ZPM console and ZPM item to provide massive energy
+
   
 ## Screenshots:  
   
