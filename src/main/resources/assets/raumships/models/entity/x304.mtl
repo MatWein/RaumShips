@@ -1,0 +1,57 @@
+# Created by Metasequoia
+
+newmtl Blinds_Vertical_Pattern
+Ka 0.23280 0.23280 0.23280
+Kd 0.31040 0.31040 0.31040
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd Blinds_Vertical_Pattern.jpg
+
+newmtl Aluminm2
+Ka 0.28680 0.28680 0.28680
+Kd 0.38240 0.38240 0.38240
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd Aluminm2.jpg
+
+newmtl _3
+Ka 0.28680 0.28680 0.28680
+Kd 0.38240 0.38240 0.38240
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd _3.jpg
+
+newmtl Translucent_Glass_Sky_Reflectio
+Ka 0.40020 0.55500 0.60000
+Kd 0.53360 0.74000 0.80000
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd Translucent_Glass_Sky_Reflection.jpg
+
+newmtl _1
+Ka 0.06600 0.06360 0.06360
+Kd 0.08800 0.08480 0.08480
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd _1.jpg
+
+newmtl FrontColor
+Ka 0.60000 0.60000 0.60000
+Kd 0.80000 0.80000 0.80000
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+
+newmtl _Glass_Sky_Reflection_1
+Ka 0.49200 0.44460 0.09900
+Kd 0.65600 0.59280 0.13200
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd _Glass_Sky_Reflection_1.jpg
+
+newmtl Metal_Panel
+Ka 0.12480 0.12480 0.12480
+Kd 0.16640 0.16640 0.16640
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd Metal_Panel.jpg
+

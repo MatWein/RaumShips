@@ -5,10 +5,7 @@ import com.mw.raumships.common.blocks.ZPMChargerBlock;
 import com.mw.raumships.common.blocks.ZPMChargerTileEntity;
 import com.mw.raumships.common.blocks.ZPMHubBlock;
 import com.mw.raumships.common.blocks.ZPMHubTileEntity;
-import com.mw.raumships.common.entities.AlKeshEntity;
-import com.mw.raumships.common.entities.DeathGliderEntity;
-import com.mw.raumships.common.entities.PuddleJumperEntity;
-import com.mw.raumships.common.entities.RaumShipsEntity;
+import com.mw.raumships.common.entities.*;
 import com.mw.raumships.common.gui.RaumshipsGuiHandler;
 import com.mw.raumships.common.items.ZPMItem;
 import net.minecraft.block.Block;
@@ -43,6 +40,7 @@ public class RSCommonProxy {
         registerModEntity(PuddleJumperEntity.ID, PuddleJumperEntity.NAME, PuddleJumperEntity.class, Color.BLACK, Color.WHITE);
         registerModEntity(DeathGliderEntity.ID, DeathGliderEntity.NAME, DeathGliderEntity.class, Color.BLUE, Color.WHITE);
         registerModEntity(AlKeshEntity.ID, AlKeshEntity.NAME, AlKeshEntity.class, Color.YELLOW, Color.WHITE);
+        registerModEntity(F301Entity.ID, F301Entity.NAME, F301Entity.class, Color.GREEN, Color.WHITE);
 
         zpmHubBlock = new ZPMHubBlock();
         zpmHubItem = registerModBlock(zpmHubBlock);

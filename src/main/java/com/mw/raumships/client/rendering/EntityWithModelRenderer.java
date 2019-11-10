@@ -1,5 +1,6 @@
 package com.mw.raumships.client.rendering;
 
+import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.common.entities.RaumShipsEntity;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.GlStateManager;
@@ -31,6 +32,7 @@ public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
             try {
                 this.model = (OBJModel) OBJLoader.INSTANCE.loadModel(entity.getModelResourceLocation());
             } catch (Exception e) {
+                RaumShipsMod.logger.error("Error on loading entity model for {}", entity.getClass().getSimpleName(), e);
                 throw new RuntimeException(e);
             }
         }
@@ -40,8 +42,8 @@ public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
 
         EntityPlayerSP player = getMc().player;
         if (player != null && player.isRidingSameEntity(entity) && isEgoPersonView()) {
-            double motionX = (double) (MathHelper.sin(-entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset());
-            double motionZ = (double) (MathHelper.cos(entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset());
+            double motionX = MathHelper.sin(-entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset();
+            double motionZ = MathHelper.cos(entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset();
             GL11.glTranslatef((float)motionX, 0.0F, (float)motionZ);
         }
         GlStateManager.rotate(0.0F - entityYaw, 0.0F, 1.0F, 0.0F);

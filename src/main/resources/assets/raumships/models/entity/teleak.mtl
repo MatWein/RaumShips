@@ -1,0 +1,9 @@
+# Created by Metasequoia
+
+newmtl Material_0
+Ka 0.64000 0.64000 0.64000
+Kd 0.64000 0.64000 0.64000
+Ks 0.00000 0.00000 0.00000
+Ns 5.00000
+map_Kd TELEAK.PNG
+

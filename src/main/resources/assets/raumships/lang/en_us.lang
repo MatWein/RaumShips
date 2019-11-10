@@ -1,6 +1,7 @@
 entity.PuddleJumper.name=Puddle Jumper
 entity.DeathGlider.name=Death Glider
 entity.AlKesh.name=Al'Kesh
+entity.F301.name=F301
 
 raumships.keys=RaumShips
 rs.key.ctrl=Control

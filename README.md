@@ -8,6 +8,13 @@ Currently included ships:
 - Stargate Atlantis Puddle Jumper (SGCraft compatible)  
 - Stargate Goa'uld Death Glider  
 - Stargate Goa'uld Al'Kesh  
+- Stargate Atlantis  
+- Stargate F301  
+- Stargate F302  
+- Stargate Goa'uld Gate Glider  
+- Stargate Goa'uld Hatak  
+- Stargate Goa'uld Teleak  
+- Stargate X304  
 
 Additional content:
 - added ZPM console and ZPM item to provide massive energy
@@ -24,5 +31,7 @@ Additional content:
 ![Alt text](/src/test/resources/screenshots/DeathGlider.png?raw=true "DeathGlider")
 
 ![Alt text](/src/test/resources/screenshots/AlKesh.png?raw=true "AlKesh")
+
+![Alt text](/src/test/resources/screenshots/F301.png?raw=true "F301")
   
 (see LICENSE.txt for more information about models and sounds)
