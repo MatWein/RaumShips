@@ -3,6 +3,7 @@ entity.DeathGlider.name=Todesgleiter
 entity.AlKesh.name=Al'Kesh
 entity.F301.name=F301
 entity.F302.name=F302
+entity.GateGlider.name=Torgleiter
 
 raumships.keys=RaumShips
 rs.key.ctrl=Steuerung/Control

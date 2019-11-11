@@ -26,6 +26,7 @@ public class RSClientProxy extends RSCommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(AlKeshEntity.class, EntityWithModelRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(F301Entity.class, EntityWithModelRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(F302Entity.class, EntityWithModelRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(GateGliderEntity.class, EntityWithModelRenderer::new);
 
         Keybinds.init();
 
