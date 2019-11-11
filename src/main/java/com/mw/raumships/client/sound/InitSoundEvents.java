@@ -14,6 +14,7 @@ public class InitSoundEvents {
         event.getRegistry().registerAll(
                 Sounds.JUMPER_ENGINE,
                 Sounds.ALKESH_ENGINE,
+                Sounds.TELEAK_ENGINE,
                 Sounds.DEATH_GLIDER_ENGINE
         );
     }

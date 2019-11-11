@@ -27,5 +27,15 @@
         "stream": false
       }
     ]
+  },
+
+  "sound.teleak": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:teleak",
+        "stream": false
+      }
+    ]
   }
 }

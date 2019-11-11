@@ -10,6 +10,7 @@ import static com.mw.raumships.client.ClientUtils.getSh;
 public class Sounds {
     public static final SoundEvent JUMPER_ENGINE = createSoundEvent("sound.engine");
     public static final SoundEvent ALKESH_ENGINE = createSoundEvent("sound.engine2");
+    public static final SoundEvent TELEAK_ENGINE = createSoundEvent("sound.teleak");
     public static final SoundEvent DEATH_GLIDER_ENGINE = createSoundEvent("sound.engine3");
 
     private static SoundEvent createSoundEvent(String soundName) {

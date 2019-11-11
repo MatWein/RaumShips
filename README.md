@@ -33,5 +33,11 @@ Additional content:
 ![Alt text](/src/test/resources/screenshots/AlKesh.png?raw=true "AlKesh")
 
 ![Alt text](/src/test/resources/screenshots/F301.png?raw=true "F301")
+
+![Alt text](/src/test/resources/screenshots/F302.png?raw=true "F302")
+
+![Alt text](/src/test/resources/screenshots/GateGlider.png?raw=true "GateGlider")
+
+![Alt text](/src/test/resources/screenshots/Teleak.png?raw=true "Teleak")
   
 (see LICENSE.txt for more information about models and sounds)

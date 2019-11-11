@@ -4,6 +4,7 @@ entity.AlKesh.name=Al'Kesh
 entity.F301.name=F301
 entity.F302.name=F302
 entity.GateGlider.name=Torgleiter
+entity.Teleak.name=Teleak
 
 raumships.keys=RaumShips
 rs.key.ctrl=Steuerung/Control
