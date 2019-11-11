@@ -7,24 +7,24 @@ import net.minecraft.world.World;
 
 import static com.mw.raumships.RaumShipsMod.MODID;
 
-public class F301Entity extends RaumShipsEntity {
-    public static final int ID = 1004;
-    public static final String NAME = "F301";
+public class F302Entity extends RaumShipsEntity {
+    public static final int ID = 1005;
+    public static final String NAME = "F302";
 
-    public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/f301.obj");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/f301.png");
+    public static final ResourceLocation MODEL = new ResourceLocation(MODID, "models/entity/f302.obj");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/f302.png");
     public static final float SOUND_VOLUME = 0.6F;
 
     public static final float THIRD_PERSON_DISTANCE = 8.5F;
-    public static final float COCKPIT_CAMERA_Z_OFFSET = -3.0F;
+    public static final float COCKPIT_CAMERA_Z_OFFSET = -6.0F;
     public static final float SCALING_FACTOR = 0.01F;
-    public static final float[] PLAYER_MOUNT_POSITION_X_OFFSET = new float[] { 0.0F };
-    public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 2.8F;
+    public static final float[] PLAYER_MOUNT_POSITION_X_OFFSET = new float[] { -0.5F };
+    public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 1.7F;
     public static final float[] PLAYER_MOUNT_POSITION_Z_OFFSET = new float[] { 0.0F };
     public static final float RENDER_Y_OFFSET = 0.5F;
 
     public static final float BOUNDING_BOX_WIDTH = 7.0F;
-    public static final float BOUNDING_BOX_HEIGHT = 5.0F;
+    public static final float BOUNDING_BOX_HEIGHT = 4.0F;
     public static final int MAX_PASSANGERS = 1;
 
     public static final float FINAL_AIRSHIP_SPEED_TURN = 0.72F;
@@ -34,7 +34,7 @@ public class F301Entity extends RaumShipsEntity {
     public static final float SPEED_MODIFIER = 0.16F;
     public static final float MOMENTUM = 0.7F;
 
-    public F301Entity(World worldIn) {
+    public F302Entity(World worldIn) {
         super(worldIn);
 
         setSize(BOUNDING_BOX_WIDTH, BOUNDING_BOX_HEIGHT);

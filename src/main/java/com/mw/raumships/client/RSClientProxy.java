@@ -3,10 +3,7 @@ package com.mw.raumships.client;
 import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.rendering.EntityWithModelRenderer;
 import com.mw.raumships.common.RSCommonProxy;
-import com.mw.raumships.common.entities.AlKeshEntity;
-import com.mw.raumships.common.entities.DeathGliderEntity;
-import com.mw.raumships.common.entities.F301Entity;
-import com.mw.raumships.common.entities.PuddleJumperEntity;
+import com.mw.raumships.common.entities.*;
 import net.minecraft.client.renderer.PatchedEntityRenderer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -28,6 +25,7 @@ public class RSClientProxy extends RSCommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(DeathGliderEntity.class, EntityWithModelRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(AlKeshEntity.class, EntityWithModelRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(F301Entity.class, EntityWithModelRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(F302Entity.class, EntityWithModelRenderer::new);
 
         Keybinds.init();
 

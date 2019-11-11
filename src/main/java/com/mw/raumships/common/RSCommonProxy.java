@@ -41,6 +41,7 @@ public class RSCommonProxy {
         registerModEntity(DeathGliderEntity.ID, DeathGliderEntity.NAME, DeathGliderEntity.class, Color.BLUE, Color.WHITE);
         registerModEntity(AlKeshEntity.ID, AlKeshEntity.NAME, AlKeshEntity.class, Color.YELLOW, Color.WHITE);
         registerModEntity(F301Entity.ID, F301Entity.NAME, F301Entity.class, Color.GREEN, Color.WHITE);
+        registerModEntity(F302Entity.ID, F302Entity.NAME, F302Entity.class, Color.GREEN, Color.YELLOW);
 
         zpmHubBlock = new ZPMHubBlock();
         zpmHubItem = registerModBlock(zpmHubBlock);
