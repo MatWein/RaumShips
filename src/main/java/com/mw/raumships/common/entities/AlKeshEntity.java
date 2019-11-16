@@ -23,8 +23,8 @@ public class AlKeshEntity extends RaumShipsEntity {
     public static final float[] PLAYER_MOUNT_POSITION_Z_OFFSET = new float[] { 0.0F };
     public static final float RENDER_Y_OFFSET = 3.0F;
 
-    public static final float BOUNDING_BOX_WIDTH = 12.0F;
-    public static final float BOUNDING_BOX_HEIGHT = 6.0F;
+    public static final float BOUNDING_BOX_WIDTH = 4.0F;
+    public static final float BOUNDING_BOX_HEIGHT = 4.0F;
     public static final int MAX_PASSANGERS = 1;
 
     public static final float FINAL_AIRSHIP_SPEED_TURN = 0.025F;

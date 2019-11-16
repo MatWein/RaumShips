@@ -23,8 +23,8 @@ public class TeleakEntity extends RaumShipsEntity {
     public static final float[] PLAYER_MOUNT_POSITION_Z_OFFSET = new float[] { 0.0F };
     public static final float RENDER_Y_OFFSET = 0.5F;
 
-    public static final float BOUNDING_BOX_WIDTH = 14.0F;
-    public static final float BOUNDING_BOX_HEIGHT = 13.0F;
+    public static final float BOUNDING_BOX_WIDTH = 4.0F;
+    public static final float BOUNDING_BOX_HEIGHT = 4.0F;
     public static final int MAX_PASSANGERS = 1;
 
     public static final float FINAL_AIRSHIP_SPEED_TURN = 0.025F;

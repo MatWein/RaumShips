@@ -23,7 +23,7 @@ public class F302Entity extends RaumShipsEntity {
     public static final float[] PLAYER_MOUNT_POSITION_Z_OFFSET = new float[] { 0.0F };
     public static final float RENDER_Y_OFFSET = 0.0F;
 
-    public static final float BOUNDING_BOX_WIDTH = 7.0F;
+    public static final float BOUNDING_BOX_WIDTH = 4.0F;
     public static final float BOUNDING_BOX_HEIGHT = 4.0F;
     public static final int MAX_PASSANGERS = 1;
 
