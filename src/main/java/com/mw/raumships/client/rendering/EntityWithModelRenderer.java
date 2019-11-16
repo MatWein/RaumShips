@@ -38,13 +38,13 @@ public class EntityWithModelRenderer extends Render<RaumShipsEntity> {
         }
 
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) x, (float) y + entity.getRenderYOffset(), (float) z);
+        GL11.glTranslatef((float) x + entity.getRenderXOffset(), (float) y + entity.getRenderYOffset(), (float) z + entity.getRenderZOffset());
 
         EntityPlayerSP player = getMc().player;
         if (player != null && player.isRidingSameEntity(entity) && isEgoPersonView()) {
             double motionX = MathHelper.sin(-entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset();
             double motionZ = MathHelper.cos(entityYaw * ROTATION_FACTOR) * entity.getRenderCockpitCameraZOffset();
-            GL11.glTranslatef((float)motionX, 0.0F, (float)motionZ);
+            GL11.glTranslatef((float)motionX, entity.getRenderCockpitCameraYOffset(), (float)motionZ);
         }
         GlStateManager.rotate(0.0F - entityYaw, 0.0F, 1.0F, 0.0F);
 

@@ -15,13 +15,16 @@ public class X304Entity extends RaumShipsEntity {
     public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "models/entity/x304.png");
     public static final float SOUND_VOLUME = 1.0F;
 
-    public static final float THIRD_PERSON_DISTANCE = 20.0F;
-    public static final float COCKPIT_CAMERA_Z_OFFSET = -10.0F;
-    public static final float SCALING_FACTOR = 0.01F;
-    public static final float[] PLAYER_MOUNT_POSITION_X_OFFSET = new float[] { 0.0F };
-    public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 4.0F;
+    public static final float THIRD_PERSON_DISTANCE = 50.0F;
+    public static final float COCKPIT_CAMERA_Z_OFFSET = -50.0F;
+    public static final float COCKPIT_CAMERA_Y_OFFSET = 15.0F;
+    public static final float SCALING_FACTOR = 0.007F;
+    public static final float[] PLAYER_MOUNT_POSITION_X_OFFSET = new float[] { 20.0F };
+    public static final float PLAYER_MOUNT_POSITION_Y_OFFSET = 8.0F;
     public static final float[] PLAYER_MOUNT_POSITION_Z_OFFSET = new float[] { 0.0F };
     public static final float RENDER_Y_OFFSET = 0.5F;
+    public static final float RENDER_X_OFFSET = 0.0F;
+    public static final float RENDER_Z_OFFSET = 0.0F;
 
     public static final float BOUNDING_BOX_WIDTH = 4.0F;
     public static final float BOUNDING_BOX_HEIGHT = 4.0F;
@@ -66,6 +69,11 @@ public class X304Entity extends RaumShipsEntity {
     }
 
     @Override
+    public float getRenderCockpitCameraYOffset() {
+        return COCKPIT_CAMERA_Y_OFFSET;
+    }
+
+    @Override
     public float getRenderScalingFactor() {
         return SCALING_FACTOR;
     }
@@ -98,6 +106,16 @@ public class X304Entity extends RaumShipsEntity {
     @Override
     public float getRenderYOffset() {
         return RENDER_Y_OFFSET;
+    }
+
+    @Override
+    public float getRenderXOffset() {
+        return RENDER_X_OFFSET;
+    }
+
+    @Override
+    public float getRenderZOffset() {
+        return RENDER_Z_OFFSET;
     }
 
     @Override

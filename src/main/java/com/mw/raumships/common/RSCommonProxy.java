@@ -25,7 +25,7 @@ import java.awt.*;
 import static com.mw.raumships.RaumShipsMod.MODID;
 
 public class RSCommonProxy {
-    public static final int RENDER_DISTANCE = 100;
+    public static final int RENDER_DISTANCE = 200;
 
     protected RaumshipsItemTab raumshipsItemTab;
     protected ZPMHubBlock zpmHubBlock;

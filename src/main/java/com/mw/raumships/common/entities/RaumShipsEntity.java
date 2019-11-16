@@ -60,6 +60,7 @@ public abstract class RaumShipsEntity extends EntityLiving {
     public abstract SoundEvent getSound();
     public abstract float getVolume();
     public abstract float getRenderCockpitCameraZOffset();
+    public float getRenderCockpitCameraYOffset() { return 0.0F; };
     public abstract float getRenderScalingFactor();
     public abstract float getThirdPersonDistance();
     public abstract int getMaxPassangers();
@@ -67,6 +68,8 @@ public abstract class RaumShipsEntity extends EntityLiving {
     public abstract float getPlayerMountPositionYOffset();
     public abstract float[] getPlayerMountPositionZOffset();
     public abstract float getRenderYOffset();
+    public float getRenderXOffset() { return 0.0F; };
+    public float getRenderZOffset() { return 0.0F; };
     public abstract float getFinalAirShipSpeedTurn();
     public abstract float getFinalAirShipSpeedForward();
     public abstract float getFinalAirShipSpeedUp();

@@ -1,14 +1,13 @@
 # RaumShips
 This is a simple mod to add some space ships as flyable entities to Minecraft (Forge).
 
-Currently supported MC-Versions:
+**Currently supported MC-Versions:**
 - 1.12.2
 
-Currently included ships:
+**Currently included ships:**
 - Stargate Atlantis Puddle Jumper (SGCraft compatible)  
 - Stargate Goa'uld Death Glider  
 - Stargate Goa'uld Al'Kesh  
-- Stargate Atlantis  
 - Stargate F301  
 - Stargate F302  
 - Stargate Goa'uld Gate Glider  
@@ -16,9 +15,12 @@ Currently included ships:
 - Stargate Goa'uld Teleak  
 - Stargate X304  
 
-Additional content:
+**Additional content:**
 - added ZPM console and ZPM item to provide massive energy
-
+  
+**Advice:**  
+- The hitboxes of some bigger ships are difficult to find.  
+  Solution: press F3 and then F3+B to show the hitboxes. Then you can fly the ships by right clicking the hitbox.
   
 ## Screenshots:  
   
@@ -43,5 +45,9 @@ Additional content:
 ![Alt text](/src/test/resources/screenshots/Hatak1.png?raw=true "Hatak1")
 
 ![Alt text](/src/test/resources/screenshots/Hatak2.png?raw=true "Hatak2")
+
+![Alt text](/src/test/resources/screenshots/X304_1.png?raw=true "X304_1")
+
+![Alt text](/src/test/resources/screenshots/X304_2.png?raw=true "X304_2")
   
 (see LICENSE.txt for more information about models and sounds)
