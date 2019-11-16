@@ -16,7 +16,7 @@ import static com.mw.raumships.RaumShipsMod.*;
 public class RaumShipsMod {
     public static final String MODID = "raumships";
     public static final String NAME = "RaumShips Mod";
-    public static final String VERSION = "1.2.0";
+    public static final String VERSION = "1.2.1";
 
     @SidedProxy(clientSide = "com.mw.raumships.client.RSClientProxy", serverSide = "com.mw.raumships.server.RSServerProxy")
     public static RSCommonProxy proxy;

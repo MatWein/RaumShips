@@ -39,5 +39,9 @@ Additional content:
 ![Alt text](/src/test/resources/screenshots/GateGlider.png?raw=true "GateGlider")
 
 ![Alt text](/src/test/resources/screenshots/Teleak.png?raw=true "Teleak")
+
+![Alt text](/src/test/resources/screenshots/Hatak1.png?raw=true "Hatak1")
+
+![Alt text](/src/test/resources/screenshots/Hatak2.png?raw=true "Hatak2")
   
 (see LICENSE.txt for more information about models and sounds)

@@ -44,6 +44,8 @@ public class RSCommonProxy {
         registerModEntity(F302Entity.ID, F302Entity.NAME, F302Entity.class, Color.GREEN, Color.YELLOW);
         registerModEntity(GateGliderEntity.ID, GateGliderEntity.NAME, GateGliderEntity.class, Color.GREEN, Color.RED);
         registerModEntity(TeleakEntity.ID, TeleakEntity.NAME, TeleakEntity.class, Color.YELLOW, Color.RED);
+        registerModEntity(X304Entity.ID, X304Entity.NAME, X304Entity.class, Color.WHITE, Color.BLACK);
+        registerModEntity(HatakEntity.ID, HatakEntity.NAME, HatakEntity.class, Color.BLACK, Color.YELLOW);
 
         zpmHubBlock = new ZPMHubBlock();
         zpmHubItem = registerModBlock(zpmHubBlock);

@@ -5,6 +5,8 @@ entity.F301.name=F301
 entity.F302.name=F302
 entity.GateGlider.name=Gate Glider
 entity.Teleak.name=Teleak
+entity.X304.name=X304
+entity.Hatak.name=Hatak
 
 raumships.keys=RaumShips
 rs.key.ctrl=Control

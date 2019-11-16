@@ -28,6 +28,8 @@ public class RSClientProxy extends RSCommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(F302Entity.class, EntityWithModelRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(GateGliderEntity.class, EntityWithModelRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(TeleakEntity.class, EntityWithModelRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(X304Entity.class, EntityWithModelRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(HatakEntity.class, EntityWithModelRenderer::new);
 
         Keybinds.init();
 

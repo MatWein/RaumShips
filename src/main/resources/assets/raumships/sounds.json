@@ -37,5 +37,25 @@
         "stream": false
       }
     ]
+  },
+
+  "sound.hatak": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:hatak",
+        "stream": false
+      }
+    ]
+  },
+
+  "sound.x304": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:x304",
+        "stream": false
+      }
+    ]
   }
 }

@@ -15,6 +15,8 @@ public class InitSoundEvents {
                 Sounds.JUMPER_ENGINE,
                 Sounds.ALKESH_ENGINE,
                 Sounds.TELEAK_ENGINE,
+                Sounds.HATAK_ENGINE,
+                Sounds.X304_ENGINE,
                 Sounds.DEATH_GLIDER_ENGINE
         );
     }
