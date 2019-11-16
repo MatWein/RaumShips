@@ -5,7 +5,7 @@ import net.minecraft.client.audio.SoundHandler;
 
 public class ClientUtils {
     public static Minecraft getMc() {
-        return Minecraft.getMinecraft();
+        return Minecraft.getInstance();
     }
 
     public static SoundHandler getSh() {

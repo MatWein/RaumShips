@@ -4,12 +4,11 @@ import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.gui.zpm.ZpmHubGuiContainer;
 import com.mw.raumships.common.RaumshipsItemTab;
 import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
@@ -31,7 +30,7 @@ public class ZPMItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if(!worldIn.isRemote) {
             ItemStack activeItemStack = playerIn.getHeldItemMainhand();
             long zpmEnergy = getZpmEnergy(activeItemStack);
@@ -39,7 +38,7 @@ public class ZPMItem extends Item {
             String number = ZpmHubGuiContainer.NUMBER_FORMAT.format(zpmEnergy);
             String message = String.format("ZPM: %s RF (%s %%)", number, percentage);
 
-            Minecraft.getMinecraft().player.sendChatMessage(message);
+            Minecraft.getInstance().player.sendChatMessage(message);
         }
 
         return super.onItemRightClick(worldIn, playerIn, handIn);

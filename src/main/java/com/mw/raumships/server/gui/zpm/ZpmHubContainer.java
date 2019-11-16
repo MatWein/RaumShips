@@ -2,10 +2,10 @@ package com.mw.raumships.server.gui.zpm;
 
 import com.mw.raumships.common.blocks.OneSlotEnergyTileEntityBase;
 import com.mw.raumships.common.items.ZPMItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ZpmHubContainer extends Container {
@@ -25,12 +25,13 @@ public class ZpmHubContainer extends Container {
     private final OneSlotEnergyTileEntityBase tileEntity;
     private final ZpmHubContainerSlot slotIn;
 
-    public ZpmHubContainer(InventoryPlayer invPlayer, OneSlotEnergyTileEntityBase tileEntity) {
+    public ZpmHubContainer(PlayerInventory invPlayer, OneSlotEnergyTileEntityBase tileEntity) {
+        super();
         this.tileEntity = tileEntity;
 
         int slotNumber = 0;
         for (int x = 0; x < HOTBAR_SLOT_COUNT; x++) {
-            addSlotToContainer(new Slot(invPlayer, slotNumber, HOTBAR_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));
+            addSlot(new Slot(invPlayer, slotNumber, HOTBAR_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));
             slotNumber++;
         }
 
@@ -39,21 +40,21 @@ public class ZpmHubContainer extends Container {
                 slotNumber = HOTBAR_SLOT_COUNT + y * PLAYER_INVENTORY_COLUMN_COUNT + x;
                 int xpos = PLAYER_INVENTORY_XPOS + x * SLOT_X_SPACING;
                 int ypos = PLAYER_INVENTORY_YPOS + y * SLOT_Y_SPACING;
-                addSlotToContainer(new Slot(invPlayer, slotNumber,  xpos, ypos));
+                addSlot(new Slot(invPlayer, slotNumber,  xpos, ypos));
             }
         }
 
         slotIn = new ZpmHubContainerSlot(tileEntity, 0, 8, 8);
-        addSlotToContainer(slotIn);
+        addSlot(slotIn);
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
+    public boolean canInteractWith(PlayerEntity playerIn) {
         return tileEntity.isUsableByPlayer(playerIn);
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex) {
+    public ItemStack transferStackInSlot(PlayerEntity player, int sourceSlotIndex) {
         Slot sourceSlot = inventorySlots.get(sourceSlotIndex);
         if (sourceSlot == null || !sourceSlot.getHasStack()) return ItemStack.EMPTY;
         ItemStack sourceStack = sourceSlot.getStack();

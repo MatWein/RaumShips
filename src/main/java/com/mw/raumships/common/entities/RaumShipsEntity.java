@@ -2,26 +2,20 @@ package com.mw.raumships.common.entities;
 
 import com.mw.raumships.client.Keybinds;
 import com.mw.raumships.client.sound.Sounds;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.renderer.EntityRenderer;
+import javafx.geometry.Side;
 import net.minecraft.client.renderer.PatchedEntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -30,7 +24,7 @@ import static com.mw.raumships.client.ClientUtils.getMc;
 import static com.mw.raumships.client.ClientUtils.isEgoPersonView;
 import static com.mw.raumships.common.RSCommonConstants.*;
 
-public abstract class RaumShipsEntity extends EntityLiving {
+public abstract class RaumShipsEntity extends LivingEntity {
     protected float deltaRotation;
 
     protected boolean leftInputDown;

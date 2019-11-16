@@ -5,12 +5,10 @@ import com.mw.raumships.client.rendering.EntityWithModelRenderer;
 import com.mw.raumships.common.RSCommonProxy;
 import com.mw.raumships.common.entities.*;
 import net.minecraft.client.renderer.PatchedEntityRenderer;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import static com.mw.raumships.client.ClientUtils.getMc;
 

@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+issueTrackerURL="https://github.com/MatWein/RaumShips/issues"
+
+[[mods]]
+modId="raumships"
+version="${file.jarVersion}"
+displayName="Raumships"
+displayURL="https://github.com/MatWein/RaumShips"
+authors="MW"
+description='''
+Adds space ships as flyable entities to the game.
+'''
+[[dependencies.raumships]]
+    modId="forge"
+    mandatory=true
+    versionRange="[28,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.raumships]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14.4]"
+    ordering="NONE"
+    side="BOTH"

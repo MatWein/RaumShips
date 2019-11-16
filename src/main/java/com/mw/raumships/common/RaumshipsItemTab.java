@@ -3,7 +3,6 @@ package com.mw.raumships.common;
 import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.common.blocks.ZPMHubBlock;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

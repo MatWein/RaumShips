@@ -1,11 +1,11 @@
 package com.mw.raumships.client.sound;
 
 import com.mw.raumships.common.entities.RaumShipsEntity;
-import net.minecraft.client.audio.MovingSound;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 
-public class FlyingEntitySoundLoop extends MovingSound {
+public class FlyingEntitySoundLoop extends Sound {
     private RaumShipsEntity entity;
     private final float volumeToUse;
 

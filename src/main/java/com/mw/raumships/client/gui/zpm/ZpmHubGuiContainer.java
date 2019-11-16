@@ -1,25 +1,25 @@
 package com.mw.raumships.client.gui.zpm;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.common.blocks.OneSlotEnergyTileEntityBase;
 import com.mw.raumships.common.calc.PowerUnitCalculator;
 import com.mw.raumships.common.items.ZPMItem;
 import com.mw.raumships.server.gui.zpm.ZpmHubContainer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-@SideOnly(Side.CLIENT)
-public class ZpmHubGuiContainer extends GuiContainer {
+@OnlyIn(Dist.CLIENT)
+public class ZpmHubGuiContainer extends ContainerScreen {
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(RaumShipsMod.MODID, "textures/gui/zpmhub.png");
     public static final NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(Locale.getDefault());
 
@@ -31,7 +31,7 @@ public class ZpmHubGuiContainer extends GuiContainer {
     private final String textNoZpm;
     private final String textZpmInstalled;
 
-    public ZpmHubGuiContainer(InventoryPlayer invPlayer, OneSlotEnergyTileEntityBase zpmHubTileEntity) {
+    public ZpmHubGuiContainer(PlayerInventory invPlayer, OneSlotEnergyTileEntityBase zpmHubTileEntity) {
         super(new ZpmHubContainer(invPlayer, zpmHubTileEntity));
 
         this.zpmHubTileEntity = zpmHubTileEntity;
@@ -48,7 +48,7 @@ public class ZpmHubGuiContainer extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        Minecraft.getMinecraft().getTextureManager().bindTexture(GUI_TEXTURE);
+        Minecraft.getInstance().getTextureManager().bindTexture(GUI_TEXTURE);
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
