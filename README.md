@@ -6,6 +6,7 @@ This is a simple mod to add some space ships as flyable entities to Minecraft (F
 
 **Currently included ships:**
 - Stargate Atlantis Puddle Jumper (SGCraft compatible)  
+- Stargate Atlantis  
 - Stargate Goa'uld Death Glider  
 - Stargate Goa'uld Al'Kesh  
 - Stargate F301  
