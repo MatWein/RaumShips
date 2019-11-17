@@ -46,6 +46,7 @@ public class RSCommonProxy {
         registerModEntity(TeleakEntity.ID, TeleakEntity.NAME, TeleakEntity.class, Color.YELLOW, Color.RED);
         registerModEntity(X304Entity.ID, X304Entity.NAME, X304Entity.class, Color.WHITE, Color.BLACK);
         registerModEntity(HatakEntity.ID, HatakEntity.NAME, HatakEntity.class, Color.BLACK, Color.YELLOW);
+        registerModEntity(AtlantisEntity.ID, AtlantisEntity.NAME, AtlantisEntity.class, Color.BLUE, Color.BLUE);
 
         zpmHubBlock = new ZPMHubBlock();
         zpmHubItem = registerModBlock(zpmHubBlock);

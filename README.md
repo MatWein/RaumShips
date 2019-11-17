@@ -49,5 +49,9 @@ This is a simple mod to add some space ships as flyable entities to Minecraft (F
 ![Alt text](/src/test/resources/screenshots/X304_1.png?raw=true "X304_1")
 
 ![Alt text](/src/test/resources/screenshots/X304_2.png?raw=true "X304_2")
+
+![Alt text](/src/test/resources/screenshots/Atlantis1.png?raw=true "Atlantis1")
+
+![Alt text](/src/test/resources/screenshots/Atlantis2.png?raw=true "Atlantis2")
   
 (see LICENSE.txt for more information about models and sounds)

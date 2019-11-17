@@ -7,6 +7,7 @@ entity.GateGlider.name=Gate Glider
 entity.Teleak.name=Teleak
 entity.X304.name=X304
 entity.Hatak.name=Hatak
+entity.Atlantis.name=Atlantis
 
 raumships.keys=RaumShips
 rs.key.ctrl=Control

@@ -16,8 +16,8 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ObjVtConverter {
-    private static final String INPUT_FILE = "D:\\Entwicklung\\Java\\RaumShips\\src\\main\\resources\\assets\\raumships\\models\\entity\\x304.obj";
-    private static final String OUTPUT_FILE = "D:\\Entwicklung\\Java\\RaumShips\\src\\main\\resources\\assets\\raumships\\models\\entity\\x304_2.obj";
+    private static final String INPUT_FILE = "D:\\Entwicklung\\Java\\RaumShips\\src\\main\\resources\\assets\\raumships\\models\\entity\\atlantis.obj";
+    private static final String OUTPUT_FILE = "D:\\Entwicklung\\Java\\RaumShips\\src\\main\\resources\\assets\\raumships\\models\\entity\\atlantis_2.obj";
     private static final String VT_PREFIX = "vt ";
 
     public static void main(String[] args) throws Exception {
