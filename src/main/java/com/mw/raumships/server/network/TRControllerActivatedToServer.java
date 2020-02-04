@@ -52,7 +52,7 @@ public class TRControllerActivatedToServer extends PositionedPacket {
                 RingsTile ringsTile = controllerTile.getLinkedRingsTile(world);
 
                 if (ringsTile != null) {
-                    Sounds.playSoundEvent(world, message.pos, Sounds.RINGS_CONTROLLER_BUTTON, 0.5F);
+                    Sounds.playSoundEvent(message.pos, Sounds.RINGS_CONTROLLER_BUTTON, 0.5F);
 
                     ringsTile.attemptTransportTo(player, message.address);
                 } else

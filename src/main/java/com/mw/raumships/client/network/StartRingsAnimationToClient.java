@@ -47,7 +47,7 @@ public class StartRingsAnimationToClient extends PositionedPacket {
 			
 				if (ringsTile != null) {
 					ringsTile.getTransportRingsRenderer().animationStart(message.animationStart);
-				}	
+				}
 			});
 						
 			return null;

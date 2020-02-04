@@ -32,13 +32,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.*;
 
 public class RingsTile extends TileEntity implements ITileEntityRendered, ITickable, ITileEntityStateProvider, ILinkable {
-
-//	public TransportRingsTile() {
-////		stateMap.put(EnumStateType.GUI_STATE, new RingsGuiState());
-//	}
-	
-	// ---------------------------------------------------------------------------------
-	// Ticking
 	private boolean firstTick = true;
 	private boolean waitForStart = false;
 	private boolean waitForFadeOut = false;
@@ -46,17 +39,13 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 	private boolean waitForClearout = false;
 	
 	private long buttonPressed;
-	
-//	private boolean doLightUpdate = false;
-	
-	private static final int fadeOutTimeout = (int) (30 + TransportRingsRenderer.uprisingInterval*TransportRingsRenderer.ringCount + TransportRingsRenderer.animationDiv * Math.PI);
+
+	private static final int fadeOutTimeout = (int) (30 + RingsRenderer.uprisingInterval* RingsRenderer.ringCount + RingsRenderer.animationDiv * Math.PI);
 	public static final int fadeOutTotalTime = 2 * 20; // 2s
 	
 	private static final int teleportTimeout = fadeOutTimeout + fadeOutTotalTime/2;
-	private static final int clearoutTimeout = (int) (100 + TransportRingsRenderer.fallingInterval*TransportRingsRenderer.ringCount + TransportRingsRenderer.animationDiv * Math.PI);
-	
-//	private long tickStartFog;
-	
+	private static final int clearoutTimeout = (int) (100 + RingsRenderer.fallingInterval* RingsRenderer.ringCount + RingsRenderer.animationDiv * Math.PI);
+
 	private List<Entity> teleportList;
 	
 	@Override
@@ -85,10 +74,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 			else if (waitForFadeOut && effTick >= fadeOutTimeout) {
 				waitForFadeOut = false;
 				waitForTeleport = true;
-				
-//				doLightUpdate = true;
-				
-//				tickStartFog = world.getTotalWorldTime();
 				
 				teleportList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.add(-2, 2, -2), pos.add(3, 6, 3)));
 				
@@ -123,9 +108,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 		}
 	}
 	
-	
-	// ---------------------------------------------------------------------------------
-	// Teleportation
 	private BlockPos targetRingsPos;
 	private List<Entity> excludedEntities;
 	
@@ -147,21 +129,13 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 		TargetPoint point = new TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 512);
 		RaumShipsMod.proxy.getNetworkWrapper().sendToAllTracking(new StartRingsAnimationToClient(pos, getTransportRingsRendererState().animationStart), point);
 		
-		Sounds.playSoundEvent(world, pos, Sounds.RINGS_TRANSPORT, 0.8f);
-		Sounds.playSoundEvent(world, targetRingsPos, Sounds.RINGS_TRANSPORT, 0.8f);
+		Sounds.playSoundEvent(pos, Sounds.RINGS_TRANSPORT, 0.8f);
+		Sounds.playSoundEvent(targetRingsPos, Sounds.RINGS_TRANSPORT, 0.8f);
 	}
 
-	/**
-	 * Checks if Rings are linked to Rings at given address.
-	 * If yes, it starts teleportation.
-	 * 
-	 * @param player Initiating player
-	 * @param address Target rings address
-	 */
 	public void attemptTransportTo(EntityPlayerMP player, int address) {
 		if (checkIfObstructed()) {
 			player.sendStatusMessage(new TextComponentString(I18n.format("tile.rings_block.obstructed")), true);
-			
 			return;
 		}
 		
@@ -214,7 +188,7 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 		return false;
 	}
 	
-	private List<BlockPos> invisibleBlocks = new ArrayList<BlockPos>();
+	private List<BlockPos> invisibleBlocks = new ArrayList<>();
 	
 	private void setBarrierBlocks(boolean set) {
 		if (set) {
@@ -245,20 +219,13 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 			}
 		}
 	}
-	
-	
-	// ---------------------------------------------------------------------------------
-	// Controller
+
 	private BlockPos linkedController;
 	
 	public void setLinkedController(BlockPos pos) {
 		this.linkedController = pos;
 		
 		markDirty();
-	}
-	
-	public BlockPos getLinkedController() {
-		return linkedController;
 	}
 	
 	@Override
@@ -270,9 +237,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 		return (linkedController != null ? ((RingsControllerTile) world.getTileEntity(linkedController)) : null);
 	}
 	
-	
-	// ---------------------------------------------------------------------------------
-	// Rings network
 	private DtoRingsModel rings;
 	private DtoRingsModel getRings() {
 		if (rings == null)
@@ -281,28 +245,12 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 		return rings;
 	}
 	
-	/**
-	 * Gets clone of {@link RingsTile#rings} object. Sets the distance from
-	 * callerPos to this tile. Called from {@link RingsTile#addRings(RingsTile)}.
-	 * 
-	 * @param callerPos - calling tile position
-	 * @return - clone of this rings info
-	 */
 	public DtoRingsModel getClonedRings(BlockPos callerPos) {
 		return getRings().cloneWithNewDistance(callerPos);
 	}
 	
-	/**
-	 * Contains neighborhooding rings(clones of {@link RingsTile#rings}) with distance set to this tile
-	 */
 	public Map<Integer, DtoRingsModel> ringsMap = new HashMap<>();
 	
-	/**
-	 * Adds rings to {@link RingsTile#ringsMap}, by cloning caller's {@link RingsTile#rings} and
-	 * setting distance
-	 * 
-	 * @param caller - Caller rings tile
-	 */
 	public void addRings(RingsTile caller) {
 		DtoRingsModel clonedRings = caller.getClonedRings(this.pos);
 		
@@ -365,10 +313,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 		markDirty();
 	}
 	
-	
-	// ---------------------------------------------------------------------------------
-	// NBT data
-	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		getRendererState().toNBT(compound);
@@ -385,12 +329,7 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 			
 			i++;
 		}
-		
-		
-//		for (EnumStateType stateType : stateMap.keySet()) {
-//			compound.setTag(stateType.getKey(), stateMap.get(stateType).serializeNBT());
-//		}
-		
+
 		return super.writeToNBT(compound);
 	}
 	
@@ -416,21 +355,8 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 			}
 		}
 		
-//		for (EnumStateType stateType : stateMap.keySet()) {
-//			State state = stateMap.get(stateType);
-//			
-//			state.deserializeNBT((NBTTagCompound) compound.getTag(stateType.getKey()));
-//			
-//			stateMap.put(stateType, state);
-//		}
-		
 		super.readFromNBT(compound);
 	}
-	
-	
-	// ---------------------------------------------------------------------------------	
-	// States
-//	private Map<EnumStateType, State> stateMap = new HashMap<>();
 
 	@Override
 	public State getState(EnumStateType stateType) {
@@ -479,39 +405,36 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 		}
 	}
 	
-	// ---------------------------------------------------------------------------------
-	// Renders
-	// TODO: To be removed and replaced by States
-	TransportRingsRenderer renderer;
-	TransportRingsRendererState rendererState;
+	RingsRenderer renderer;
+	RingsRendererState rendererState;
 	
 	@Override
-	public ISpecialRenderer<TransportRingsRendererState> getRenderer() {
+	public ISpecialRenderer<RingsRendererState> getRenderer() {
 		if (renderer == null)
-			renderer = new TransportRingsRenderer(this);
+			renderer = new RingsRenderer(this);
 		
 		return renderer;
 	}
 	
-	public TransportRingsRenderer getTransportRingsRenderer() {
-		return (TransportRingsRenderer) getRenderer();
+	public RingsRenderer getTransportRingsRenderer() {
+		return (RingsRenderer) getRenderer();
 	}
 
 	@Override
 	public RendererState getRendererState() {
 		if (rendererState == null)
-			rendererState = new TransportRingsRendererState();
+			rendererState = new RingsRendererState();
 		
 		return rendererState;
 	}
 	
-	public TransportRingsRendererState getTransportRingsRendererState() {
-		return (TransportRingsRendererState) getRendererState();
+	public RingsRendererState getTransportRingsRendererState() {
+		return (RingsRendererState) getRendererState();
 	}
 
 	@Override
 	public RendererState createRendererState(ByteBuf buf) {
-		return new TransportRingsRendererState().fromBytes(buf);
+		return new RingsRendererState().fromBytes(buf);
 	}
 	
 	@Override

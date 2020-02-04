@@ -12,7 +12,7 @@ public class RaumShipsConfig {
     public static class RingsConfig {
         @Name("Rings range's radius horizontal")
         @RangeInt(min = 1, max = 256)
-        public int rangeFlat = 25;
+        public int rangeFlat = 125;
 
         @Name("Rings vertical reach")
         @RangeInt(min = 1, max = 256)

@@ -81,14 +81,7 @@ public class ModelLoader {
 		threads.get(name).start();
 	}
 	
-	/**
-	 * Gets specific ResourceLocation from the map
-	 * If no-existent, loads it.
-	 * 
-	 * @param texturePath - Path to the texture
-	 * @return texture ResourceLocation
-	 */
-	public static ResourceLocation getTexture(String texturePath) {	
+	public static ResourceLocation getTexture(String texturePath) {
 		if (failedToLoadTextures.contains(texturePath))
 			return null;
 		
@@ -97,7 +90,6 @@ public class ModelLoader {
 		if (resource == null) {
 			resource = new ResourceLocation(RaumShipsMod.MODID + ":textures/tesr/" + texturePath);
 			
-			// Failed to load
 			if (!Minecraft.getMinecraft().getTextureManager().loadTexture(resource, new SimpleTexture(resource))) {
 				failedToLoadTextures.add(texturePath);
 				

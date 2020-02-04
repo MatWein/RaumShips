@@ -41,3 +41,9 @@ tile.rings_block.obstructed=Rings obstructed, clear 7x7 area around rings
 
 item.analyzer_ancient.name=Ancient Analyzer
 tile.invisible_block.name=
+
+gui.rings.save=Save
+gui.rings.title=Rings No. 
+gui.rings.title.address=Address:
+gui.rings.title.name=Name:
+gui.rings.notInGrid=Rings not in grid
