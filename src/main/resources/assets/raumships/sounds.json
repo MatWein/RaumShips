@@ -57,5 +57,25 @@
         "stream": false
       }
     ]
+  },
+
+  "sound.rings_transport": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:rings_transport",
+        "stream": false
+      }
+    ]
+  },
+
+  "sound.rings_controller_button": {
+    "category": "sound",
+    "sounds": [
+      {
+        "name": "raumships:rings_controller_button",
+        "stream": false
+      }
+    ]
   }
 }

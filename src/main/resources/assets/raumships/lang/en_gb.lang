@@ -29,3 +29,15 @@ itemGroup.raumships=RaumShips
 
 custom.zpmhub.gui.noZpm=No ZPM installed. Device inactive.
 custom.zpmhub.gui.zpmInstalled=ZPM installed. Device active:
+
+tile.rings_controller_block.name=Transport rings controller
+tile.rings_controller_block.not_linked=Controller not linked
+
+tile.rings_block.name=Transport rings
+tile.rings_block.non_existing_address=Unable to reach this address
+tile.rings_block.duplicate_address=Duplicate address
+tile.rings_block.wrong_address=Wrong address, should be 1-6
+tile.rings_block.obstructed=Rings obstructed, clear 7x7 area around rings
+
+item.analyzer_ancient.name=Ancient Analyzer
+tile.invisible_block.name=

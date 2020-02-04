@@ -1,14 +1,25 @@
 package com.mw.raumships.common;
 
 import com.mw.raumships.RaumShipsMod;
+import com.mw.raumships.client.network.RendererUpdatePacketToClient;
+import com.mw.raumships.client.network.StartPlayerFadeOutToClient;
+import com.mw.raumships.client.network.StartRingsAnimationToClient;
+import com.mw.raumships.client.network.StateUpdatePacketToClient;
 import com.mw.raumships.common.blocks.ZPMChargerBlock;
 import com.mw.raumships.common.blocks.ZPMChargerTileEntity;
 import com.mw.raumships.common.blocks.ZPMHubBlock;
 import com.mw.raumships.common.blocks.ZPMHubTileEntity;
+import com.mw.raumships.common.blocks.rings.*;
 import com.mw.raumships.common.entities.*;
 import com.mw.raumships.common.gui.RaumshipsGuiHandler;
+import com.mw.raumships.common.items.AnalyzerAncientItem;
 import com.mw.raumships.common.items.ZPMItem;
+import com.mw.raumships.server.network.RendererUpdateRequestToServer;
+import com.mw.raumships.server.network.SaveRingsParametersToServer;
+import com.mw.raumships.server.network.StateUpdateRequestToServer;
+import com.mw.raumships.server.network.TRControllerActivatedToServer;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -16,23 +27,31 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.awt.*;
 
 import static com.mw.raumships.RaumShipsMod.MODID;
 
-public class RSCommonProxy {
-    public static final int RENDER_DISTANCE = 200;
-
+public abstract class RSCommonProxy {
     protected RaumshipsItemTab raumshipsItemTab;
     protected ZPMHubBlock zpmHubBlock;
     protected Item zpmHubItem;
     protected ZPMItem zpmItem;
     protected ZPMChargerBlock zpmChargerBlock;
     protected Item zpmChargerItem;
+    protected AnalyzerAncientItem analyzerAncientItem;
+    protected RingsBlock ringsBlock;
+    protected RingsControllerBlock ringsControllerBlock;
+    protected InvisibleBlock invisibleBlock;
+    protected Item ringsItem;
+    protected Item ringsControllerItem;
+    protected Item invisibleItem;
+    protected SimpleNetworkWrapper networkWrapper;
 
     public void preInit(FMLPreInitializationEvent event) throws Exception {
         raumshipsItemTab = new RaumshipsItemTab();
@@ -57,10 +76,36 @@ public class RSCommonProxy {
         zpmItem = new ZPMItem();
         registerModItem(zpmItem);
 
+        analyzerAncientItem = new AnalyzerAncientItem();
+        registerModItem(analyzerAncientItem);
+
+        ringsBlock = new RingsBlock();
+        ringsItem = registerModBlock(ringsBlock);
+
+        ringsControllerBlock = new RingsControllerBlock();
+        ringsControllerItem = registerModBlock(ringsControllerBlock);
+
+        invisibleBlock = new InvisibleBlock();
+        invisibleItem = registerModBlock(invisibleBlock);
+
         GameRegistry.registerTileEntity(ZPMHubTileEntity.class, new ResourceLocation(MODID, "zpm_hub_tile_entity"));
         GameRegistry.registerTileEntity(ZPMChargerTileEntity.class, new ResourceLocation(MODID, "zpm_charger_tile_entity"));
+        GameRegistry.registerTileEntity(RingsTile.class, new ResourceLocation(MODID, "rings_tile_entity"));
+        GameRegistry.registerTileEntity(RingsControllerTile.class, new ResourceLocation(MODID, "rings_controller_tile_entity"));
 
         NetworkRegistry.INSTANCE.registerGuiHandler(RaumShipsMod.instance, new RaumshipsGuiHandler());
+
+        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        int id = 0;
+
+        networkWrapper.registerMessage(StateUpdateRequestToServer.StateUpdateServerHandler.class, StateUpdateRequestToServer.class, id, Side.SERVER); id++;
+        networkWrapper.registerMessage(SaveRingsParametersToServer.SaveRingsParametersServerHandler.class, SaveRingsParametersToServer.class, id, Side.SERVER); id++;
+        networkWrapper.registerMessage(TRControllerActivatedToServer.TRControllerActivatedServerHandler.class, TRControllerActivatedToServer.class, id, Side.SERVER); id++;
+        networkWrapper.registerMessage(RendererUpdatePacketToClient.TileUpdateClientHandler.class, RendererUpdatePacketToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(StartRingsAnimationToClient.StartRingsAnimationToClientHandler.class, StartRingsAnimationToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(StartPlayerFadeOutToClient.StartPlayerFadeOutToClientHandler.class, StartPlayerFadeOutToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(StateUpdatePacketToClient.StateUpdateClientHandler.class, StateUpdatePacketToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(RendererUpdateRequestToServer.TileUpdateServerHandler.class, RendererUpdateRequestToServer.class, id, Side.CLIENT); id++;
     }
 
     public void load(FMLInitializationEvent event) throws Exception {}
@@ -88,10 +133,21 @@ public class RSCommonProxy {
                 name,
                 id,
                 RaumShipsMod.instance,
-                RENDER_DISTANCE,
+                RSCommonConstants.RENDER_DISTANCE,
                 1,
                 true,
                 c1.getRGB(),
                 c2.getRGB());
+    }
+
+    public abstract EntityPlayer getPlayerClientSide();
+    public abstract void addScheduledTaskClientSide(Runnable runnable);
+
+    public InvisibleBlock getInvisibleBlock() {
+        return invisibleBlock;
+    }
+
+    public SimpleNetworkWrapper getNetworkWrapper() {
+        return networkWrapper;
     }
 }

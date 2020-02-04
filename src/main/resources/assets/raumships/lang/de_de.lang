@@ -29,3 +29,15 @@ itemGroup.raumships=RaumShips
 
 custom.zpmhub.gui.noZpm=Kein ZPM installiert.
 custom.zpmhub.gui.zpmInstalled=ZPM installiert und betriebsbereit:
+
+tile.rings_controller_block.name=Transportring-Steuergerät
+tile.rings_controller_block.not_linked=Transportring-Steuergerät nicht verbunden
+
+tile.rings_block.name=Transportring-Plattform
+tile.rings_block.non_existing_address=Zieladresse nicht gefunden,
+tile.rings_block.duplicate_address=Adresse bereits vorhanden,
+tile.rings_block.wrong_address=Nur Adressen zwischen 1 und 6 gültig,
+tile.rings_block.obstructed=Ringe blockiert. Gebiet von 7x7 Blöcken freihalten,
+
+item.analyzer_ancient.name=Ring-Analysegerät
+tile.invisible_block.name=

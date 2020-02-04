@@ -1,5 +1,10 @@
 package com.mw.raumships.common;
 
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.util.EnumFacing;
+
+import java.util.Arrays;
+
 public interface RSCommonConstants {
     float DEFAULT_MINECRAFT_VIEW_DISTANCE = 4.0F;
 
@@ -8,4 +13,8 @@ public interface RSCommonConstants {
 
     int MAX_LIGHT = 15;
     int MIN_LIGHT = 0;
+
+    PropertyDirection FACING_HORIZONTAL = PropertyDirection.create("facing", Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST));
+
+    int RENDER_DISTANCE = 200;
 }

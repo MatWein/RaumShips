@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"particle": "raumships:blocks/rings_block_bottom",
+		"north": "raumships:blocks/rings_block_bottom",
+		"south": "raumships:blocks/rings_block_bottom",
+		"west": "raumships:blocks/rings_block_bottom",
+		"east": "raumships:blocks/rings_block_bottom",
+		"up": "raumships:blocks/rings_block_top",
+		"down": "raumships:blocks/rings_block_bottom"
+	}
+}

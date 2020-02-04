@@ -17,7 +17,9 @@ public class InitSoundEvents {
                 Sounds.TELEAK_ENGINE,
                 Sounds.HATAK_ENGINE,
                 Sounds.X304_ENGINE,
-                Sounds.DEATH_GLIDER_ENGINE
+                Sounds.DEATH_GLIDER_ENGINE,
+                Sounds.RINGS_TRANSPORT,
+                Sounds.RINGS_CONTROLLER_BUTTON
         );
     }
 }
