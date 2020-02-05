@@ -27,7 +27,35 @@ This is a simple mod to add some space ships as flyable entities to Minecraft (F
   
 ## Screenshots:  
   
-<img src="/src/test/resources/screenshots/PuddleJumperAir.png?raw=true "PuddleJumperAir"" width="45%"></img> <img src="/src/test/resources/screenshots/PuddleJumperSG.png?raw=true "PuddleJumperSG"" width="45%"></img> <img src="/src/test/resources/screenshots/PuddleJumperUnderWater.png?raw=true "PuddleJumperUnderWater"" width="45%"></img> <img src="/src/test/resources/screenshots/DeathGlider.png?raw=true "DeathGlider"" width="45%"></img> <img src="/src/test/resources/screenshots/AlKesh.png?raw=true "AlKesh"" width="45%"></img> <img src="/src/test/resources/screenshots/F301.png?raw=true "F301"" width="45%"></img> <img src="/src/test/resources/screenshots/F302.png?raw=true "F302"" width="45%"></img> <img src="/src/test/resources/screenshots/GateGlider.png?raw=true "GateGlider"" width="45%"></img> <img src="/src/test/resources/screenshots/Teleak.png?raw=true "Teleak"" width="45%"></img> <img src="/src/test/resources/screenshots/Hatak1.png?raw=true "Hatak1"" width="45%"></img> <img src="/src/test/resources/screenshots/Hatak2.png?raw=true "Hatak2"" width="45%"></img> <img src="/src/test/resources/screenshots/X304_1.png?raw=true "X304_1"" width="45%"></img> <img src="/src/test/resources/screenshots/X304_2.png?raw=true "X304_2"" width="45%"></img> <img src="/src/test/resources/screenshots/Atlantis1.png?raw=true "Atlantis1"" width="45%"></img> <img src="/src/test/resources/screenshots/Atlantis2.png?raw=true "Atlantis2"" width="45%"></img> 
+![Alt text](/src/test/resources/screenshots/PuddleJumperAir.png?raw=true "PuddleJumperAir") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/PuddleJumperSG.png?raw=true "PuddleJumperSG") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/PuddleJumperUnderWater.png?raw=true "PuddleJumperUnderWater") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/DeathGlider.png?raw=true "DeathGlider") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/AlKesh.png?raw=true "AlKesh") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/F301.png?raw=true "F301") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/F302.png?raw=true "F302") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/GateGlider.png?raw=true "GateGlider") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/Teleak.png?raw=true "Teleak") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/Hatak1.png?raw=true "Hatak1") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/Hatak2.png?raw=true "Hatak2") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/X304_1.png?raw=true "X304_1") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/X304_2.png?raw=true "X304_2") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/Atlantis1.png?raw=true "Atlantis1") <!-- .element width="45%" -->
+  
+![Alt text](/src/test/resources/screenshots/Atlantis2.png?raw=true "Atlantis2") <!-- .element width="45%" -->
   
 ## Models
 
