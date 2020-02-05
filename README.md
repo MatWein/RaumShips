@@ -17,11 +17,13 @@ This is a simple mod to add some space ships as flyable entities to Minecraft (F
 - Stargate X304  
 
 **Additional content:**
-- added ZPM console and ZPM item to provide massive energy
+- ZPM console and ZPM item to provide massive energy
+- Stargate ring transporter
   
 **Advice:**  
 - The hitboxes of some bigger ships are difficult to find.  
   Solution: press F3 and then F3+B to show the hitboxes. Then you can fly the ships by right clicking the hitbox.
+- The ring transporter can be controlled by numpad keys 1-6 when staying on a ring block
   
 ## Screenshots:  
   
@@ -55,4 +57,65 @@ This is a simple mod to add some space ships as flyable entities to Minecraft (F
 
 ![Alt text](/src/test/resources/screenshots/Atlantis2.png?raw=true "Atlantis2")
   
-(see LICENSE.txt for more information about models and sounds)
+## Models
+
+- Stargate Atlantis Puddle Jumper
+(Model from https://free3d.com/3d-model/puddle-jumper-70555.html)
+
+- Stargate Goa'uld Death Glider
+(Model from https://www.models-resource.com/pc_computer/stargateresistance/model/20344/)
+
+- Stargate Goa'uld Al'Kesh
+(Model from https://www.models-resource.com/pc_computer/stargateresistance/model/20343/)
+
+- Stargate Atlantis
+(Model from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Stargate F301
+(Model from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Stargate F302
+(Model from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Stargate Goa'uld Gate Glider
+(Model from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Stargate Goa'uld Hatak
+(Model from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Stargate Goa'uld Teleak
+(Model from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Stargate X304
+(Model from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Ring transporter
+(Model from https://github.com/MrJake222/AUNIS)
+
+## Sounds
+
+- engine.ogg
+(Sound from https://minecraft.curseforge.com/projects/starship)
+
+- engine2.ogg
+(Sound from https://freesound.org/people/LittleRobotSoundFactory/sounds/270539/)
+(License: http://creativecommons.org/licenses/by/3.0/)
+
+- engine3.ogg
+(Sound from https://freesound.org/people/nick121087/sounds/234316/)
+(License: https://creativecommons.org/publicdomain/zero/1.0/)
+
+- daedalus.ogg
+(Sound from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- hatak.ogg
+(Sound from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- teleak.ogg
+(Sound from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- X304.ogg
+(Sound from https://www.curseforge.com/minecraft/mc-mods/starship)
+
+- Ring transporter
+(Sound from https://github.com/MrJake222/AUNIS)
