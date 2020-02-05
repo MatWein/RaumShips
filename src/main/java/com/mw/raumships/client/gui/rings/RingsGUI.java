@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -103,10 +103,10 @@ public class RingsGUI extends GuiBase {
                 if (address > 0 && address <= 6) {
                     RaumShipsMod.proxy.getNetworkWrapper().sendToServer(new SaveRingsParametersToServer(pos, player, address, name));
                 } else {
-                    player.sendStatusMessage(new TextComponentString(I18n.format("tile.rings_block.wrong_address")), true);
+                    player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.wrong_address"), true);
                 }
             } catch (NumberFormatException e) {
-                player.sendStatusMessage(new TextComponentString(I18n.format("tile.rings_block.wrong_address")), true);
+                player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.wrong_address"), true);
             }
         }
     }

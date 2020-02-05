@@ -8,6 +8,7 @@ import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -52,6 +53,8 @@ public class TRControllerActivatedToServer extends PositionedPacket {
                 if (ringsTile != null) {
                     ringsTile.attemptTransportTo(player, message.address);
                     RaumShipsMod.proxy.getNetworkWrapper().sendTo(new TRControllerActivatedToClient(message.pos, message.address), player);
+                } else {
+                    player.sendStatusMessage(new TextComponentTranslation("tile.aunis.transportrings_controller_block.not_linked"), true);
                 }
             });
 

@@ -11,7 +11,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,7 +21,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.*;
 
-public class RingsTile extends TileEntity implements ITileEntityRendered, ITickable, ITileEntityStateProvider, ILinkable {
+public class RingsTile extends TileEntity implements ITileEntityRendered, ITickable, ILinkable {
     private boolean firstTick = true;
     private boolean waitForStart = false;
     private boolean waitForFadeOut = false;
@@ -127,9 +126,7 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 
     public void attemptTransportTo(EntityPlayer player, int address) {
         if (checkIfObstructed()) {
-            if (world.isRemote) {
-                player.sendStatusMessage(new TextComponentString(I18n.format("tile.rings_block.obstructed")), true);
-            }
+            player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.obstructed"), true);
             return;
         }
 
@@ -144,8 +141,8 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 
             List<Entity> excludedEntities = targetRingsTile.startAnimationAndTeleport(pos, excludedFromReceivingSite);
             startAnimationAndTeleport(targetRingsPos, excludedEntities);
-        } else if (world.isRemote) {
-            player.sendStatusMessage(new TextComponentString(I18n.format("tile.rings_block.non_existing_address")), true);
+        } else {
+            player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.non_existing_address"), true);
         }
     }
 
@@ -282,8 +279,7 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 
                 int newRingsAddress = newRingsTile.getClonedRings(pos).getAddress();
                 if (newRingsAddress == address && newRingsAddress != -1) {
-                    player.sendStatusMessage(new TextComponentString(I18n.format("tile.rings_block.duplicate_address")), true);
-
+                    player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.duplicate_address"), true);
                     return;
                 }
             }
@@ -347,7 +343,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         super.readFromNBT(compound);
     }
 
-    @Override
     public State getState(EnumStateType stateType) {
         switch (stateType) {
             case GUI_STATE:
@@ -358,7 +353,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         }
     }
 
-    @Override
     public State createState(EnumStateType stateType) {
         switch (stateType) {
             case GUI_STATE:
@@ -372,21 +366,20 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
     @SideOnly(Side.CLIENT)
     private RingsGUI openGui;
 
-    @Override
     @SideOnly(Side.CLIENT)
     public void setState(EnumStateType stateType, State state) {
         switch (stateType) {
             case GUI_STATE:
-
-                if (openGui == null || !openGui.isOpen) {
+                if (openGui == null) {
                     openGui = new RingsGUI(pos, (RingsGuiState) state);
                     Minecraft.getMinecraft().displayGuiScreen(openGui);
+                } else if (!openGui.isOpen) {
+                    Minecraft.getMinecraft().displayGuiScreen(openGui);
+                    openGui.isOpen = true;
                 } else {
                     openGui.state = (RingsGuiState) state;
                 }
-
                 break;
-
             default:
                 break;
         }

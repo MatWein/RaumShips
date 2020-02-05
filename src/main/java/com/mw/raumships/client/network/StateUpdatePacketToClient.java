@@ -2,8 +2,8 @@ package com.mw.raumships.client.network;
 
 import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.gui.rings.EnumStateType;
-import com.mw.raumships.client.gui.rings.ITileEntityStateProvider;
 import com.mw.raumships.client.gui.rings.State;
+import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -53,7 +53,7 @@ public class StateUpdatePacketToClient extends PositionedPacket {
             World world = player.getEntityWorld();
 
             RaumShipsMod.proxy.addScheduledTaskClientSide(() -> {
-                ITileEntityStateProvider te = (ITileEntityStateProvider) world.getTileEntity(message.pos);
+                RingsTile te = (RingsTile) world.getTileEntity(message.pos);
 
                 try {
                     State state = te.createState(message.stateType);

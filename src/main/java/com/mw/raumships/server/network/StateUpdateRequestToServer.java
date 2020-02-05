@@ -1,10 +1,10 @@
 package com.mw.raumships.server.network;
 
 import com.mw.raumships.client.gui.rings.EnumStateType;
-import com.mw.raumships.client.gui.rings.ITileEntityStateProvider;
 import com.mw.raumships.client.gui.rings.State;
 import com.mw.raumships.client.network.PositionedPlayerPacket;
 import com.mw.raumships.client.network.StateUpdatePacketToClient;
+import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -48,7 +48,7 @@ public class StateUpdateRequestToServer extends PositionedPlayerPacket {
             if (world.isBlockLoaded(message.pos)) {
 
                 world.addScheduledTask(() -> {
-                    ITileEntityStateProvider te = (ITileEntityStateProvider) world.getTileEntity(message.pos);
+                    RingsTile te = (RingsTile) world.getTileEntity(message.pos);
 
                     if (te != null) {
                         try {
