@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RingsRenderer implements ISpecialRenderer<RingsRendererState> {
-
     public static final int ringCount = 5;
     public static final int uprisingInterval = 5;
     public static final int fallingInterval = 5;
@@ -75,9 +74,7 @@ public class RingsRenderer implements ISpecialRenderer<RingsRendererState> {
                         }
                     }
                 }
-            }
-
-            else {
+            } else {
                 if (tick > 100) {
                     tick -= 100;
 
@@ -121,10 +118,5 @@ public class RingsRenderer implements ISpecialRenderer<RingsRendererState> {
     public void setState(RingsRendererState rendererState) {
         lastTick = -1;
         this.state = rendererState;
-    }
-
-    @Override
-    public float getHorizontalRotation() {
-        return 0;
     }
 }

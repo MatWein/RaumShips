@@ -95,10 +95,12 @@ public abstract class OneSlotEnergyTileEntityBase extends TileEntity implements 
     }
 
     @Override
-    public void openInventory(EntityPlayer player) { }
+    public void openInventory(EntityPlayer player) {
+    }
 
     @Override
-    public void closeInventory(EntityPlayer player) { }
+    public void closeInventory(EntityPlayer player) {
+    }
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
@@ -111,7 +113,8 @@ public abstract class OneSlotEnergyTileEntityBase extends TileEntity implements 
     }
 
     @Override
-    public void setField(int id, int value) {}
+    public void setField(int id, int value) {
+    }
 
     @Override
     public int getFieldCount() {
@@ -209,7 +212,7 @@ public abstract class OneSlotEnergyTileEntityBase extends TileEntity implements 
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (facing != EnumFacing.UP && capability == CapabilityEnergy.ENERGY) {
-            return (T)this;
+            return (T) this;
         }
 
         return super.getCapability(capability, facing);

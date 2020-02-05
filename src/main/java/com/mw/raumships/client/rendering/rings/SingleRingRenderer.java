@@ -7,8 +7,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class SingleRingRenderer {
-	public static final double SPACE_ABOVE_EARTH = 0.5;
-	private World world;
+    public static final double SPACE_ABOVE_EARTH = 0.5;
+    private World world;
 
     private boolean shouldRender;
     private boolean shouldAnimate;

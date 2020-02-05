@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RingsGUI extends GuiBase {
-
     private BlockPos pos;
     public RingsGuiState state;
     public boolean isOpen;
@@ -33,7 +32,6 @@ public class RingsGUI extends GuiBase {
 
     private GuiTextField addressTextField;
     private GuiTextField nameTextField;
-
     private RingsGuiButton saveButton;
 
     @Override
@@ -47,8 +45,8 @@ public class RingsGUI extends GuiBase {
         saveButton = new RingsGuiButton(id++,
                 getBottomRightInside(false) - 90,
                 getBottomRightInside(true) - 20,
-				90, 20,
-				I18n.format("gui.rings.save"));
+                90, 20,
+                I18n.format("gui.rings.save"));
         buttonList.add(saveButton);
 
         isOpen = true;

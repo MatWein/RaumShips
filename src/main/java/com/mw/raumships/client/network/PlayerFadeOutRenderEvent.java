@@ -12,7 +12,6 @@ import net.minecraftforge.fml.relauncher.Side;
 
 @EventBusSubscriber(Side.CLIENT)
 public class PlayerFadeOutRenderEvent {
-
 	private static World world;
 
 	private static long tickStart;
@@ -45,36 +44,6 @@ public class PlayerFadeOutRenderEvent {
 		}
 	}
 	
-	// Fog version of fading screen above
-	// Not working with shaders
-//	@SubscribeEvent
-//	public static void onOverlayRender(EntityViewRenderEvent.FogDensity event) {
-//		if (fadeOut) {
-//			float fog = (float) calcFog(world, tickStart, event.getRenderPartialTicks());
-//
-//			if (fog < 0) {
-//				fadeOut = false;
-//				GlStateManager.setFog(GlStateManager.FogMode.LINEAR);
-//			}
-//
-//			else {
-//				event.setDensity(fog * 1.5f);
-//				GlStateManager.setFog(GlStateManager.FogMode.EXP);
-//
-//				event.setCanceled(true);
-//			}
-//		}
-//	}
-//
-//	@SubscribeEvent
-//	public static void onFogColor(EntityViewRenderEvent.FogColors event) {
-//		if (fadeOut) {
-//			event.setRed(1.0f);
-//			event.setGreen(1.0f);
-//			event.setBlue(1.0f);
-//		}
-//	}
-
 	public static void startFadeOut() {
 		world = Minecraft.getMinecraft().world;
 		tickStart = world.getTotalWorldTime();

@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 public class RingsBlock extends Block {
 
 private static final String REGISTRY_NAME = "rings_block";
-	
 	public RingsBlock() {
 		super(Material.IRON);
 
@@ -35,7 +34,6 @@ private static final String REGISTRY_NAME = "rings_block";
 		setHarvestLevel("pickaxe", 3);
 	}
 	
-	// ------------------------------------------------------------------------
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
@@ -57,15 +55,13 @@ private static final String REGISTRY_NAME = "rings_block";
 		
 		RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
 		
-		if (!world.isRemote) {			
-			BlockPos closestController = LinkingHelper.findClosestUnlinked(world, pos, new BlockPos(10, 5, 10), RingsControllerBlock.class);
-			
-			if (closestController != null) {
-				RingsControllerTile controllerTile = (RingsControllerTile) world.getTileEntity(closestController);
-				
-				controllerTile.setLinkedRings(pos);
-				ringsTile.setLinkedController(closestController);
-			}
+		BlockPos closestController = LinkingHelper.findClosestUnlinked(world, pos, new BlockPos(10, 5, 10), RingsControllerBlock.class);
+
+		if (closestController != null) {
+			RingsControllerTile controllerTile = (RingsControllerTile) world.getTileEntity(closestController);
+
+			controllerTile.setLinkedRings(pos);
+			ringsTile.setLinkedController(closestController);
 		}
 	}
 	
@@ -79,7 +75,6 @@ private static final String REGISTRY_NAME = "rings_block";
 		ringsTile.removeAllRings();
 	}
 	
-	// ------------------------------------------------------------------------
 	@Override
 	public boolean hasTileEntity(IBlockState state) {
 		return true;

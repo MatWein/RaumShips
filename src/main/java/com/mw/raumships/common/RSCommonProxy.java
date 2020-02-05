@@ -1,10 +1,12 @@
 package com.mw.raumships.common;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.network.RendererUpdatePacketToClient;
-import com.mw.raumships.client.network.StartPlayerFadeOutToClient;
-import com.mw.raumships.client.network.StartRingsAnimationToClient;
-import com.mw.raumships.client.network.StateUpdatePacketToClient;
+import com.mw.raumships.client.network.*;
+import com.mw.raumships.client.network.RendererUpdatePacketToClient.TileUpdateClientHandler;
+import com.mw.raumships.client.network.StartPlayerFadeOutToClient.StartPlayerFadeOutToClientHandler;
+import com.mw.raumships.client.network.StartRingsAnimationToClient.StartRingsAnimationToClientHandler;
+import com.mw.raumships.client.network.StateUpdatePacketToClient.StateUpdateClientHandler;
+import com.mw.raumships.client.network.TRControllerActivatedToClient.TRControllerActivatedToClientHandler;
 import com.mw.raumships.common.blocks.ZPMChargerBlock;
 import com.mw.raumships.common.blocks.ZPMChargerTileEntity;
 import com.mw.raumships.common.blocks.ZPMHubBlock;
@@ -15,9 +17,13 @@ import com.mw.raumships.common.gui.RaumshipsGuiHandler;
 import com.mw.raumships.common.items.AnalyzerAncientItem;
 import com.mw.raumships.common.items.ZPMItem;
 import com.mw.raumships.server.network.RendererUpdateRequestToServer;
+import com.mw.raumships.server.network.RendererUpdateRequestToServer.TileUpdateServerHandler;
 import com.mw.raumships.server.network.SaveRingsParametersToServer;
+import com.mw.raumships.server.network.SaveRingsParametersToServer.SaveRingsParametersServerHandler;
 import com.mw.raumships.server.network.StateUpdateRequestToServer;
+import com.mw.raumships.server.network.StateUpdateRequestToServer.StateUpdateServerHandler;
 import com.mw.raumships.server.network.TRControllerActivatedToServer;
+import com.mw.raumships.server.network.TRControllerActivatedToServer.TRControllerActivatedServerHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -98,14 +104,16 @@ public abstract class RSCommonProxy {
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         int id = 0;
 
-        networkWrapper.registerMessage(StateUpdateRequestToServer.StateUpdateServerHandler.class, StateUpdateRequestToServer.class, id, Side.SERVER); id++;
-        networkWrapper.registerMessage(SaveRingsParametersToServer.SaveRingsParametersServerHandler.class, SaveRingsParametersToServer.class, id, Side.SERVER); id++;
-        networkWrapper.registerMessage(TRControllerActivatedToServer.TRControllerActivatedServerHandler.class, TRControllerActivatedToServer.class, id, Side.SERVER); id++;
-        networkWrapper.registerMessage(RendererUpdatePacketToClient.TileUpdateClientHandler.class, RendererUpdatePacketToClient.class, id, Side.CLIENT); id++;
-        networkWrapper.registerMessage(StartRingsAnimationToClient.StartRingsAnimationToClientHandler.class, StartRingsAnimationToClient.class, id, Side.CLIENT); id++;
-        networkWrapper.registerMessage(StartPlayerFadeOutToClient.StartPlayerFadeOutToClientHandler.class, StartPlayerFadeOutToClient.class, id, Side.CLIENT); id++;
-        networkWrapper.registerMessage(StateUpdatePacketToClient.StateUpdateClientHandler.class, StateUpdatePacketToClient.class, id, Side.CLIENT); id++;
-        networkWrapper.registerMessage(RendererUpdateRequestToServer.TileUpdateServerHandler.class, RendererUpdateRequestToServer.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(StateUpdateServerHandler.class, StateUpdateRequestToServer.class, id, Side.SERVER); id++;
+        networkWrapper.registerMessage(SaveRingsParametersServerHandler.class, SaveRingsParametersToServer.class, id, Side.SERVER); id++;
+        networkWrapper.registerMessage(TRControllerActivatedServerHandler.class, TRControllerActivatedToServer.class, id, Side.SERVER); id++;
+        networkWrapper.registerMessage(TileUpdateServerHandler.class, RendererUpdateRequestToServer.class, id, Side.CLIENT); id++;
+
+        networkWrapper.registerMessage(TileUpdateClientHandler.class, RendererUpdatePacketToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(StartRingsAnimationToClientHandler.class, StartRingsAnimationToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(StartPlayerFadeOutToClientHandler.class, StartPlayerFadeOutToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(StateUpdateClientHandler.class, StateUpdatePacketToClient.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(TRControllerActivatedToClientHandler.class, TRControllerActivatedToClient.class, id, Side.CLIENT); id++;
     }
 
     public void load(FMLInitializationEvent event) throws Exception {}

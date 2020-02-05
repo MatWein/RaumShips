@@ -25,7 +25,7 @@ public class Sounds {
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 
-    public static void playSoundEvent(BlockPos pos, SoundEvent soundEvent, float volume) {
+    public static void playSound(BlockPos pos, SoundEvent soundEvent, float volume) {
         getSh().playSound(new PositionedSoundRecord(soundEvent, SoundCategory.AMBIENT, volume, 1.0F, pos));
     }
 

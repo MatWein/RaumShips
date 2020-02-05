@@ -7,7 +7,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumBlockRenderType;
 
 public class InvisibleBlock extends Block {
-
 	private static final String REGISTRY_NAME = "invisible_block";
 	
 	public InvisibleBlock() {

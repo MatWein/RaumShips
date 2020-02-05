@@ -1,6 +1,7 @@
 package com.mw.raumships.client.network;
 
 import com.mw.raumships.RaumShipsMod;
+import com.mw.raumships.client.sound.Sounds;
 import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,11 +15,13 @@ public class StartRingsAnimationToClient extends PositionedPacket {
 	public StartRingsAnimationToClient() {}
 	
 	public long animationStart;
+	public BlockPos targetRingsPos;
 	
-	public StartRingsAnimationToClient(BlockPos pos, long animationStart) {
+	public StartRingsAnimationToClient(BlockPos pos, long animationStart, BlockPos targetRingsPos) {
 		super(pos);
 		
 		this.animationStart = animationStart;
+		this.targetRingsPos = targetRingsPos;
 	}
 	
 	@Override
@@ -26,6 +29,7 @@ public class StartRingsAnimationToClient extends PositionedPacket {
 		super.toBytes(buf);
 		
 		buf.writeLong(animationStart);
+		buf.writeLong(targetRingsPos.toLong());
 	}
 	
 	@Override
@@ -33,10 +37,10 @@ public class StartRingsAnimationToClient extends PositionedPacket {
 		super.fromBytes(buf);
 		
 		animationStart = buf.readLong();
+		targetRingsPos = BlockPos.fromLong(buf.readLong());
 	}
 	
 	public static class StartRingsAnimationToClientHandler implements IMessageHandler<StartRingsAnimationToClient, IMessage> {
-
 		@Override
 		public IMessage onMessage(StartRingsAnimationToClient message, MessageContext ctx) {
 			EntityPlayer player = RaumShipsMod.proxy.getPlayerClientSide();
@@ -46,12 +50,14 @@ public class StartRingsAnimationToClient extends PositionedPacket {
 				RingsTile ringsTile = (RingsTile) world.getTileEntity(message.pos);
 			
 				if (ringsTile != null) {
+					Sounds.playSound(message.pos, Sounds.RINGS_TRANSPORT, 0.8f);
+					Sounds.playSound(message.targetRingsPos, Sounds.RINGS_TRANSPORT, 0.8f);
+
 					ringsTile.getTransportRingsRenderer().animationStart(message.animationStart);
 				}
 			});
 						
 			return null;
 		}
-		
 	}
 }

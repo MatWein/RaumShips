@@ -1,25 +1,24 @@
-package com.mw.raumships.server.network;
+package com.mw.raumships.client.network;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.network.PositionedPacket;
-import com.mw.raumships.client.network.TRControllerActivatedToClient;
+import com.mw.raumships.client.sound.Sounds;
 import com.mw.raumships.common.blocks.rings.RingsControllerTile;
 import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class TRControllerActivatedToServer extends PositionedPacket {
+public class TRControllerActivatedToClient extends PositionedPacket {
     public int address;
 
-    public TRControllerActivatedToServer() {
+    public TRControllerActivatedToClient() {
     }
 
-    public TRControllerActivatedToServer(BlockPos pos, int address) {
+    public TRControllerActivatedToClient(BlockPos pos, int address) {
         super(pos);
 
         this.address = address;
@@ -39,19 +38,20 @@ public class TRControllerActivatedToServer extends PositionedPacket {
         address = buf.readInt();
     }
 
-    public static class TRControllerActivatedServerHandler implements IMessageHandler<TRControllerActivatedToServer, IMessage> {
+    public static class TRControllerActivatedToClientHandler implements IMessageHandler<TRControllerActivatedToClient, IMessage> {
         @Override
-        public IMessage onMessage(TRControllerActivatedToServer message, MessageContext ctx) {
-            EntityPlayerMP player = ctx.getServerHandler().player;
-            WorldServer world = player.getServerWorld();
+        public IMessage onMessage(TRControllerActivatedToClient message, MessageContext ctx) {
+            EntityPlayer player = RaumShipsMod.proxy.getPlayerClientSide();
+            World world = player.getEntityWorld();
 
-            world.addScheduledTask(() -> {
+            RaumShipsMod.proxy.addScheduledTaskClientSide(() -> {
                 RingsControllerTile controllerTile = (RingsControllerTile) world.getTileEntity(message.pos);
                 RingsTile ringsTile = controllerTile.getLinkedRingsTile(world);
 
+                Sounds.playSound(message.pos, Sounds.RINGS_CONTROLLER_BUTTON, 0.5F);
+
                 if (ringsTile != null) {
                     ringsTile.attemptTransportTo(player, message.address);
-                    RaumShipsMod.proxy.getNetworkWrapper().sendTo(new TRControllerActivatedToClient(message.pos, message.address), player);
                 }
             });
 
