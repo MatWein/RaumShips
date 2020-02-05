@@ -27,35 +27,7 @@ This is a simple mod to add some space ships as flyable entities to Minecraft (F
   
 ## Screenshots:  
   
-![Alt text](/src/test/resources/screenshots/PuddleJumperAir.png?raw=true "PuddleJumperAir")
-
-![Alt text](/src/test/resources/screenshots/PuddleJumperSG.png?raw=true "PuddleJumperSG")
-
-![Alt text](/src/test/resources/screenshots/PuddleJumperUnderWater.png?raw=true "PuddleJumperUnderWater")
-
-![Alt text](/src/test/resources/screenshots/DeathGlider.png?raw=true "DeathGlider")
-
-![Alt text](/src/test/resources/screenshots/AlKesh.png?raw=true "AlKesh")
-
-![Alt text](/src/test/resources/screenshots/F301.png?raw=true "F301")
-
-![Alt text](/src/test/resources/screenshots/F302.png?raw=true "F302")
-
-![Alt text](/src/test/resources/screenshots/GateGlider.png?raw=true "GateGlider")
-
-![Alt text](/src/test/resources/screenshots/Teleak.png?raw=true "Teleak")
-
-![Alt text](/src/test/resources/screenshots/Hatak1.png?raw=true "Hatak1")
-
-![Alt text](/src/test/resources/screenshots/Hatak2.png?raw=true "Hatak2")
-
-![Alt text](/src/test/resources/screenshots/X304_1.png?raw=true "X304_1")
-
-![Alt text](/src/test/resources/screenshots/X304_2.png?raw=true "X304_2")
-
-![Alt text](/src/test/resources/screenshots/Atlantis1.png?raw=true "Atlantis1")
-
-![Alt text](/src/test/resources/screenshots/Atlantis2.png?raw=true "Atlantis2")
+<img src="/src/test/resources/screenshots/PuddleJumperAir.png?raw=true "PuddleJumperAir"" width="45%"></img> <img src="/src/test/resources/screenshots/PuddleJumperSG.png?raw=true "PuddleJumperSG"" width="45%"></img> <img src="/src/test/resources/screenshots/PuddleJumperUnderWater.png?raw=true "PuddleJumperUnderWater"" width="45%"></img> <img src="/src/test/resources/screenshots/DeathGlider.png?raw=true "DeathGlider"" width="45%"></img> <img src="/src/test/resources/screenshots/AlKesh.png?raw=true "AlKesh"" width="45%"></img> <img src="/src/test/resources/screenshots/F301.png?raw=true "F301"" width="45%"></img> <img src="/src/test/resources/screenshots/F302.png?raw=true "F302"" width="45%"></img> <img src="/src/test/resources/screenshots/GateGlider.png?raw=true "GateGlider"" width="45%"></img> <img src="/src/test/resources/screenshots/Teleak.png?raw=true "Teleak"" width="45%"></img> <img src="/src/test/resources/screenshots/Hatak1.png?raw=true "Hatak1"" width="45%"></img> <img src="/src/test/resources/screenshots/Hatak2.png?raw=true "Hatak2"" width="45%"></img> <img src="/src/test/resources/screenshots/X304_1.png?raw=true "X304_1"" width="45%"></img> <img src="/src/test/resources/screenshots/X304_2.png?raw=true "X304_2"" width="45%"></img> <img src="/src/test/resources/screenshots/Atlantis1.png?raw=true "Atlantis1"" width="45%"></img> <img src="/src/test/resources/screenshots/Atlantis2.png?raw=true "Atlantis2"" width="45%"></img> 
   
 ## Models
 
