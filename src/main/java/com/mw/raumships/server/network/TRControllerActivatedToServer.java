@@ -48,26 +48,30 @@ public class TRControllerActivatedToServer extends PositionedPacket {
             WorldServer world = player.getServerWorld();
 
             world.addScheduledTask(() -> {
-                TileEntity tileEntity = world.getTileEntity(message.pos);
-
-                RingsTile ringsTile;
-                if (tileEntity instanceof RingsControllerTile) {
-                    ringsTile = ((RingsControllerTile)tileEntity).getLinkedRingsTile(world);
-                } else if (tileEntity instanceof RingsTile) {
-                    ringsTile = (RingsTile)tileEntity;
-                } else {
-                    return;
-                }
+                RingsTile ringsTile = getRingsTile(world, message.pos);
 
                 if (ringsTile != null) {
                     ringsTile.attemptTransportTo(player, message.address);
                     RaumShipsMod.proxy.getNetworkWrapper().sendTo(new TRControllerActivatedToClient(message.pos, message.address), player);
                 } else {
-                    player.sendStatusMessage(new TextComponentTranslation("tile.aunis.transportrings_controller_block.not_linked"), true);
+                    player.sendStatusMessage(new TextComponentTranslation("tile.rings_controller_block.not_linked"), true);
                 }
             });
 
             return null;
         }
+
+        private RingsTile getRingsTile(WorldServer world, BlockPos pos) {
+            TileEntity tileEntity = world.getTileEntity(pos);
+
+            if (tileEntity instanceof RingsControllerTile) {
+                return ((RingsControllerTile)tileEntity).getLinkedRingsTile(world);
+            } else if (tileEntity instanceof RingsTile) {
+                return (RingsTile)tileEntity;
+            } else {
+                return null;
+            }
+        }
     }
+
 }

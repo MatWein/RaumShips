@@ -125,7 +125,7 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
     }
 
     public void attemptTransportTo(EntityPlayer player, int address) {
-        if (checkIfObstructed()) {
+        if (checkIfObstructed(this.pos)) {
             player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.obstructed"), true);
             return;
         }
@@ -134,6 +134,10 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 
         if (rings != null) {
             BlockPos targetRingsPos = rings.getPos();
+            if (checkIfObstructed(targetRingsPos)) {
+                player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.targetObstructed"), true);
+                return;
+            }
 
             List<Entity> excludedFromReceivingSite = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.add(-2, 2, -2), pos.add(3, 6, 3)));
 
@@ -153,7 +157,7 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
             new BlockPos(3, 2, 1)
     );
 
-    private boolean checkIfObstructed() {
+    private boolean checkIfObstructed(BlockPos pos) {
         if (RaumShipsConfig.ringsConfig.ignoreObstructionCheck)
             return false;
 
@@ -161,7 +165,7 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
             for (Rotation rotation : Rotation.values()) {
                 for (BlockPos invPos : invisibleBlocksTemplate) {
 
-                    BlockPos newPos = new BlockPos(this.pos).add(invPos.rotate(rotation)).add(0, y, 0);
+                    BlockPos newPos = new BlockPos(pos).add(invPos.rotate(rotation)).add(0, y, 0);
 
                     Block block = world.getBlockState(newPos).getBlock();
 
