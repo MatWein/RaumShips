@@ -17,12 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RingsGUI extends GuiBase {
+    public static final int FRAME_THICKNESS = 4;
+    public static final int PADDING = 8;
+
     private BlockPos pos;
     public RingsGuiState state;
     public boolean isOpen;
 
     public RingsGUI(BlockPos pos, RingsGuiState state) {
-        super(196, 160, 8, FRAME_COLOR, BG_COLOR, TEXT_COLOR, 4);
+        super(196, 160, FRAME_THICKNESS, FRAME_COLOR, BG_COLOR, TEXT_COLOR, PADDING);
 
         this.pos = pos;
         this.state = state;

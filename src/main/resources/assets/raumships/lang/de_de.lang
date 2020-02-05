@@ -17,6 +17,12 @@ rs.key.moveForward=Vorwärts
 rs.key.moveLeft=Nach links
 rs.key.moveRight=Nach rechts
 rs.key.moveUp=Nach oben
+rs.key.number1Ctrl=1
+rs.key.number2Ctrl=2
+rs.key.number3Ctrl=3
+rs.key.number4Ctrl=4
+rs.key.number5Ctrl=5
+rs.key.number6Ctrl=6
 
 item.zpm.name=ZPM (Zero Point Module)
 item.zpmhub.name=ZPM Konsole

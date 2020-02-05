@@ -7,6 +7,7 @@ import com.mw.raumships.common.blocks.rings.RingsControllerTile;
 import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldServer;
@@ -47,8 +48,16 @@ public class TRControllerActivatedToServer extends PositionedPacket {
             WorldServer world = player.getServerWorld();
 
             world.addScheduledTask(() -> {
-                RingsControllerTile controllerTile = (RingsControllerTile) world.getTileEntity(message.pos);
-                RingsTile ringsTile = controllerTile.getLinkedRingsTile(world);
+                TileEntity tileEntity = world.getTileEntity(message.pos);
+
+                RingsTile ringsTile;
+                if (tileEntity instanceof RingsControllerTile) {
+                    ringsTile = ((RingsControllerTile)tileEntity).getLinkedRingsTile(world);
+                } else if (tileEntity instanceof RingsTile) {
+                    ringsTile = (RingsTile)tileEntity;
+                } else {
+                    return;
+                }
 
                 if (ringsTile != null) {
                     ringsTile.attemptTransportTo(player, message.address);

@@ -76,7 +76,6 @@ public class ControllerActivation extends Activation {
         player.swingArm(EnumHand.MAIN_HAND);
 
         TRControllerActivatedToServer message = new TRControllerActivatedToServer(pos, num);
-
         RaumShipsMod.proxy.getNetworkWrapper().sendToServer(message);
     }
 

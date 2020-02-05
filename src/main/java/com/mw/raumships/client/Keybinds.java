@@ -15,21 +15,35 @@ public class Keybinds {
     public static KeyBinding rsDown;
     public static KeyBinding rsCtrl;
 
-    public static void init() {
-        rsForward = new KeyBinding("rs.key.moveForward", Keyboard.KEY_W, RS_KEYS);
-        rsBack = new KeyBinding("rs.key.moveBack", Keyboard.KEY_S, RS_KEYS);
-        rsLeft = new KeyBinding("rs.key.moveLeft", Keyboard.KEY_A, RS_KEYS);
-        rsRight = new KeyBinding("rs.key.moveRight", Keyboard.KEY_D, RS_KEYS);
-        rsUp = new KeyBinding("rs.key.moveUp", Keyboard.KEY_SPACE, RS_KEYS);
-        rsDown = new KeyBinding("rs.key.moveDown", Keyboard.KEY_X, RS_KEYS);
-        rsCtrl = new KeyBinding("rs.key.ctrl", Keyboard.KEY_LCONTROL, RS_KEYS);
+    public static KeyBinding number1Ctrl;
+    public static KeyBinding number2Ctrl;
+    public static KeyBinding number3Ctrl;
+    public static KeyBinding number4Ctrl;
+    public static KeyBinding number5Ctrl;
+    public static KeyBinding number6Ctrl;
 
-        ClientRegistry.registerKeyBinding(rsForward);
-        ClientRegistry.registerKeyBinding(rsBack);
-        ClientRegistry.registerKeyBinding(rsLeft);
-        ClientRegistry.registerKeyBinding(rsRight);
-        ClientRegistry.registerKeyBinding(rsUp);
-        ClientRegistry.registerKeyBinding(rsDown);
-        ClientRegistry.registerKeyBinding(rsCtrl);
+    public static void init() {
+        // Ships
+        rsForward = registerKeyBinding("rs.key.moveForward", Keyboard.KEY_W);
+        rsBack = registerKeyBinding("rs.key.moveBack", Keyboard.KEY_S);
+        rsLeft = registerKeyBinding("rs.key.moveLeft", Keyboard.KEY_A);
+        rsRight = registerKeyBinding("rs.key.moveRight", Keyboard.KEY_D);
+        rsUp = registerKeyBinding("rs.key.moveUp", Keyboard.KEY_SPACE);
+        rsDown = registerKeyBinding("rs.key.moveDown", Keyboard.KEY_X);
+        rsCtrl = registerKeyBinding("rs.key.ctrl", Keyboard.KEY_LCONTROL);
+
+        // Transport rings
+        number1Ctrl = registerKeyBinding("rs.key.number1Ctrl", Keyboard.KEY_NUMPAD1);
+        number2Ctrl = registerKeyBinding("rs.key.number2Ctrl", Keyboard.KEY_NUMPAD2);
+        number3Ctrl = registerKeyBinding("rs.key.number3Ctrl", Keyboard.KEY_NUMPAD3);
+        number4Ctrl = registerKeyBinding("rs.key.number4Ctrl", Keyboard.KEY_NUMPAD4);
+        number5Ctrl = registerKeyBinding("rs.key.number5Ctrl", Keyboard.KEY_NUMPAD5);
+        number6Ctrl = registerKeyBinding("rs.key.number6Ctrl", Keyboard.KEY_NUMPAD6);
+    }
+
+    private static KeyBinding registerKeyBinding(String translationKey, int key) {
+        KeyBinding keyBinding = new KeyBinding(translationKey, key, RS_KEYS);
+        ClientRegistry.registerKeyBinding(keyBinding);
+        return keyBinding;
     }
 }

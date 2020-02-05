@@ -61,7 +61,7 @@ public class GuiBase extends GuiScreen {
         drawRect(frameThickness, frameThickness, imageWidth - frameThickness, imageHeight - frameThickness, bgColor);
     }
 
-    protected void frame(int w, int h, int thickness, int color) {
+    public static void frame(int w, int h, int thickness, int color) {
         // Up
         drawRect(0, 0, w, thickness, color);
 
