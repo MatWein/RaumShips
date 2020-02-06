@@ -87,7 +87,7 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
                 waitForFadeOut = false;
                 waitForTeleport = true;
 
-                teleportList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.add(-2, 2, -2), pos.add(3, 6, 3)));
+                teleportList = world.getEntitiesWithinAABB(Entity.class, createTeleportAxisAlignedBB());
 
                 for (Entity entity : teleportList) {
                     if (entity instanceof EntityPlayerMP) {
@@ -115,6 +115,10 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         }
     }
 
+    public AxisAlignedBB createTeleportAxisAlignedBB() {
+        return new AxisAlignedBB(pos.add(-3, 2, -3), pos.add(4, 6, 4));
+    }
+
     public List<Entity> startAnimationAndTeleport(BlockPos targetRingsPos, List<Entity> excludedEntities) {
         this.targetRingsPos = targetRingsPos;
         this.excludedEntities = excludedEntities;
@@ -122,7 +126,7 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         waitForStart = true;
         buttonPressed = world.getTotalWorldTime();
 
-        return world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.add(-2, 2, -2), pos.add(3, 6, 3)));
+        return world.getEntitiesWithinAABB(Entity.class, createTeleportAxisAlignedBB());
     }
 
     public void animationStart() {
@@ -152,7 +156,7 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
                 return;
             }
 
-            List<Entity> excludedFromReceivingSite = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.add(-2, 2, -2), pos.add(3, 6, 3)));
+            List<Entity> excludedFromReceivingSite = world.getEntitiesWithinAABB(Entity.class, createTeleportAxisAlignedBB());
 
             RingsTile targetRingsTile = (RingsTile) world.getTileEntity(targetRingsPos);
 
