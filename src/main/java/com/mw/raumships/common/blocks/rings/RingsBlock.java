@@ -19,69 +19,67 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class RingsBlock extends Block {
+    private static final String REGISTRY_NAME = "rings_block";
 
-private static final String REGISTRY_NAME = "rings_block";
-	public RingsBlock() {
-		super(Material.IRON);
+    public RingsBlock() {
+        super(Material.IRON);
 
-		setUnlocalizedName(REGISTRY_NAME);
-		setRegistryName(RaumShipsMod.MODID, REGISTRY_NAME);
-		setSoundType(SoundType.STONE);
+        setUnlocalizedName(REGISTRY_NAME);
+        setRegistryName(RaumShipsMod.MODID, REGISTRY_NAME);
+        setSoundType(SoundType.STONE);
 
-		setLightOpacity(0);
-		
-		setHardness(3.0f);
-		setHarvestLevel("pickaxe", 3);
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
-		
-		if (!world.isRemote) {			
-			if (player.getHeldItem(hand).getItem() instanceof AnalyzerAncientItem)
-				RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(pos, EnumStateType.GUI_STATE, ringsTile.getState(EnumStateType.GUI_STATE)), (EntityPlayerMP) player);
-		}
-		
-		else {
-			ringsTile.getTransportRingsRenderer().which++;
-		}
-		
-		return true;
-	}
-	
-	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		
-		RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
-		
-		BlockPos closestController = LinkingHelper.findClosestUnlinked(world, pos, new BlockPos(10, 5, 10), RingsControllerBlock.class);
+        setLightOpacity(0);
 
-		if (closestController != null) {
-			RingsControllerTile controllerTile = (RingsControllerTile) world.getTileEntity(closestController);
+        setHardness(3.0f);
+        setHarvestLevel("pickaxe", 3);
+    }
 
-			controllerTile.setLinkedRings(pos);
-			ringsTile.setLinkedController(closestController);
-		}
-	}
-	
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
 
-		if (ringsTile.isLinked())
-			ringsTile.getLinkedControllerTile(world).setLinkedRings(null);
-		
-		ringsTile.removeAllRings();
-	}
-	
-	@Override
-	public boolean hasTileEntity(IBlockState state) {
-		return true;
-	}
-	
-	@Override
-	public RingsTile createTileEntity(World world, IBlockState state) {
-		return new RingsTile();
-	}
+        if (!world.isRemote) {
+            if (player.getHeldItem(hand).getItem() instanceof AnalyzerAncientItem)
+                RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(pos, EnumStateType.GUI_STATE, ringsTile.getState(EnumStateType.GUI_STATE)), (EntityPlayerMP) player);
+        } else {
+            ringsTile.getTransportRingsRenderer().which++;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+
+        RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
+
+        BlockPos closestController = LinkingHelper.findClosestUnlinked(world, pos, new BlockPos(10, 5, 10), RingsControllerBlock.class);
+
+        if (closestController != null) {
+            RingsControllerTile controllerTile = (RingsControllerTile) world.getTileEntity(closestController);
+
+            controllerTile.setLinkedRings(pos);
+            ringsTile.setLinkedController(closestController);
+        }
+    }
+
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
+
+        if (ringsTile.isLinked())
+            ringsTile.getLinkedControllerTile(world).setLinkedRings(null);
+
+        ringsTile.removeAllRings();
+    }
+
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public RingsTile createTileEntity(World world, IBlockState state) {
+        return new RingsTile();
+    }
 }

@@ -5,7 +5,9 @@ import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.gui.rings.*;
 import com.mw.raumships.client.network.StartPlayerFadeOutToClient;
 import com.mw.raumships.client.network.StartRingsAnimationToClient;
-import com.mw.raumships.client.rendering.rings.*;
+import com.mw.raumships.client.rendering.rings.RendererState;
+import com.mw.raumships.client.rendering.rings.RingsRenderer;
+import com.mw.raumships.client.rendering.rings.RingsRendererState;
 import com.mw.raumships.server.network.RendererUpdateRequestToServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -16,6 +18,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.Rotation;
@@ -29,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.*;
 
-public class RingsTile extends TileEntity implements ITileEntityRendered, ITickable, ILinkable {
+public class RingsTile extends TileEntity implements ITickable, ILinkable {
     private boolean firstTick = true;
     private boolean waitForStart = false;
     private boolean waitForFadeOut = false;
@@ -45,6 +49,18 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
     private static final int clearoutTimeout = (int) (100 + RingsRenderer.fallingInterval * RingsRenderer.ringCount + RingsRenderer.animationDiv * Math.PI);
 
     private List<Entity> teleportList;
+    private BlockPos targetRingsPos;
+    private List<Entity> excludedEntities;
+    private List<BlockPos> invisibleBlocks = new ArrayList<>();
+    private BlockPos linkedController;
+    private DtoRingsModel rings;
+    public Map<Integer, DtoRingsModel> ringsMap = new HashMap<>();
+
+    @SideOnly(Side.CLIENT)
+    private RingsGUI openGui;
+
+    RingsRenderer renderer;
+    RingsRendererState rendererState;
 
     @Override
     public void update() {
@@ -98,9 +114,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
             }
         }
     }
-
-    private BlockPos targetRingsPos;
-    private List<Entity> excludedEntities;
 
     public List<Entity> startAnimationAndTeleport(BlockPos targetRingsPos, List<Entity> excludedEntities) {
         this.targetRingsPos = targetRingsPos;
@@ -179,8 +192,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         return false;
     }
 
-    private List<BlockPos> invisibleBlocks = new ArrayList<>();
-
     private void setBarrierBlocks(boolean set) {
         if (set) {
             invisibleBlocks.clear();
@@ -209,8 +220,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         }
     }
 
-    private BlockPos linkedController;
-
     public void setLinkedController(BlockPos pos) {
         this.linkedController = pos;
 
@@ -226,8 +235,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         return (linkedController != null ? ((RingsControllerTile) world.getTileEntity(linkedController)) : null);
     }
 
-    private DtoRingsModel rings;
-
     private DtoRingsModel getRings() {
         if (rings == null)
             rings = new DtoRingsModel(pos);
@@ -239,7 +246,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         return getRings().cloneWithNewDistance(callerPos);
     }
 
-    public Map<Integer, DtoRingsModel> ringsMap = new HashMap<>();
 
     public void addRings(RingsTile caller) {
         DtoRingsModel clonedRings = caller.getClonedRings(this.pos);
@@ -277,7 +283,6 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
 
         for (BlockPos newRingsPos : BlockPos.getAllInBoxMutable(new BlockPos(x - radius, y - vertical, z - radius), new BlockPos(x + radius, y + vertical, z + radius))) {
             if (world.getBlockState(newRingsPos).getBlock() instanceof RingsBlock && !pos.equals(newRingsPos)) {
-
                 RingsTile newRingsTile = (RingsTile) world.getTileEntity(newRingsPos);
                 ringsTilesInRange.add(newRingsTile);
 
@@ -347,53 +352,61 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         super.readFromNBT(compound);
     }
 
-    public State getState(EnumStateType stateType) {
-        switch (stateType) {
-            case GUI_STATE:
-                return new RingsGuiState(getRings(), ringsMap.values());
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound updateTagDescribingTileEntityState = getUpdateTag();
+        final int METADATA = 0;
+        return new SPacketUpdateTileEntity(this.pos, METADATA, updateTagDescribingTileEntityState);
+    }
 
-            default:
-                return null;
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        NBTTagCompound updateTagDescribingTileEntityState = pkt.getNbtCompound();
+        handleUpdateTag(updateTagDescribingTileEntityState);
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        writeToNBT(nbtTagCompound);
+        return nbtTagCompound;
+    }
+
+    @Override
+    public void handleUpdateTag(NBTTagCompound tag) {
+        this.readFromNBT(tag);
+    }
+
+    public State getState(EnumStateType stateType) {
+        if (stateType == EnumStateType.GUI_STATE) {
+            return new RingsGuiState(getRings(), ringsMap.values());
         }
+        return null;
     }
 
     public State createState(EnumStateType stateType) {
-        switch (stateType) {
-            case GUI_STATE:
-                return new RingsGuiState();
-
-            default:
-                return null;
+        if (stateType == EnumStateType.GUI_STATE) {
+            return new RingsGuiState();
         }
+        return null;
     }
-
-    @SideOnly(Side.CLIENT)
-    private RingsGUI openGui;
 
     @SideOnly(Side.CLIENT)
     public void setState(EnumStateType stateType, State state) {
-        switch (stateType) {
-            case GUI_STATE:
-                if (openGui == null) {
-                    openGui = new RingsGUI(pos, (RingsGuiState) state);
-                    Minecraft.getMinecraft().displayGuiScreen(openGui);
-                } else if (!openGui.isOpen) {
-                    Minecraft.getMinecraft().displayGuiScreen(openGui);
-                    openGui.isOpen = true;
-                } else {
-                    openGui.state = (RingsGuiState) state;
-                }
-                break;
-            default:
-                break;
+        if (stateType == EnumStateType.GUI_STATE) {
+            if (openGui == null) {
+                openGui = new RingsGUI(pos, (RingsGuiState) state);
+                Minecraft.getMinecraft().displayGuiScreen(openGui);
+            } else if (!openGui.isOpen) {
+                Minecraft.getMinecraft().displayGuiScreen(openGui);
+                openGui.isOpen = true;
+            } else {
+                openGui.state = (RingsGuiState) state;
+            }
         }
     }
 
-    RingsRenderer renderer;
-    RingsRendererState rendererState;
-
-    @Override
-    public ISpecialRenderer<RingsRendererState> getRenderer() {
+    public RingsRenderer getRenderer() {
         if (renderer == null)
             renderer = new RingsRenderer(this);
 
@@ -401,10 +414,9 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
     }
 
     public RingsRenderer getTransportRingsRenderer() {
-        return (RingsRenderer) getRenderer();
+        return getRenderer();
     }
 
-    @Override
     public RendererState getRendererState() {
         if (rendererState == null)
             rendererState = new RingsRendererState();
@@ -416,12 +428,10 @@ public class RingsTile extends TileEntity implements ITileEntityRendered, ITicka
         return (RingsRendererState) getRendererState();
     }
 
-    @Override
     public RendererState createRendererState(ByteBuf buf) {
         return new RingsRendererState().fromBytes(buf);
     }
 
-    @Override
     public AxisAlignedBB getRenderBoundingBox() {
         return new AxisAlignedBB(pos.add(-4, 0, -4), pos.add(4, 7, 4));
     }

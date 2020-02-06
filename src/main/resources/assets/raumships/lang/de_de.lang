@@ -36,21 +36,22 @@ itemGroup.raumships=RaumShips
 custom.zpmhub.gui.noZpm=Kein ZPM installiert.
 custom.zpmhub.gui.zpmInstalled=ZPM installiert und betriebsbereit:
 
-tile.rings_controller_block.name=Transportring-Steuergeraet
-tile.rings_controller_block.not_linked=Transportring-Steuergeraet nicht verbunden
+tile.rings_controller_block.name=Ring-Steuergeraet
+tile.rings_controller_block.not_linked=Ring-Steuergeraet nicht verbunden
 
-tile.rings_block.name=Transportring-Plattform
+tile.rings_block.name=Ringtransporter
 tile.rings_block.non_existing_address=Zieladresse nicht gefunden oder konfiguriert.
 tile.rings_block.duplicate_address=Adresse bereits vorhanden.
 tile.rings_block.wrong_address=Nur Adressen zwischen 1 und 6 gueltig.
-tile.rings_block.obstructed=Ringe blockiert oder nicht konfiguriert. Gebiet von 7x7 Bloecken freihalten.
-tile.rings_block.targetObstructed=Ziel-Ringe blockiert oder nicht konfiguriert. Gebiet von 7x7 Bloecken freihalten.
+tile.rings_block.obstructed=Ringe blockiert oder nicht konfiguriert. Gebiet von 7x7x5 Bloecken freihalten.
+tile.rings_block.targetObstructed=Ziel-Ringe blockiert oder nicht konfiguriert. Gebiet von 7x7x5 Bloecken freihalten.
+tile.rings_block.overlay.noConnectedRings=Ringtransporter nicht verbunden
 
 item.analyzer_ancient.name=Ring-Analysegeraet
 tile.invisible_block.name=
 
 gui.rings.save=Speichern
-gui.rings.title=Transportring-Platform 
+gui.rings.title=Ringtransporter
 gui.rings.title.address=Adresse:
 gui.rings.title.name=Name:
 gui.rings.notInGrid=Ringe ausserhalb des Bereichs

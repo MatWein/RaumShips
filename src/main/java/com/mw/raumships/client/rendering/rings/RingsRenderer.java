@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RingsRenderer implements ISpecialRenderer<RingsRendererState> {
+public class RingsRenderer {
     public static final int ringCount = 5;
     public static final int uprisingInterval = 5;
     public static final int fallingInterval = 5;
@@ -33,7 +33,6 @@ public class RingsRenderer implements ISpecialRenderer<RingsRendererState> {
 
     public int which = 0;
 
-    @Override
     public void render(double x, double y, double z, double partialTicks) {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
 
@@ -114,7 +113,6 @@ public class RingsRenderer implements ISpecialRenderer<RingsRendererState> {
 
     RingsRendererState state = new RingsRendererState();
 
-    @Override
     public void setState(RingsRendererState rendererState) {
         lastTick = -1;
         this.state = rendererState;

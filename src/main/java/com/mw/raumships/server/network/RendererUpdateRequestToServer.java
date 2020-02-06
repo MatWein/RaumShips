@@ -2,7 +2,7 @@ package com.mw.raumships.server.network;
 
 import com.mw.raumships.client.network.PositionedPlayerPacket;
 import com.mw.raumships.client.network.RendererUpdatePacketToClient;
-import com.mw.raumships.client.rendering.rings.ITileEntityRendered;
+import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -40,7 +40,7 @@ public class RendererUpdateRequestToServer extends PositionedPlayerPacket {
                     TileEntity te = world.getTileEntity(message.pos);
 
                     if (te != null) {
-                        message.respond(world, new RendererUpdatePacketToClient(message.pos, ((ITileEntityRendered) te).getRendererState()));
+                        message.respond(world, new RendererUpdatePacketToClient(message.pos, ((RingsTile) te).getRendererState()));
                     }
                 });
             }

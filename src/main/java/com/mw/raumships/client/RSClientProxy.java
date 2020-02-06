@@ -2,8 +2,8 @@ package com.mw.raumships.client;
 
 import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.rendering.EntityWithModelRenderer;
-import com.mw.raumships.client.rendering.rings.TRControllerTESR;
-import com.mw.raumships.client.rendering.rings.TransportRingsTESR;
+import com.mw.raumships.client.rendering.rings.RingsControllerTESR;
+import com.mw.raumships.client.rendering.rings.RingsTESR;
 import com.mw.raumships.common.RSCommonProxy;
 import com.mw.raumships.common.blocks.rings.RingsControllerTile;
 import com.mw.raumships.common.blocks.rings.RingsTile;
@@ -39,8 +39,8 @@ public class RSClientProxy extends RSCommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(HatakEntity.class, EntityWithModelRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(AtlantisEntity.class, EntityWithModelRenderer::new);
 
-        ClientRegistry.bindTileEntitySpecialRenderer(RingsTile.class, new TransportRingsTESR());
-        ClientRegistry.bindTileEntitySpecialRenderer(RingsControllerTile.class, new TRControllerTESR());
+        ClientRegistry.bindTileEntitySpecialRenderer(RingsTile.class, new RingsTESR());
+        ClientRegistry.bindTileEntitySpecialRenderer(RingsControllerTile.class, new RingsControllerTESR());
 
         Keybinds.init();
 

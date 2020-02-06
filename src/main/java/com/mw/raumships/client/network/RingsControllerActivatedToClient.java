@@ -8,13 +8,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class TRControllerActivatedToClient extends PositionedPacket {
+public class RingsControllerActivatedToClient extends PositionedPacket {
     public int address;
 
-    public TRControllerActivatedToClient() {
+    public RingsControllerActivatedToClient() {
     }
 
-    public TRControllerActivatedToClient(BlockPos pos, int address) {
+    public RingsControllerActivatedToClient(BlockPos pos, int address) {
         super(pos);
 
         this.address = address;
@@ -34,9 +34,9 @@ public class TRControllerActivatedToClient extends PositionedPacket {
         address = buf.readInt();
     }
 
-    public static class TRControllerActivatedToClientHandler implements IMessageHandler<TRControllerActivatedToClient, IMessage> {
+    public static class RingsControllerActivatedToClientHandler implements IMessageHandler<RingsControllerActivatedToClient, IMessage> {
         @Override
-        public IMessage onMessage(TRControllerActivatedToClient message, MessageContext ctx) {
+        public IMessage onMessage(RingsControllerActivatedToClient message, MessageContext ctx) {
             RaumShipsMod.proxy.addScheduledTaskClientSide(() -> {
                 Sounds.playSound(message.pos, Sounds.RINGS_CONTROLLER_BUTTON, 0.5F);
             });

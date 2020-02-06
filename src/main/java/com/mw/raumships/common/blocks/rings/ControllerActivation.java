@@ -1,10 +1,10 @@
 package com.mw.raumships.common.blocks.rings;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.rendering.rings.TRControllerRenderer;
+import com.mw.raumships.client.rendering.rings.RingsControllerRenderer;
 import com.mw.raumships.common.RSCommonConstants;
 import com.mw.raumships.common.calc.Ray;
-import com.mw.raumships.server.network.TRControllerActivatedToServer;
+import com.mw.raumships.server.network.RingsControllerActivatedToServer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -53,7 +53,7 @@ public class ControllerActivation extends Activation {
 
     public void onActivated(World world, BlockPos pos, EntityPlayer player) {
         EnumFacing facing = world.getBlockState(pos).getValue(RSCommonConstants.FACING_HORIZONTAL);
-        float rotation = TRControllerRenderer.getRotation(facing);
+        float rotation = RingsControllerRenderer.getRotation(facing);
 
         super.onActivated(world, pos, player, rotation);
     }
@@ -62,7 +62,7 @@ public class ControllerActivation extends Activation {
     protected Vector3f getTranslation(World world, BlockPos pos) {
         EnumFacing facing = world.getBlockState(pos).getValue(RSCommonConstants.FACING_HORIZONTAL);
 
-        return TRControllerRenderer.getTranslation(facing);
+        return RingsControllerRenderer.getTranslation(facing);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class ControllerActivation extends Activation {
 
         player.swingArm(EnumHand.MAIN_HAND);
 
-        TRControllerActivatedToServer message = new TRControllerActivatedToServer(pos, num);
+        RingsControllerActivatedToServer message = new RingsControllerActivatedToServer(pos, num);
         RaumShipsMod.proxy.getNetworkWrapper().sendToServer(message);
     }
 

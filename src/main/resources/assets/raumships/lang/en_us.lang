@@ -43,8 +43,9 @@ tile.rings_block.name=Transport rings
 tile.rings_block.non_existing_address=Address cannot be reached or is not configured.
 tile.rings_block.duplicate_address=Duplicate address
 tile.rings_block.wrong_address=Wrong address, should be 1-6
-tile.rings_block.obstructed=Rings obstructed or not configured, clear 7x7 area around rings
-tile.rings_block.targetObstructed=Target rings obstructed or not configured, clear 7x7 area around rings
+tile.rings_block.obstructed=Rings obstructed or not configured, clear 7x7x5 area around rings
+tile.rings_block.targetObstructed=Target rings obstructed or not configured, clear 7x7x5 area around rings
+tile.rings_block.overlay.noConnectedRings=Rings not connected
 
 item.analyzer_ancient.name=Ancient Analyzer
 tile.invisible_block.name=

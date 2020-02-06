@@ -5,40 +5,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class DtoRingsModel {
     private int address;
-
-    public int getAddress() {
-        return address;
-    }
-
-    public void setAddress(int address) {
-        this.address = address;
-    }
-
     private String name;
-
-    public String getName() {
-        if (name == null)
-            return "[empty]";
-
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     private BlockPos pos;
-
-    public BlockPos getPos() {
-        return pos;
-    }
-
     private double distance;
-
-    public double getDistance() {
-        return distance;
-    }
-
     private boolean isClone;
 
     public DtoRingsModel(BlockPos pos) {
@@ -111,5 +80,32 @@ public class DtoRingsModel {
     @Override
     public String toString() {
         return "[pos=" + pos.toString() + ", address=" + address + ", name=" + name + "]";
+    }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+    }
+
+    public String getName() {
+        if (name == null)
+            return "[empty]";
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BlockPos getPos() {
+        return pos;
+    }
+
+    public double getDistance() {
+        return distance;
     }
 }

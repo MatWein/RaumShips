@@ -11,10 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.lwjgl.util.vector.Vector3f;
 
-public class TRControllerRenderer {
+public class RingsControllerRenderer {
     private EnumFacing facing;
 
-    public TRControllerRenderer(RingsControllerTile controllerTile) {
+    public RingsControllerRenderer(RingsControllerTile controllerTile) {
         World world = controllerTile.getWorld();
         BlockPos pos = controllerTile.getPos();
 

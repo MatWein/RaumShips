@@ -1,7 +1,7 @@
 package com.mw.raumships.common.blocks.rings;
 
 import com.mw.raumships.client.gui.rings.ILinkable;
-import com.mw.raumships.client.rendering.rings.TRControllerRenderer;
+import com.mw.raumships.client.rendering.rings.RingsControllerRenderer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 
 public class RingsControllerTile extends TileEntity implements ILinkable {
     private BlockPos linkedRings;
+    private RingsControllerRenderer renderer;
 
     public void setLinkedRings(BlockPos pos) {
         this.linkedRings = pos;
@@ -45,11 +46,9 @@ public class RingsControllerTile extends TileEntity implements ILinkable {
         super.readFromNBT(compound);
     }
 
-    private TRControllerRenderer renderer;
-
-    public TRControllerRenderer getRenderer() {
+    public RingsControllerRenderer getRenderer() {
         if (renderer == null)
-            renderer = new TRControllerRenderer(this);
+            renderer = new RingsControllerRenderer(this);
 
         return renderer;
     }

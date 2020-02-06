@@ -1,8 +1,9 @@
 package com.mw.raumships.client.network;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.rendering.rings.ITileEntityRendered;
 import com.mw.raumships.client.rendering.rings.RendererState;
+import com.mw.raumships.client.rendering.rings.RingsRendererState;
+import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -46,8 +47,9 @@ public class RendererUpdatePacketToClient extends PositionedPacket {
             World world = player.getEntityWorld();
 
             RaumShipsMod.proxy.addScheduledTaskClientSide(() -> {
-                ITileEntityRendered te = (ITileEntityRendered) world.getTileEntity(message.pos);
-                te.getRenderer().setState(te.createRendererState(message.stateBuf));
+                RingsTile te = (RingsTile) world.getTileEntity(message.pos);
+                RingsRendererState rendererState = (RingsRendererState)te.createRendererState(message.stateBuf);
+                te.getRenderer().setState(rendererState);
             });
 
             return null;
