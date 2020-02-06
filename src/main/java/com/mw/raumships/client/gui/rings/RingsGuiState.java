@@ -9,30 +9,10 @@ import java.util.Collection;
 import java.util.List;
 
 public class RingsGuiState extends State {
-
     private boolean inGrid;
-
-    public boolean isInGrid() {
-        return inGrid;
-    }
-
     private int address;
-
-    public int getAddress() {
-        return address;
-    }
-
     private String name;
-
-    public String getName() {
-        return name != null ? name : "";
-    }
-
     private List<DtoRingsModel> ringsList = new ArrayList<>();
-
-    public List<DtoRingsModel> getRings() {
-        return ringsList;
-    }
 
     public RingsGuiState() {
     }
@@ -86,5 +66,21 @@ public class RingsGuiState extends State {
                 ringsList.add(new DtoRingsModel(address, name));
             }
         }
+    }
+
+    public boolean isInGrid() {
+        return inGrid;
+    }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public String getName() {
+        return name != null ? name : "";
+    }
+
+    public List<DtoRingsModel> getRings() {
+        return ringsList;
     }
 }

@@ -2,7 +2,10 @@ package com.mw.raumships.common.blocks.rings;
 
 import com.mw.raumships.RaumShipsConfig;
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.gui.rings.*;
+import com.mw.raumships.client.gui.rings.ILinkable;
+import com.mw.raumships.client.gui.rings.RingsGUI;
+import com.mw.raumships.client.gui.rings.RingsGuiState;
+import com.mw.raumships.client.gui.rings.State;
 import com.mw.raumships.client.network.StartPlayerFadeOutToClient;
 import com.mw.raumships.client.network.StartRingsAnimationToClient;
 import com.mw.raumships.client.rendering.rings.RendererState;
@@ -196,7 +199,7 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         return false;
     }
 
-    private void setBarrierBlocks(boolean set) {
+    public void setBarrierBlocks(boolean set) {
         if (set) {
             invisibleBlocks.clear();
 
@@ -381,38 +384,31 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         this.readFromNBT(tag);
     }
 
-    public State getState(EnumStateType stateType) {
-        if (stateType == EnumStateType.GUI_STATE) {
-            return new RingsGuiState(getRings(), ringsMap.values());
-        }
-        return null;
+    public State getState() {
+        return new RingsGuiState(getRings(), ringsMap.values());
     }
 
-    public State createState(EnumStateType stateType) {
-        if (stateType == EnumStateType.GUI_STATE) {
-            return new RingsGuiState();
-        }
-        return null;
+    public State createState() {
+        return new RingsGuiState();
     }
 
     @SideOnly(Side.CLIENT)
-    public void setState(EnumStateType stateType, State state) {
-        if (stateType == EnumStateType.GUI_STATE) {
-            if (openGui == null) {
-                openGui = new RingsGUI(pos, (RingsGuiState) state);
-                Minecraft.getMinecraft().displayGuiScreen(openGui);
-            } else if (!openGui.isOpen) {
-                Minecraft.getMinecraft().displayGuiScreen(openGui);
-                openGui.isOpen = true;
-            } else {
-                openGui.state = (RingsGuiState) state;
-            }
+    public void setState(State state) {
+        if (openGui == null) {
+            openGui = new RingsGUI(pos, (RingsGuiState) state);
+            Minecraft.getMinecraft().displayGuiScreen(openGui);
+        } else if (!openGui.isOpen) {
+            Minecraft.getMinecraft().displayGuiScreen(openGui);
+            openGui.isOpen = true;
+        } else {
+            openGui.state = (RingsGuiState) state;
         }
     }
 
     public RingsRenderer getRenderer() {
-        if (renderer == null)
+        if (renderer == null) {
             renderer = new RingsRenderer(this);
+        }
 
         return renderer;
     }

@@ -1,6 +1,5 @@
 package com.mw.raumships.server.network;
 
-import com.mw.raumships.client.gui.rings.EnumStateType;
 import com.mw.raumships.client.network.PositionedPlayerPacket;
 import com.mw.raumships.client.network.StateUpdatePacketToClient;
 import com.mw.raumships.common.blocks.rings.RingsTile;
@@ -16,11 +15,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import java.nio.charset.StandardCharsets;
 
 public class SaveRingsParametersToServer extends PositionedPlayerPacket {
-    public SaveRingsParametersToServer() {
-    }
-
     int address;
     String name;
+
+    public SaveRingsParametersToServer() {
+    }
 
     public SaveRingsParametersToServer(BlockPos pos, EntityPlayer player, int address, String name) {
         super(pos, player);
@@ -57,7 +56,7 @@ public class SaveRingsParametersToServer extends PositionedPlayerPacket {
                 RingsTile ringsTile = (RingsTile) world.getTileEntity(message.pos);
                 ringsTile.setRingsParams(player, message.address, message.name);
 
-                message.respond(world, new StateUpdatePacketToClient(message.pos, EnumStateType.GUI_STATE, ringsTile.getState(EnumStateType.GUI_STATE)));
+                message.respond(world, new StateUpdatePacketToClient(message.pos, ringsTile.getState()));
             });
 
             return null;

@@ -1,7 +1,6 @@
 package com.mw.raumships.common.blocks.rings;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.gui.rings.EnumStateType;
 import com.mw.raumships.client.gui.rings.LinkingHelper;
 import com.mw.raumships.client.network.StateUpdatePacketToClient;
 import com.mw.raumships.common.items.AnalyzerAncientItem;
@@ -40,7 +39,7 @@ public class RingsBlock extends Block {
 
         if (!world.isRemote) {
             if (player.getHeldItem(hand).getItem() instanceof AnalyzerAncientItem)
-                RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(pos, EnumStateType.GUI_STATE, ringsTile.getState(EnumStateType.GUI_STATE)), (EntityPlayerMP) player);
+                RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(pos, ringsTile.getState()), (EntityPlayerMP) player);
         } else {
             ringsTile.getTransportRingsRenderer().which++;
         }
@@ -71,6 +70,7 @@ public class RingsBlock extends Block {
             ringsTile.getLinkedControllerTile(world).setLinkedRings(null);
 
         ringsTile.removeAllRings();
+        ringsTile.setBarrierBlocks(false);
     }
 
     @Override

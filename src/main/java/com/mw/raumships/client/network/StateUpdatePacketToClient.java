@@ -1,7 +1,6 @@
 package com.mw.raumships.client.network;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.gui.rings.EnumStateType;
 import com.mw.raumships.client.gui.rings.State;
 import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
@@ -13,26 +12,21 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class StateUpdatePacketToClient extends PositionedPacket {
+    private State state;
+    private ByteBuf stateBuf;
+
     public StateUpdatePacketToClient() {
     }
 
-    private EnumStateType stateType;
-    private State state;
-
-    private ByteBuf stateBuf;
-
-    public StateUpdatePacketToClient(BlockPos pos, EnumStateType stateType, State state) {
+    public StateUpdatePacketToClient(BlockPos pos, State state) {
         super(pos);
 
-        this.stateType = stateType;
         this.state = state;
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         super.toBytes(buf);
-
-        buf.writeInt(stateType.id);
 
         state.toBytes(buf);
     }
@@ -41,12 +35,10 @@ public class StateUpdatePacketToClient extends PositionedPacket {
     public void fromBytes(ByteBuf buf) {
         super.fromBytes(buf);
 
-        stateType = EnumStateType.byId(buf.readInt());
         stateBuf = buf.copy();
     }
 
     public static class StateUpdateClientHandler implements IMessageHandler<StateUpdatePacketToClient, IMessage> {
-
         @Override
         public IMessage onMessage(StateUpdatePacketToClient message, MessageContext ctx) {
             EntityPlayer player = RaumShipsMod.proxy.getPlayerClientSide();
@@ -56,11 +48,11 @@ public class StateUpdatePacketToClient extends PositionedPacket {
                 RingsTile te = (RingsTile) world.getTileEntity(message.pos);
 
                 try {
-                    State state = te.createState(message.stateType);
+                    State state = te.createState();
                     state.fromBytes(message.stateBuf);
 
                     if (te != null && state != null) {
-                        te.setState(message.stateType, state);
+                        te.setState(state);
                     }
                 } catch (UnsupportedOperationException e) {
                     e.printStackTrace();
