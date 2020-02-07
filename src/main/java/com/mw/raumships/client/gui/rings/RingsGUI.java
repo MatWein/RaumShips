@@ -19,6 +19,8 @@ import java.util.List;
 public class RingsGUI extends GuiBase {
     public static final int FRAME_THICKNESS = 4;
     public static final int PADDING = 8;
+    public static final int COLOR_TITLE_OK = 0xAA5500;
+    public static final int COLOR_TITLE_PROBLEM = 0xB36262;
 
     private BlockPos pos;
     public RingsGuiState state;
@@ -70,9 +72,9 @@ public class RingsGUI extends GuiBase {
         drawBackground();
 
         if (state.isInGrid()) {
-            drawVerticallCenteredString(I18n.format("gui.rings.title") + state.getAddress(), 0, 0, 0xAA5500);
+            drawVerticallCenteredString(I18n.format("gui.rings.title") + state.getAddress(), 0, 0, COLOR_TITLE_OK);
         } else {
-            drawVerticallCenteredString(I18n.format("gui.rings.notInGrid"), 0, 0, 0xB36262);
+            drawVerticallCenteredString(I18n.format("gui.rings.notInGrid"), 0, 0, COLOR_TITLE_PROBLEM);
         }
 
         drawString(I18n.format("gui.rings.title.address"), 0, 20, 0x00AA00);

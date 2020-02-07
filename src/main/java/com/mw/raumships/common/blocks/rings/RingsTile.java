@@ -240,11 +240,15 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         return (linkedController != null ? ((RingsControllerTile) world.getTileEntity(linkedController)) : null);
     }
 
-    private DtoRingsModel getRings() {
+    public DtoRingsModel getRings() {
         if (rings == null)
             rings = new DtoRingsModel(pos);
 
         return rings;
+    }
+
+    public void setRings(DtoRingsModel ringsModel) {
+        this.rings = ringsModel;
     }
 
     public DtoRingsModel getClonedRings(BlockPos callerPos) {

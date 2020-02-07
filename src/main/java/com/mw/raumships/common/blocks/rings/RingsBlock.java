@@ -39,7 +39,7 @@ public class RingsBlock extends Block {
 
         if (!world.isRemote) {
             if (player.getHeldItem(hand).getItem() instanceof AnalyzerAncientItem)
-                RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(pos, ringsTile.getState(), true), (EntityPlayerMP) player);
+                RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(pos, ringsTile.getState(), ringsTile.getRings(), true), (EntityPlayerMP) player);
         } else {
             ringsTile.getTransportRingsRenderer().which++;
         }

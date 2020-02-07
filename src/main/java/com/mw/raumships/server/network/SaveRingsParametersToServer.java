@@ -57,10 +57,10 @@ public class SaveRingsParametersToServer extends PositionedPlayerPacket {
                 RingsTile ringsTile = (RingsTile) world.getTileEntity(message.pos);
                 List<RingsTile> connectedRingsTiles = ringsTile.populateRingsParams(player, message.address, message.name);
 
-                message.respond(world, new StateUpdatePacketToClient(message.pos, ringsTile.getState(), false));
+                message.respond(world, new StateUpdatePacketToClient(message.pos, ringsTile.getState(), ringsTile.getRings(), false));
 
                 for (RingsTile connectedRingsTile : connectedRingsTiles) {
-                    message.respond(world, new StateUpdatePacketToClient(connectedRingsTile.getPos(), connectedRingsTile.getState(), false));
+                    message.respond(world, new StateUpdatePacketToClient(connectedRingsTile.getPos(), connectedRingsTile.getState(), connectedRingsTile.getRings(), false));
                 }
             });
 

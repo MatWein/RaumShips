@@ -10,6 +10,9 @@ public class DtoRingsModel {
     private double distance;
     private boolean isClone;
 
+    public DtoRingsModel() {
+    }
+
     public DtoRingsModel(BlockPos pos) {
         this(-1, null, pos, false);
     }
@@ -107,5 +110,21 @@ public class DtoRingsModel {
 
     public double getDistance() {
         return distance;
+    }
+
+    public void setPos(BlockPos pos) {
+        this.pos = pos;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public void setClone(boolean clone) {
+        isClone = clone;
+    }
+
+    public boolean isClone() {
+        return isClone;
     }
 }
