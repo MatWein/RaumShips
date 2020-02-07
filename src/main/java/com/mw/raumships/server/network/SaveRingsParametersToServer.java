@@ -1,5 +1,6 @@
 package com.mw.raumships.server.network;
 
+import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.network.PositionedPlayerPacket;
 import com.mw.raumships.client.network.StateUpdatePacketToClient;
 import com.mw.raumships.common.blocks.rings.RingsTile;
@@ -57,10 +58,10 @@ public class SaveRingsParametersToServer extends PositionedPlayerPacket {
                 RingsTile ringsTile = (RingsTile) world.getTileEntity(message.pos);
                 List<RingsTile> connectedRingsTiles = ringsTile.populateRingsParams(player, message.address, message.name);
 
-                message.respond(world, new StateUpdatePacketToClient(message.pos, ringsTile.getState(), ringsTile.getRings(), false));
+                RaumShipsMod.proxy.getNetworkWrapper().sendToAll(new StateUpdatePacketToClient(message.pos, ringsTile.getState(), ringsTile.getRings(), false));
 
                 for (RingsTile connectedRingsTile : connectedRingsTiles) {
-                    message.respond(world, new StateUpdatePacketToClient(connectedRingsTile.getPos(), connectedRingsTile.getState(), connectedRingsTile.getRings(), false));
+                    RaumShipsMod.proxy.getNetworkWrapper().sendToAll(new StateUpdatePacketToClient(connectedRingsTile.getPos(), connectedRingsTile.getState(), connectedRingsTile.getRings(), false));
                 }
             });
 
