@@ -13,10 +13,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class SaveRingsParametersToServer extends PositionedPlayerPacket {
-    int address;
-    String name;
+    private int address;
+    private String name;
 
     public SaveRingsParametersToServer() {
     }
@@ -54,9 +55,13 @@ public class SaveRingsParametersToServer extends PositionedPlayerPacket {
 
             world.addScheduledTask(() -> {
                 RingsTile ringsTile = (RingsTile) world.getTileEntity(message.pos);
-                ringsTile.setRingsParams(player, message.address, message.name);
+                List<RingsTile> connectedRingsTiles = ringsTile.populateRingsParams(player, message.address, message.name);
 
-                message.respond(world, new StateUpdatePacketToClient(message.pos, ringsTile.getState()));
+                message.respond(world, new StateUpdatePacketToClient(message.pos, ringsTile.getState(), false));
+
+                for (RingsTile connectedRingsTile : connectedRingsTiles) {
+                    message.respond(world, new StateUpdatePacketToClient(connectedRingsTile.getPos(), connectedRingsTile.getState(), false));
+                }
             });
 
             return null;

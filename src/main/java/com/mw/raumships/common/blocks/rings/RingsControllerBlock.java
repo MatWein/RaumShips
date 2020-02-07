@@ -114,7 +114,7 @@ public class RingsControllerBlock extends Block {
                 RingsTile ringsTile = controllerTile.getLinkedRingsTile(world);
 
                 if (ringsTile != null) {
-                    RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(ringsTile.getPos(), ringsTile.getState()), (EntityPlayerMP) player);
+                    RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(ringsTile.getPos(), ringsTile.getState(), true), (EntityPlayerMP) player);
                 }
             }
         } else {

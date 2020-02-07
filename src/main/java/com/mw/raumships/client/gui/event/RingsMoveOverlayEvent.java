@@ -60,7 +60,7 @@ public class RingsMoveOverlayEvent {
 
         WorldClient world = ClientUtils.getMc().world;
         RingsTile targetRingsTile = (RingsTile) world.getTileEntity(ringBlockPos);
-        Collection<DtoRingsModel> connectedRings = targetRingsTile != null && targetRingsTile.ringsMap != null ? targetRingsTile.ringsMap.values() : new ArrayList<>();
+        Collection<DtoRingsModel> connectedRings = targetRingsTile != null ? targetRingsTile.getState().getRings() : new ArrayList<>();
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(OVERLAY_X, OVERLAY_Y, 0F);

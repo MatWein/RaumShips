@@ -21,8 +21,6 @@ import com.mw.raumships.server.network.RendererUpdateRequestToServer.TileUpdateS
 import com.mw.raumships.server.network.RingsControllerActivatedToServer;
 import com.mw.raumships.server.network.SaveRingsParametersToServer;
 import com.mw.raumships.server.network.SaveRingsParametersToServer.SaveRingsParametersServerHandler;
-import com.mw.raumships.server.network.StateUpdateRequestToServer;
-import com.mw.raumships.server.network.StateUpdateRequestToServer.StateUpdateServerHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -103,7 +101,6 @@ public abstract class RSCommonProxy {
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         int id = 0;
 
-        networkWrapper.registerMessage(StateUpdateServerHandler.class, StateUpdateRequestToServer.class, id, Side.SERVER); id++;
         networkWrapper.registerMessage(SaveRingsParametersServerHandler.class, SaveRingsParametersToServer.class, id, Side.SERVER); id++;
         networkWrapper.registerMessage(RingsControllerActivatedToServer.RingsControllerActivatedServerHandler.class, RingsControllerActivatedToServer.class, id, Side.SERVER); id++;
         networkWrapper.registerMessage(TileUpdateServerHandler.class, RendererUpdateRequestToServer.class, id, Side.CLIENT); id++;

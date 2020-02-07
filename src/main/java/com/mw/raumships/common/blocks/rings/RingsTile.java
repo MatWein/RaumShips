@@ -5,7 +5,6 @@ import com.mw.raumships.RaumShipsMod;
 import com.mw.raumships.client.gui.rings.ILinkable;
 import com.mw.raumships.client.gui.rings.RingsGUI;
 import com.mw.raumships.client.gui.rings.RingsGuiState;
-import com.mw.raumships.client.gui.rings.State;
 import com.mw.raumships.client.network.StartPlayerFadeOutToClient;
 import com.mw.raumships.client.network.StartRingsAnimationToClient;
 import com.mw.raumships.client.rendering.rings.RendererState;
@@ -15,7 +14,6 @@ import com.mw.raumships.server.network.RendererUpdateRequestToServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -60,7 +58,7 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
     public Map<Integer, DtoRingsModel> ringsMap = new HashMap<>();
 
     @SideOnly(Side.CLIENT)
-    private RingsGUI openGui;
+    public RingsGUI openGui;
 
     RingsRenderer renderer;
     RingsRendererState rendererState;
@@ -271,13 +269,15 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
 
     public void removeAllRings() {
         for (DtoRingsModel rings : ringsMap.values()) {
-
             RingsTile ringsTile = (RingsTile) world.getTileEntity(rings.getPos());
-            ringsTile.removeRings(getRings().getAddress());
+
+            if (ringsTile != null) {
+                ringsTile.removeRings(getRings().getAddress());
+            }
         }
     }
 
-    public void setRingsParams(EntityPlayer player, int address, String name) {
+    public List<RingsTile> populateRingsParams(EntityPlayer player, int address, String name) {
         int x = pos.getX();
         int z = pos.getZ();
 
@@ -296,7 +296,7 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
                 int newRingsAddress = newRingsTile.getClonedRings(pos).getAddress();
                 if (newRingsAddress == address && newRingsAddress != -1) {
                     player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.duplicate_address"), true);
-                    return;
+                    return new ArrayList<>();
                 }
             }
         }
@@ -312,6 +312,8 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         }
 
         markDirty();
+
+        return ringsTilesInRange;
     }
 
     @Override
@@ -384,24 +386,20 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         this.readFromNBT(tag);
     }
 
-    public State getState() {
-        return new RingsGuiState(getRings(), ringsMap.values());
-    }
-
-    public State createState() {
-        return new RingsGuiState();
+    public RingsGuiState getState() {
+        if (world.isRemote && openGui != null) {
+            return openGui.state;
+        } else {
+            return new RingsGuiState(getRings(), ringsMap.values());
+        }
     }
 
     @SideOnly(Side.CLIENT)
-    public void setState(State state) {
+    public void setState(RingsGuiState state) {
         if (openGui == null) {
-            openGui = new RingsGUI(pos, (RingsGuiState) state);
-            Minecraft.getMinecraft().displayGuiScreen(openGui);
-        } else if (!openGui.isOpen) {
-            Minecraft.getMinecraft().displayGuiScreen(openGui);
-            openGui.isOpen = true;
+            openGui = new RingsGUI(pos, state);
         } else {
-            openGui.state = (RingsGuiState) state;
+            openGui.state = state;
         }
     }
 

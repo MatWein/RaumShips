@@ -1,9 +1,10 @@
 package com.mw.raumships.client.network;
 
 import com.mw.raumships.RaumShipsMod;
-import com.mw.raumships.client.gui.rings.State;
+import com.mw.raumships.client.gui.rings.RingsGuiState;
 import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,21 +13,24 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class StateUpdatePacketToClient extends PositionedPacket {
-    private State state;
-    private ByteBuf stateBuf;
+    private RingsGuiState state;
+    private boolean shouldOpenGui;
 
     public StateUpdatePacketToClient() {
     }
 
-    public StateUpdatePacketToClient(BlockPos pos, State state) {
+    public StateUpdatePacketToClient(BlockPos pos, RingsGuiState state, boolean shouldOpenGui) {
         super(pos);
 
         this.state = state;
+        this.shouldOpenGui = shouldOpenGui;
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         super.toBytes(buf);
+
+        buf.writeBoolean(shouldOpenGui);
 
         state.toBytes(buf);
     }
@@ -35,7 +39,10 @@ public class StateUpdatePacketToClient extends PositionedPacket {
     public void fromBytes(ByteBuf buf) {
         super.fromBytes(buf);
 
-        stateBuf = buf.copy();
+        shouldOpenGui = buf.readBoolean();
+
+        state = new RingsGuiState();
+        state.fromBytes(buf);
     }
 
     public static class StateUpdateClientHandler implements IMessageHandler<StateUpdatePacketToClient, IMessage> {
@@ -47,20 +54,16 @@ public class StateUpdatePacketToClient extends PositionedPacket {
             RaumShipsMod.proxy.addScheduledTaskClientSide(() -> {
                 RingsTile te = (RingsTile) world.getTileEntity(message.pos);
 
-                try {
-                    State state = te.createState();
-                    state.fromBytes(message.stateBuf);
+                if (te != null) {
+                    te.setState(message.state);
 
-                    if (te != null && state != null) {
-                        te.setState(state);
+                    if (message.shouldOpenGui) {
+                        Minecraft.getMinecraft().displayGuiScreen(te.openGui);
                     }
-                } catch (UnsupportedOperationException e) {
-                    e.printStackTrace();
                 }
             });
 
             return null;
         }
-
     }
 }
