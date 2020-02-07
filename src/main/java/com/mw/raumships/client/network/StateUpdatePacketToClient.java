@@ -5,7 +5,6 @@ import com.mw.raumships.client.gui.rings.RingsGuiState;
 import com.mw.raumships.common.blocks.rings.DtoRingsModel;
 import com.mw.raumships.common.blocks.rings.RingsTile;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -79,7 +78,7 @@ public class StateUpdatePacketToClient extends PositionedPacket {
                     te.setRings(message.ringsModel);
 
                     if (message.shouldOpenGui) {
-                        Minecraft.getMinecraft().displayGuiScreen(te.openGui);
+                        te.showMenu();
                     }
                 }
             });

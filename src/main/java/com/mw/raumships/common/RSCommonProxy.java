@@ -103,7 +103,7 @@ public abstract class RSCommonProxy {
 
         networkWrapper.registerMessage(SaveRingsParametersServerHandler.class, SaveRingsParametersToServer.class, id, Side.SERVER); id++;
         networkWrapper.registerMessage(RingsControllerActivatedToServer.RingsControllerActivatedServerHandler.class, RingsControllerActivatedToServer.class, id, Side.SERVER); id++;
-        networkWrapper.registerMessage(TileUpdateServerHandler.class, RendererUpdateRequestToServer.class, id, Side.CLIENT); id++;
+        networkWrapper.registerMessage(TileUpdateServerHandler.class, RendererUpdateRequestToServer.class, id, Side.SERVER); id++;
 
         networkWrapper.registerMessage(TileUpdateClientHandler.class, RendererUpdatePacketToClient.class, id, Side.CLIENT); id++;
         networkWrapper.registerMessage(StartRingsAnimationToClientHandler.class, StartRingsAnimationToClient.class, id, Side.CLIENT); id++;

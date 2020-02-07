@@ -9,6 +9,7 @@ import com.mw.raumships.common.blocks.rings.RingsBlock;
 import com.mw.raumships.common.blocks.rings.RingsTile;
 import com.mw.raumships.server.network.RingsControllerActivatedToServer;
 import net.minecraft.block.Block;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -42,7 +43,7 @@ public class RingsMoveOverlayEvent {
     @SubscribeEvent
     public static void makePath(LivingUpdateEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayerSP) {
             EntityPlayer player = (EntityPlayer)entity;
             World world = player.getEntityWorld();
 

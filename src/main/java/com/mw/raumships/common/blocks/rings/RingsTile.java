@@ -34,6 +34,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.*;
 
+import static com.mw.raumships.client.ClientUtils.getMc;
+
 public class RingsTile extends TileEntity implements ITickable, ILinkable {
     private boolean firstTick = true;
     private boolean waitForStart = false;
@@ -436,5 +438,10 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
 
     public AxisAlignedBB getRenderBoundingBox() {
         return new AxisAlignedBB(pos.add(-4, 0, -4), pos.add(4, 7, 4));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void showMenu() {
+        getMc().displayGuiScreen(openGui);
     }
 }
