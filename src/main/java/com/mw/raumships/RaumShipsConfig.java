@@ -20,5 +20,8 @@ public class RaumShipsConfig {
 
         @Name("Ignore rings check for blocks to replace")
         public boolean ignoreObstructionCheck = false;
+
+        @Name("Rings need energy or not")
+        public boolean needEnergy = true;
     }
 }

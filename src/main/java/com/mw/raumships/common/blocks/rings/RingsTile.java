@@ -10,6 +10,7 @@ import com.mw.raumships.client.network.StartRingsAnimationToClient;
 import com.mw.raumships.client.rendering.rings.RendererState;
 import com.mw.raumships.client.rendering.rings.RingsRenderer;
 import com.mw.raumships.client.rendering.rings.RingsRendererState;
+import com.mw.raumships.common.blocks.EnergyTileEntityBase;
 import com.mw.raumships.server.network.RendererUpdateRequestToServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -19,9 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -36,7 +34,10 @@ import java.util.*;
 
 import static com.mw.raumships.client.ClientUtils.getMc;
 
-public class RingsTile extends TileEntity implements ITickable, ILinkable {
+public class RingsTile extends EnergyTileEntityBase implements ITickable, ILinkable {
+    private static final int MAX_ENERGY_STORED = 1000000;
+    private static final int ENERGY_NEEDED_TO_TRANSPORT = 100000;
+
     private boolean firstTick = true;
     private boolean waitForStart = false;
     private boolean waitForFadeOut = false;
@@ -44,6 +45,7 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
     private boolean waitForClearout = false;
 
     private long buttonPressed;
+    private int energyStored;
 
     private static final int fadeOutTimeout = (int) (30 + RingsRenderer.uprisingInterval * RingsRenderer.ringCount + RingsRenderer.animationDiv * Math.PI);
     public static final int fadeOutTotalTime = 2 * 20; // 2s
@@ -148,6 +150,16 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
         if (checkIfObstructed(this.pos)) {
             player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.obstructed"), true);
             return;
+        }
+
+        if (RaumShipsConfig.ringsConfig.needEnergy && energyStored < ENERGY_NEEDED_TO_TRANSPORT) {
+            player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.notEnoughEnergy"), true);
+            return;
+        }
+
+        if (RaumShipsConfig.ringsConfig.needEnergy) {
+            energyStored -= ENERGY_NEEDED_TO_TRANSPORT;
+            markDirty();
         }
 
         DtoRingsModel rings = ringsMap.get(address);
@@ -339,6 +351,8 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
             i++;
         }
 
+        compound.setInteger("energyStored", energyStored);
+
         return super.writeToNBT(compound);
     }
 
@@ -364,32 +378,11 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
             }
         }
 
+        if (compound.hasKey("energyStored")) {
+            energyStored = compound.getInteger("energyStored");
+        }
+
         super.readFromNBT(compound);
-    }
-
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound updateTagDescribingTileEntityState = getUpdateTag();
-        final int METADATA = 0;
-        return new SPacketUpdateTileEntity(this.pos, METADATA, updateTagDescribingTileEntityState);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-        NBTTagCompound updateTagDescribingTileEntityState = pkt.getNbtCompound();
-        handleUpdateTag(updateTagDescribingTileEntityState);
-    }
-
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        NBTTagCompound nbtTagCompound = new NBTTagCompound();
-        writeToNBT(nbtTagCompound);
-        return nbtTagCompound;
-    }
-
-    @Override
-    public void handleUpdateTag(NBTTagCompound tag) {
-        this.readFromNBT(tag);
     }
 
     public RingsGuiState getState() {
@@ -443,5 +436,53 @@ public class RingsTile extends TileEntity implements ITickable, ILinkable {
     @SideOnly(Side.CLIENT)
     public void showMenu() {
         getMc().displayGuiScreen(openGui);
+    }
+
+    @Override
+    public int receiveEnergy(int maxReceive, boolean simulate) {
+        if (!RaumShipsConfig.ringsConfig.needEnergy) {
+            return 0;
+        }
+
+        if (energyStored >= MAX_ENERGY_STORED) {
+            return 0;
+        }
+
+        if (energyStored + maxReceive <= MAX_ENERGY_STORED) {
+            if (!simulate) {
+                energyStored += maxReceive;
+            }
+            return maxReceive;
+        }
+
+        if (!simulate) {
+            energyStored = MAX_ENERGY_STORED;
+        }
+        return MAX_ENERGY_STORED - energyStored;
+    }
+
+    @Override
+    public int extractEnergy(int maxExtract, boolean simulate) {
+        return 0;
+    }
+
+    @Override
+    public int getEnergyStored() {
+        return energyStored;
+    }
+
+    @Override
+    public int getMaxEnergyStored() {
+        return MAX_ENERGY_STORED;
+    }
+
+    @Override
+    public boolean canExtract() {
+        return false;
+    }
+
+    @Override
+    public boolean canReceive() {
+        return RaumShipsConfig.ringsConfig.needEnergy;
     }
 }

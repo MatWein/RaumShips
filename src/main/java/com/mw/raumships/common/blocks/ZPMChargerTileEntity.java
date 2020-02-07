@@ -38,7 +38,7 @@ public class ZPMChargerTileEntity extends OneSlotEnergyTileEntityBase {
 
         long energyStored = getEnergyStoredAsLong();
         long maxEnergyStored = getMaxEnergyStoredAsLong();
-        if (energyStored == maxEnergyStored) {
+        if (energyStored >= maxEnergyStored) {
             return 0;
         }
 

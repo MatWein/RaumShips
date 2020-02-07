@@ -31,8 +31,6 @@ public class RingsRenderer {
     private int lastRingAnimated;
     private long lastTick;
 
-    public int which = 0;
-
     public void render(double x, double y, double z, double partialTicks) {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
 

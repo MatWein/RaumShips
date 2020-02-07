@@ -46,6 +46,8 @@ tile.rings_block.wrong_address=Nur Adressen zwischen 1 und 6 gueltig.
 tile.rings_block.obstructed=Ringe blockiert oder nicht konfiguriert. Gebiet von 7x7x5 Bloecken freihalten.
 tile.rings_block.targetObstructed=Ziel-Ringe blockiert oder nicht konfiguriert. Gebiet von 7x7x5 Bloecken freihalten.
 tile.rings_block.overlay.noConnectedRings=Ringtransporter nicht verbunden
+tile.rings_block.notEnoughEnergy=Nicht genug Energie vorhanden.
+tile.rings_block.energyStored=Energie-Puffer: %s / %s RF
 
 item.analyzer_ancient.name=Ring-Analysegeraet
 tile.invisible_block.name=

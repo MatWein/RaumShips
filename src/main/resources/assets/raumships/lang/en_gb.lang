@@ -46,6 +46,8 @@ tile.rings_block.wrong_address=Wrong address, should be 1-6
 tile.rings_block.obstructed=Rings obstructed or not configured, clear 7x7x5 area around rings
 tile.rings_block.targetObstructed=Target rings obstructed or not configured, clear 7x7x5 area around rings
 tile.rings_block.overlay.noConnectedRings=Rings not connected
+tile.rings_block.notEnoughEnergy=Not enough energy available.
+tile.rings_block.energyStored=Energy buffer: %s / %s RF
 
 item.analyzer_ancient.name=Ancient Analyzer
 tile.invisible_block.name=

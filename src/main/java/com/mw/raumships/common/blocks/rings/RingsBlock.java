@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class RingsBlock extends Block {
@@ -38,10 +39,10 @@ public class RingsBlock extends Block {
         RingsTile ringsTile = (RingsTile) world.getTileEntity(pos);
 
         if (!world.isRemote) {
+            player.sendStatusMessage(new TextComponentTranslation("tile.rings_block.energyStored", ringsTile.getEnergyStored(), ringsTile.getMaxEnergyStored()), true);
+
             if (player.getHeldItem(hand).getItem() instanceof AnalyzerAncientItem)
                 RaumShipsMod.proxy.getNetworkWrapper().sendTo(new StateUpdatePacketToClient(pos, ringsTile.getState(), ringsTile.getRings(), true), (EntityPlayerMP) player);
-        } else {
-            ringsTile.getTransportRingsRenderer().which++;
         }
 
         return true;
