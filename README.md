@@ -1,5 +1,6 @@
 # RaumShips
-This is a simple mod to add some space ships as flyable entities to Minecraft (Forge).
+This is a simple mod to add some space ships as flyable entities to Minecraft (Forge).  
+See also: https://www.curseforge.com/minecraft/mc-mods/raumships
 
 **Currently supported MC-Versions:**
 - 1.12.2
